@@ -60,7 +60,10 @@
         </el-tab-pane>
         <el-tab-pane name="4" value="商品发布">
           <span slot="label"><i class="el-icon-date"></i>商品发布</span>
-          <div class="crawAreas">商品发布页面</div>
+          <div class="crawAreas">
+            接下来从这个地方入手向下33订单订单
+            打算打算
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -73,7 +76,7 @@ export default {
   name: 'EditShop',
   data () {
     return {
-      activeTabs: '1',
+      activeTabs: '4',
       tabsTitle: '基本信息',
       form: {
         shopId: '--', // 店铺Id

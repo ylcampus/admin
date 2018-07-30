@@ -1,6 +1,6 @@
 // 系统配置
 module.exports = {
-  host: '127.0.0.1', // 主机名
+  host: '192.168.1.4', // 主机名
   port: 8080, // 端口
   useEslint: false,
   devServer: {
@@ -11,7 +11,7 @@ module.exports = {
   },
   proxyTable: { // 代理服务器
     '/api': {
-      target: 'http://127.0.0.1:5566',
+      target: 'http://192.168.1.4:5566',
       changeOrigin: true
     }
   }
