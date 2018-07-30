@@ -1,0 +1,64 @@
+#GoodsDetail{
+  background: #fff;
+  padding: 0px 20px;
+  .warpMain{
+    .tabsAreas{
+      margin: 10px 0px;
+      &>form{
+        width:450px;
+      }
+      &.skuArea{
+        .picMsg{
+          display: flex;
+          .item{
+            margin-right:5px;
+            border: 1px solid #e6e6e6;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .5s;
+            img{
+              width:120px;
+            }
+            &:hover{
+              box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+            }
+            &.active{
+              border: 1px solid #409EFF;
+            }
+          }
+        }
+        .skuMsg{
+          max-width: 1000px;
+          margin: 15px 0px;
+          .item{
+            display: inline-block;
+            border: 1px solid #e6e6e6;
+            padding: 25px 15px;
+            cursor: pointer;
+            transition: all .5s;
+            margin: 0px 5px 5px 0px;
+            font-size: 13px;
+            color:#666;
+            line-height: 22px;
+            width: 200px;
+            .row{
+              .key{
+                color:#000;
+              }
+            }
+            &:hover{
+              box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+            }
+          }
+        }
+      }
+    }
+    .descArea{
+      margin: 10px 0px;
+      .item{
+        max-width: 800px;
+      }
+    }
+  }
+}

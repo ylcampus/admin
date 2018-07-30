@@ -1,0 +1,27 @@
+#UserBook{
+  padding-bottom: 30px;
+  h2.category{
+    text-align: center;
+    margin: 0 0 30px;
+    font-size: 30px;
+    color: #333;
+    font-weight: inherit;
+  }
+  .text_list{
+    margin-bottom: 40px;
+    .law_st-2{
+      color: #666;
+      font-weight: 700;
+    }
+    ul.law_ml20{
+      margin-left: 20px;
+    }
+    li.law_txt{
+      text-indent: 2em;
+    }
+    li, p{
+      color: #666;
+    }
+  }
+
+}

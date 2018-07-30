@@ -1,0 +1,55 @@
+/*页脚*/
+#YleFooter{
+  background-color: #24292e;
+  height: 60px;
+  padding: 0px 20px;
+  color: #ccc;
+  font-size: 12px;
+  margin-top: 60px;
+  line-height: 24px;
+  .inner{
+    width:1200px;
+    margin:0 auto;
+    padding: 6px 0px;
+    .topArea{
+      display: flex;
+      justify-content: space-between;
+      line-height: 24px;
+      .footer-law{
+        display: flex;
+        height: 24px;
+        align-items: center;
+        a{
+          cursor: pointer;
+          transition: all .36s;
+          &:hover{
+            color:#eee;
+          }
+        }
+      }
+    }
+    .bottomArea{
+      line-height: 24px;
+      .icon-record{
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+        vertical-align: middle;
+        background-size: 100% 100%;
+        &.icon1{
+          background-image: url(../../assets/img/footer/f1.png);
+        }
+        &.icon2{
+          background-image: url(../../assets/img/footer/f2.png);
+        }
+      }
+    }
+  }
+  .v-line{
+    margin: 0 10px;
+    width: 1px;
+    height: 11px;
+    background: #666;
+  }
+}

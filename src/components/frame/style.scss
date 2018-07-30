@@ -1,0 +1,102 @@
+#Frame{
+  height:100%;
+  &>.container{
+    height: 100%;
+  }
+  /*页头*/
+  #YleHeader{
+    position: relative;
+    padding-left: 14px;
+  }
+
+  /*主体*/
+  #body{
+    height: calc(100% - 100px);
+    display:flex;
+    #sidebar{
+      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+      background-color: #e8e8e8;
+      overflow-y: auto;
+      flex: none;
+      .elSidebar:not(.el-menu--collapse) {
+        width: 210px;
+      }
+      .visitData{
+        text-align: center;
+        margin: 0px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        justify-content: center;
+        background: #fff;
+        border-bottom: 2px solid #24292e;
+        cursor: pointer;
+        .number{
+          font-size: 22px;
+          font-weight: 700;
+          color:#0e5d23;
+        }
+      }
+      /*侧边栏*/
+      .el-menu{
+        border:none;
+        background: none;
+        .el-menu-item{
+          position: relative;
+          transition: all 0.36s;
+          &.is-active{
+            background: #fff;
+            color: #3399FF;
+            &:after{
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              width: 2px;
+              content: '';
+              display: block;
+              background: #3399FF;
+            }
+          }
+          &:hover{
+            background: #fff;
+          }
+        }
+        .el-submenu{
+          position: relative;
+          transition: all 0.36s;
+          .el-menu-item{
+            background: #e8e8e8;
+            &.is-active{
+              background: #fff;
+            }
+            &:hover{
+              background: #fff;
+            }
+          }
+        }
+      }
+    }
+    /*内容区*/
+    #mainWarp{
+      padding: 20px;
+      flex: auto;
+      overflow-y: auto;
+      #mainCotent{
+        height: 100%;
+        background: #fff;
+        position: relative;
+      }
+    }
+  }
+
+  /*页脚*/
+  #footer{
+    background-color: #24292e;
+    height: 40px;
+    padding: 0px 20px;
+    color: #ccc;
+    font-size: 12px;
+    line-height: 40px;
+  }
+}

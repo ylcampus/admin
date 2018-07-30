@@ -1,0 +1,152 @@
+.pictureDetail{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  .box{
+    background-color: white;
+    box-shadow: 0 0 15px #666;
+    width: 853px;
+    height:520px;
+    padding: 10px;
+    box-sizing: border-box;
+    .inner{
+      width: 833px;
+      height: 500px;
+      position: relative;
+      .control{
+        position: absolute;
+        bottom: 0;
+        height: 40px;
+        background-color: rgba(0, 0, 0, .7);
+        left: 0;
+        right: 0;
+        color: white;
+      }
+      .down{
+        color:white;
+        width: 80px;
+        float: right;
+        margin-top: -40px;
+        position: absolute;
+        right: 10px;
+        height: 40px;
+        bottom: 0
+      }
+      .icon{
+        cursor:pointer;
+        &.active{
+          color: #4692FF;
+        }
+      }
+    }
+  }
+}
+.pictureCenter{
+  width: 100%;
+  background-color: white;
+  position: relative;
+  .el-loading-mask{
+    background-color: #aaa !important;
+  }
+  .select{
+    width: 100%;
+    height: 56px;
+    line-height:30px;
+    padding: 0 12px;
+    box-sizing:border-box;
+  }
+  .lists{
+    overflow-y: auto;
+    position: absolute;
+    bottom: 41px;
+    top: 56px;
+    left: 0;
+    right:0;
+    .list{
+      width: 100%;
+      .title{
+        width: 100%;
+        height: 84px;
+        padding: 0 24px;
+        box-sizing: border-box;
+        line-height: 84px;
+        font-size: 18px;
+      }
+      .picture{
+        width: 100%;
+        overflow: hidden;
+        .card{
+          width: 303px;
+          height: 245px;
+          margin-left: 24px;
+          float:left;
+          img{
+            width: 303px;
+            height: 171px;
+          }
+          .address{
+            width:100%;
+            padding: 0 9px;
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 22px;
+            color:#666;
+            letter-spacing: 0;
+            white-space:nowrap;
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+          }
+          .info{
+            width: 100%;
+            padding: 0 9px;
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 30px;
+            color:#ccc;
+            letter-spacing: 0;
+            .capName{
+              letter-spacing: 0;
+              white-space: nowrap;
+              overflow: hidden;
+              -ms-text-overflow: ellipsis;
+              text-overflow: ellipsis;
+              width: 80%;
+            }
+            .time{
+              width: 20%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/*弹性盒子模型*/
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-top{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.flex-bottom{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.flex-left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-right{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

@@ -1,0 +1,21 @@
+#RoleAddEdit{
+  background: #fff;
+  padding: 0px 20px;
+  .form{
+    width:500px;
+    padding:20px 0px;
+    .authTree{
+      border: 1px solid #dcdfe6;
+      padding: 0px 15px;
+      border-radius: 4px;
+      .searchArea{
+        margin:20px 0px;
+      }
+      .treeArea{
+        overflow-y: auto;
+        height: 350px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

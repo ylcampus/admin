@@ -1,0 +1,82 @@
+#First_Login_Dialog{
+  &>.el-dialog{
+    &>.el-dialog__body{
+      background: #f0f0f0;
+      padding: 20px 5px;
+    }
+    &>.el-dialog__header{
+      border:none;
+    }
+  }
+  .dialogTitle{
+    .dialogTitleBtn{
+      background: #fff;
+      border: none;
+      outline: 0;
+      float: left;
+      padding: 0;
+      cursor: pointer;
+      height: 50px;
+      line-height: 50px;
+      font-size: 16px;
+      width: 40px;
+      transition: all .5s ease;
+      &>i{
+        width:30px;
+      }
+      &:hover{
+        color: #3bcd8d;
+      }
+    }
+    .elDialogTitle{
+      line-height: 1;
+      font-size: 14px;
+      font-weight: 700;
+      color:#666;
+      padding-left:0px;
+    }
+  }
+  /*主体*/
+  .First_Login_Body{
+    .formArea{
+      padding:0px 30px;
+      .reset-form-btn{
+        margin-top: 10px;
+        .el-button{
+          width:100%;
+          font-size: 14px;
+        }
+        .el-button--primary{
+          background-color: #333;
+          border-color: #333;
+          transition: all .5s ease;
+          &:hover{
+            background-color: #000;
+            border-color:#000;
+          }
+        }
+      }
+      .el-input__inner{
+        border:none;
+      }
+    }
+    .firstPage{
+      .tips{
+        line-height: 40px;
+        font-size: 13px;
+        padding: 0px 30px;
+      }
+    }
+    .nextPage{
+      .tips{
+        text-align: center;
+        line-height: 40px;
+        font-size: 13px;
+      }
+      .warp{
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

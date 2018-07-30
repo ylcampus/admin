@@ -1,0 +1,323 @@
+$black: #24292e; /*黑色*/
+/*页头*/
+#YleHeader{
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: $black;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, .08);
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #fff;
+  .warpLeft{
+    display: flex;
+    align-items: center;
+    .web-logo{
+      z-index: 10;
+      margin-right: 30px;
+      a{
+        display: block;
+        height: 60px;
+        line-height: 60px;
+        padding-left: 100px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 700;
+        background-image: url(../../assets/img/logo.jpg);
+        background-repeat: no-repeat;
+        background-size: 100px 60px;
+      }
+    }
+  }
+  .yle-header-item{
+    height: 100%;
+    line-height: 60px;
+    cursor: pointer;
+    transition: all 0.5s;
+    &.normal{
+      padding: 0 15px;
+      &:hover{
+        color:#e41f2b;
+      }
+    }
+    &.login{
+      background: #e41f2b;
+      padding: 0px 20px;
+      font-size: 14px;
+      &:hover{
+        background: #ef323e;
+      }
+    }
+  }
+  .header-tools{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  /*通用*/
+  .header-icon{
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url(../../assets/img/header-sprite.png);
+    background-size: 104px auto;
+    width: 20px;
+    height: 20px;
+    &.header-icon-lang-zh{
+      background-position: -22px -46px;
+      transition: all 0.5s;
+    }
+    &.header-icon-lang-en{
+      background-position: 58px -106px;
+      transition: all 0.5s;
+    }
+  }
+  .yle-dropdown{
+    position: relative;
+    padding: 0 15px;
+    .menu{
+      position: absolute;
+      line-height: initial;
+      text-align: center;
+      transition: all .36s;
+      height:0px;
+      overflow: hidden;
+      color:#fff;
+      background: inherit;
+      .inner{
+        padding: 10px 0px;
+        .nItem{
+          line-height: 40px;
+          transition: all .36s;
+          a{
+            line-height: 22px;
+            display: inline-block;
+            width: 100%;
+            position: relative;
+          }
+          &:hover{
+            color: #e41f2b;
+            a:after{
+              content: "";
+              position: absolute;
+              right: 0;
+              height: 20px;
+              top: 1px;
+              border-right: 3px solid #e41f2b;
+            }
+          }
+        }
+        .lItem{
+          display: flex;
+          padding: 5px 0px;
+          justify-content: center;
+          .pic{
+            width: 80px;
+            height: 80px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            &.android{
+              background-image: url(../../assets/img/header/android.png);
+            }
+            &.ios{
+              background-image: url(../../assets/img/header/ios.jpg);
+            }
+          }
+          .desc{
+            .version{
+              font-size: 12px;
+              color: #ddd;
+            }
+          }
+          a{
+            line-height: 22px;
+            display: inline-block;
+            width: 100%;
+            position: relative;
+          }
+          &:hover{
+            a{
+              color: #e41f2b;
+            }
+            a:after{
+              content: "";
+              position: absolute;
+              right: 0;
+              height: 20px;
+              top: 1px;
+              border-right: 3px solid #e41f2b;
+            }
+          }
+        }
+      }
+      .navigationInner{
+        padding:20px 30px;
+        .mitem{
+          color: #c3c5c6;
+          .module{
+            display: block;
+            line-height: 18px;
+            padding: 6px 0;
+            transition: all .36s;
+            font-size: 13px;
+            &:hover{
+              color:#e41f2b;
+            }
+            a{
+              position: relative;
+              &:after{
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0px;
+                right: -10px;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #E41F2B;
+              }
+            }
+          }
+          .spec{
+            display: block;
+            line-height: 18px;
+            padding: 6px 0;
+          }
+          .pmenu{
+            .pitem{
+              padding:0px 20px 0px 0px;
+              transition: all .36s;
+              color: #c3c5c6;
+              font-size: 13px;
+              position: relative;
+              line-height: 28px;
+              &:hover{
+                color:#e41f2b;
+              }
+              &:after{
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0px;
+                right: 10px;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #0e5d23;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.lang{
+      .menu{
+        right: 0px;
+        width: 100%;
+      }
+    }
+    &.lang{
+      &:hover{
+        color: #e41f2b;
+        background: #1d1d1d;
+        .header-icon-lang-zh{
+          background-position: 0 -46px;
+        }
+        .header-icon-lang-en{
+          background-position: 80px -106px;
+        }
+        .menu{
+          height:110px;
+        }
+      }
+    }
+    &.load{
+      .menu{
+        right: 0px;
+        width: 100%;
+      }
+    }
+    &.load{
+      &:hover{
+        color: #e41f2b;
+        background: #1d1d1d;
+        .menu{
+          height:360px;
+        }
+      }
+    }
+    &.personal{
+      background: #000;
+      .menu{
+        right: 0px;
+        width: 100%;
+        text-align: left;
+        .inner{
+          padding-left:15px;
+        }
+      }
+    }
+    &.personal{
+      &:hover{
+        color: #e41f2b;
+        background: #1d1d1d;
+        .yle-icon-user{
+          background-color:#e41f2b;
+        }
+      }
+    }
+    &.navigation{
+      .menu{
+        left: 0px;
+        width: 350px;
+        text-align: left;
+        background: #1d1d1d;
+        .inner{
+          padding-left:15px;
+        }
+      }
+    }
+    &.navigation{
+      &:hover{
+        color: #e41f2b;
+        background: #1d1d1d;
+        .yle-icon-menu{
+          background-color:#e41f2b;
+        }
+      }
+    }
+  }
+  .v-line{
+    margin: 0 10px;
+    width: 1px;
+    height: 11px;
+    background: #666;
+  }
+  .r-line{
+    margin: 10px 5px;
+    height: 1px;
+    background: #333;
+  }
+  .yle-icon{
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 16px 15px;
+    width: 26px;
+    height: 18px;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .yle-icon-user{
+    background-image: url(../../assets/img/header/user.png);
+  }
+  .yle-icon-menu{
+    background-image: url(../../assets/img/header/menu.png);
+  }
+}

@@ -1,0 +1,67 @@
+#ProtalBook{
+  .inner{
+    width: 1200px;
+    padding: 0 10px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    #sidebar{
+      position: absolute;
+      width: 280px;
+      top: 20px;
+      bottom: 0;
+      background-color: #fff;
+      z-index: 1;
+      .title{
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        padding-left: 30px;
+        margin: 0px;
+      }
+      .sideBody{
+        overflow: auto;
+        height: calc(100% - 40px);
+        .item{
+          transition: all .36s;
+          display: block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          padding: 0 40px;
+          font-size: 14px;
+          line-height: 40px;
+          cursor: pointer;
+          border-top: 1px solid #ededed;
+          position: relative;
+          &.active,&:hover{
+            background-color: #f7f7f7;
+            color: #e41f2b;
+            &:after{
+              position: absolute;
+              top: 10px;
+              right: 0;
+              height: 20px;
+              width: 3px;
+              content: '';
+              display: block;
+              background: #e41e2b;
+            }
+          }
+
+        }
+      }
+    }
+    #mainWarp{
+      width: 820px;
+      float: right;
+      right: 0;
+      margin-top: 20px;
+      background: #fff;
+      padding: 50px 40px;
+      min-height: 800px;
+    }
+  }
+}

@@ -1,0 +1,177 @@
+html {
+  overflow: hidden;
+  height:100%;
+  body{
+    padding:0;
+    margin:0;
+    height:100%;
+    font-family: Roboto, PingFangSC, 'helvetica neue', 'hiragino sans gb', arial, 'microsoft yahei ui', 'microsoft yahei', simsun, sans-serif !important;
+    font-size: 14px;
+    text-rendering: auto;
+    background-color: #f1f2f3;
+    color: #333;
+    min-width: 1280px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    #app{
+      height:100%;
+    }
+    a{
+      text-decoration: none;
+    }
+  }
+}
+/*全局变量*/
+$black: #24292e; /*黑色*/
+
+
+ul, li, dl, dd, a {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+ul, li, dd, dl {
+  list-style: none;
+}
+.el-table td, .el-table th{
+  padding: 6px 0;
+}
+.el-table th{
+  background-color: #e0e2e5;
+  color: #777;
+}
+.el-button{
+  padding: 10px 20px;
+}
+.el-input__inner{
+  height:36px;
+  line-height:36px;
+}
+.el-table__column-filter-trigger{
+  line-height: 23px;
+}
+//.el-table td{
+//  padding: 0px;
+//}
+.el-dialog__header{
+  border-bottom: 1px solid #ddd;
+  height: 50px;
+  line-height: 50px;
+  padding:0px 15px;
+}
+.el-dialog__title{
+  font-size: 16px;
+}
+.el-dropdown{
+  color: inherit;
+  outline: none;
+}
+.el-checkbox__inner{
+  width:16px;
+  height:16px;
+}
+.el-checkbox__inner::after{
+  height: 8px;
+  left: 5px;
+  width: 4px;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color: #333;
+  border-color: #333;
+}
+.el-checkbox__inner:hover{
+  border-color: #333;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #F0F2F5;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #bfc3c6;
+}
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #F0F2F5;
+}
+
+
+.yle_detail_title{
+  font-size: 16px;
+  line-height: 50px;
+  color: #333;
+  height: 50px;
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+    height: 20px;
+    border-left: 2px solid #e41f2b;
+  }
+  span{
+    padding: 0px 15px;
+  }
+}
+
+.yle_tabs_title{
+  font-size: 16px;
+  line-height: 50px;
+  color: #333;
+  height: 50px;
+  position: relative;
+  .txt{
+    position: relative;
+    padding: 0px 20px;
+    &:before{
+      content: '';
+      height: 16px;
+      position: absolute;
+      top: 0;
+      left: 8px;
+      border-right: 2px solid #000;
+    }
+  }
+}
+
+.yle_operation_penal{
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  .left_part{}
+  .right_part{
+    display: flex;
+    align-items: center;
+    .item{
+      margin-left: 5px;
+      &.w180{
+        width:180px;
+      }
+    }
+  }
+}
+.yle_color_red{
+  color:#F56C6C;
+}
+.yle_color_green{
+  color:#67C23A;
+}
+.yle_color_blue{
+  color:#409EFF;
+}
+.yle_color_yellow{
+  color:#E6A23C;
+}
+.yle_color_gray{
+  color:#909399;
+}
+.yle_pointer{
+  cursor: pointer;
+}

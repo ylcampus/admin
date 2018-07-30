@@ -1,0 +1,185 @@
+#File{
+  background: #fff;
+  padding: 0px 20px;
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 100%;
+  .operation{
+    display: flex;
+    height: 60px;
+    align-items: center;
+    .item{
+      margin-right: 30px;
+    }
+  }
+  /*面包屑*/
+  .breadWarp{
+    margin-bottom: 20px;
+    .bread{
+      display: flex;
+      height: 40px;
+      align-items: center;
+      line-height: 40px;
+      background: #e0e2e5;
+      .item{
+        position: relative;
+        padding: 0px 25px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+        color:#333;
+        transition: all .36s ease;
+        &:not(:last-child):hover{
+          color:#005aa0;
+        }
+        &:before{
+          top: 0;
+          right: 12px;
+          display: inline-block;
+          content: "";
+          position: absolute;
+          height: 10px;
+          width: 1px;
+          transform: rotate(-45deg) translateY(16px);
+          background: #000;
+        }
+        &:after{
+          bottom: 0px;
+          right: 12px;
+          display: inline-block;
+          content: "";
+          position: absolute;
+          height: 10px;
+          width: 1px;
+          transform: rotate(45deg) translateY(-16px);
+          background: #000;
+        }
+        &:last-child{
+          font-weight: normal;
+          &:after{
+            width: 0;
+          }
+          &:before{
+            width: 0;
+          }
+        }
+        &:first-child{
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .filsList{
+    height:calc(100% - 170px);
+    overflow-y: auto;
+    .yle-nodata{
+      width: 100%;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      color: #909399;
+    }
+    &>span{
+      display:inline-block;
+    }
+    .item{
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0px 10px 10px 0px;
+      cursor: pointer;
+      transition: all .5s ease;
+      display: inline-block;
+      vertical-align: top;
+      .icon{
+        margin: 5px 0px;
+        text-align: center;
+        .yle-file{
+          width: 70px;
+          height: 70px;
+          display: inline-block;
+          background-repeat: no-repeat;
+          background-size: cover;
+          &.yle-file-folder{
+            background-image: url(../../../assets/img/system/file/folder.svg);
+          }
+          &.yle-file-excel{
+            background-image: url(../../../assets/img/system/file/excel.svg);
+          }
+          &.yle-file-zip{
+            background-image: url(../../../assets/img/system/file/zip.svg);
+          }
+          &.yle-file-txt{
+            background-image: url(../../../assets/img/system/file/txt.svg);
+          }
+          &.yle-file-pdf{
+            background-image: url(../../../assets/img/system/file/pdf.svg);
+          }
+          &.yle-file-file{
+            background-image: url(../../../assets/img/system/file/file.svg);
+          }
+        }
+      }
+      .fileName{
+        font-size: 14px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: initial;
+        color: #005aa0;
+        width: 120px;
+        margin: 0px 10px;
+      }
+      .mask{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: -1;
+        transition: all .5s ease;
+        display: flex;
+        height: 150px;
+        align-items: center;
+        justify-content: center;
+        .inner{
+          color: #fff;
+          .icon{
+            width: 35px;
+            height: 35px;
+            display: inline-block;
+            background-size: 30px 30px;
+            background: rgba(0, 0, 0, .8);
+            border-radius: 32px;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            &.download{
+              background-image: url(../../../assets/img/system/file/download.svg)
+            }
+            &.preview{
+              background-image: url(../../../assets/img/system/file/preview.svg)
+            }
+          }
+        }
+      }
+      &:hover{
+        border-radius: 3px;
+        background: #f8f8f8;
+        .mask{
+          z-index: 999;
+          background: rgba(0, 0, 0, .25);
+        }
+      }
+    }
+  }
+  /*文件统计*/
+  .filsTotal{
+    color: #909399;
+    font-size: 12px;
+    padding: 0px 10px;
+    line-height: 50px;
+  }
+}
+

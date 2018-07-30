@@ -1,0 +1,58 @@
+#Member{
+  background: #fff;
+  height: 100%;
+  padding: 0px 15px;
+  display: flex;
+  justify-content: flex-start;
+  .areaTree{
+    width:220px;
+    flex: none;
+    border-right:1px solid #ddd;
+    .filter{
+      margin: 20px 0px;
+      padding-right:20px;
+    }
+    .treeContent{
+      height: calc(100% - 100px);
+      overflow-y: auto;
+      padding-right:20px;
+    }
+    .el-input__inner{
+      background-color: #f7f7f7;
+      border: none;
+      border-radius: 20px;
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+  .memberList{
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    padding-left:15px;
+    .head{
+      display: flex;
+      height: 60px;
+      align-items: center;
+      justify-content: space-between;
+      .filter{
+        display: flex;
+        .fitem{
+          margin-left: 5px;
+        }
+      }
+    }
+    .memberList{
+      flex: auto;
+    }
+    .pagination{
+      display: flex;
+      height: 50px;
+      align-items: center;
+    }
+    .raccount{
+      color:#409eff;
+      cursor:pointer;
+    }
+  }
+}
