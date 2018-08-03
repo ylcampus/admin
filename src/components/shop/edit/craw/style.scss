@@ -1,0 +1,175 @@
+#CrawView{
+  height: 100%;
+  .content{
+    height: 100%;
+    display: flex;
+    .crawPart{
+      width: 600px;
+      flex: none;
+      .opaArea{
+        font-size: 16px;
+        line-height: 40px;
+        color: #333;
+        height: 40px;
+        position: relative;
+      }
+      .panelArea{
+        background: #f1f2f3;
+        padding: 1px;
+        .shopName{
+          height: 40px;
+          line-height: 40px;
+          padding: 0 15px;
+          background: #fff;
+          font-weight: 700;
+        }
+        .totalMsg{
+          display: flex;
+          justify-content: space-between;
+          .item{
+            background: #fff;
+            width: 16.66%;
+            border-top: 1px solid #f1f2f3;
+            border-right: 1px solid #f1f2f3;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.36s;
+            border-bottom: 1px solid #f1f2f3;
+            .txt{
+              line-height: 30px;
+              border-bottom: 1px solid #f1f2f3;
+            }
+            .num{
+              line-height: 80px;
+              font-size: 32px;
+              font-weight: 700;
+              &.current{
+                color:green;
+              }
+            }
+            &.big{
+              width:33.33%;
+            }
+            &:hover{
+              box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+            }
+            &:nth-child(5){
+              border-right:none;
+            }
+          }
+        }
+        .goodsMsg{
+          display: flex;
+          .gItem{
+            display: flex;
+            width:50%;
+            background: #fff;
+            cursor: pointer;
+            text-align: center;
+            .column{
+              width:33.33%;
+              border-right: 1px solid #f1f2f3;
+              transition: all 0.36s;
+              .label{
+                line-height: 32px;
+                border-bottom: 1px solid #f1f2f3;
+              }
+              .num{
+                line-height: 80px;
+                font-size: 32px;
+                font-weight: 700;
+                &.success{
+                  color:green;
+                }
+                &.failed{
+                  color:#e41f2b;
+                }
+              }
+              &.w50{
+                width:50%;
+              }
+              &:hover{
+                box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+              }
+            }
+          }
+        }
+      }
+      .consoleArea{
+        overflow-y: auto;
+        background: #000;
+        color: #bbb;
+        margin-top: 2px;
+        padding: 5px 0;
+        height: calc(100% - 335px);
+        border-radius: 2px;
+        .row{
+          display: flex;
+          height: 22px;
+          align-items: center;
+          padding: 0 10px;
+          .time{
+            color: green;
+            width: 140px;
+            flex: none;
+            font-weight: 700;
+          }
+          .msg{
+            flex: none;
+            width:120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .shop{
+            flex: none;
+            width:120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .goods{
+            flex: auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #eee;
+          }
+          .status{
+            width:70px;
+            flex: none;
+            text-align: right;
+            &>.success{
+              color:green;
+            }
+            &>.failed{
+              color:#e41f2b;
+            }
+          }
+        }
+        .nodata{
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+    /*执行日志*/
+    .logPart{
+      display: flex;
+      flex: auto;
+      flex-direction: column;
+      padding-left: 20px;
+      .opaArea{
+        font-size: 16px;
+        line-height: 40px;
+        color: #333;
+        height: 40px;
+        position: relative;
+        flex: none;
+      }
+      .listArea{}
+    }
+  }
+}

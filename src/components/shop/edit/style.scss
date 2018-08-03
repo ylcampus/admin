@@ -1,17 +1,17 @@
 #EditShop{
   background: #fff;
-  min-height: 100%;
-  padding: 0px 20px;
-  padding-bottom: 5px;
+  height: 100%;
+  padding: 0 20px;
   .warpMain{
+    height: calc(100% - 50px);
     .editAreas{
-      margin: 20px 0px;
+      margin: 20px 0;
       &>form{
         width:450px;
       }
     }
     .graphAreas{
-      margin: 20px 0px;
+      margin: 20px 0;
       &>form{
         width:600px;
         .picArea{
@@ -28,7 +28,7 @@
     .briefAreas{
       display: inline-block;
       background: #f1f2f3;
-      padding: 0px 15px;
+      padding: 0 15px;
       width: 990px;
       .noData{
         width: 100%;
@@ -39,6 +39,8 @@
         color: #909399;
       }
     }
-    .crawAreas{}
+    .crawAreas{
+      height: 100%;
+    }
   }
 }

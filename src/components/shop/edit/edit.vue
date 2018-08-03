@@ -61,8 +61,7 @@
         <el-tab-pane name="4" value="商品发布">
           <span slot="label"><i class="el-icon-date"></i>商品发布</span>
           <div class="crawAreas">
-            接下来从这个地方入手向下33订单订单
-            打算打算
+            <craw-view></craw-view>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -72,8 +71,12 @@
 <script>
 import {getShopDetail, editShop} from '../proxy'
 import {checkSpecialChar} from '../../../libs/validate'
+import crawView from './craw/craw'
 export default {
   name: 'EditShop',
+  components: {
+    crawView
+  },
   data () {
     return {
       activeTabs: '4',
@@ -151,4 +154,19 @@ export default {
 </script>
 <style scoped lang="scss">
   @import "style";
+</style>
+
+<style lang="scss">
+  #EditShop{
+    .el-tabs{
+      height:100%;
+      .el-tabs__content{
+        height:calc(100% - 60px);
+        .el-tab-pane{
+          height:100%;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
 </style>
