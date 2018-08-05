@@ -3,6 +3,7 @@
   .content{
     height: 100%;
     display: flex;
+    overflow-x: hidden;
     .crawPart{
       width: 600px;
       flex: none;
@@ -178,7 +179,15 @@
         position: relative;
         flex: none;
       }
-      .listArea{}
+      .listArea{
+        flex:auto;
+      }
+      .pagination{
+        display: flex;
+        height: 50px;
+        flex: none;
+        align-items: center;
+      }
     }
   }
 }

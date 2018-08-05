@@ -1,14 +1,6 @@
-/**
- * @name 组件
- * @author dongjiguo2008123@126.com
- * @date 2018-07
- */
+// 函数库 2018-07
 'use strict'
-/**
- * @name 计算密码强度
- * @param n
- * @returns String
- */
+// 计算密码强度
 module.exports.pwdStrength = (pwd) => {
   const Ocolor = '#eeeeee'
   const Lcolor = '#FF0000'
@@ -75,9 +67,7 @@ module.exports.pwdStrength = (pwd) => {
   }
 }
 
-/**
- * @name 获取时刻列表
- */
+// 获取时刻列表
 module.exports.mirrorQuaraterTick = () => {
   let targetMap = {}
   for (let i = 0; i < 24; i++) {
@@ -99,9 +89,7 @@ module.exports.mirrorQuaraterTick = () => {
   return targetMap
 }
 
-/**
- * @name 获取日期数据
- */
+// 获取日期数据
 module.exports.getDateTxtArr = (start, end) => {
   let startTime = new Date(start)
   let endTime = new Date(end)
@@ -119,9 +107,7 @@ module.exports.getDateTxtArr = (start, end) => {
   return backMap
 }
 
-/**
- * @name 获取日期
- */
+// 获取日期
 module.exports.getDateString = (val) => {
   val = val || 0
   let timenow = new Date()
@@ -134,9 +120,7 @@ module.exports.getDateString = (val) => {
   return y + '-' + m + '-' + d
 }
 
-/**
- * @name 获取日期
- */
+// 获取日期
 module.exports.getDate = (date) => {
   let time = new Date(date)
   let y = time.getFullYear()
@@ -147,9 +131,7 @@ module.exports.getDate = (date) => {
   return y + '-' + m + '-' + d
 }
 
-/**
- * @name 阿拉伯数字转换为简体汉字
- */
+// 阿拉伯数字转换为简体汉字
 module.exports.arabiaToSimplisiedChinese = (num) => {
   let i = 0
   for (i = num.length - 1; i >= 0; i--) {
@@ -214,10 +196,8 @@ module.exports.arabiaToSimplisiedChinese = (num) => {
   return newchar
 }
 
-/**
- * @name 获取日期与时间
- */
-module.exports.getDateAndTime = (date) => {
+// 获取日期与时间
+let _getDateAndTime = (date) => {
   let time = new Date(date)
   let y = time.getFullYear()
   let m = time.getMonth() + 1
@@ -232,24 +212,26 @@ module.exports.getDateAndTime = (date) => {
   let s = second < 10 ? '0' + second : second
   return y + '/' + m + '/' + d + ' ' + h + ':' + mi + ':' + s
 }
-// this.doTimeChange = function(time){
-//   var myJsDate = $filter('date',time,'yyyy/mm/dd hh:mm:ss');
-//   var update = new Date(myJsDate);//更新时间
-//   var sysdate = new Date();
-//   var dateCount = sysdate.getTime() - update.getTime();//计算时间差（单位为毫秒）
-//   var dateCount = 23456789;//计算时间差（单位为毫秒）
-//   var timeReturn = "";
-//   //计算相差时间
-//   if(Math.floor(dateCount/1000<1)){
-//     timeReturn = "刚刚";
-//   }else if(Math.floor(dateCount/1000 < 60)){//秒
-//     timeReturn = Math.floor(dateCount/1000) + "秒前";
-//   }else if(Math.floor(dateCount/(60*1000) < 60)){//分钟
-//     timeReturn = Math.floor(dateCount/(60*1000)) + "分钟前";
-//   }else if(Math.floor(dateCount/(60*60*1000) < 24)){//小时
-//     timeReturn = Math.floor(dateCount/(60*60*1000)) + "小时前";
-//   }else{//天
-//     timeReturn = Math.floor(dateCount/(24*60*60*1000)) + "天前";
-//   }
-//   return timeReturn;
-// };
+module.exports.getDateAndTime = _getDateAndTime
+
+// 获取时间文本
+module.exports.getDateTxt = (date) => {
+  const targetTime = new Date(date).getTime()
+  const nowTime = new Date().getTime()
+  const dateCount = nowTime - targetTime
+  let timeTxt = ''
+  if (Math.floor(dateCount / 1000) < 1) {
+    timeTxt = '刚刚'
+  } else if (Math.floor(dateCount / 1000) < 60) {
+    timeTxt = Math.floor(dateCount / 1000) + '秒前'
+  } else if (Math.floor(dateCount / (60 * 1000)) < 60) {
+    timeTxt = Math.floor(dateCount / (60 * 1000)) + '分钟前'
+  } else if (Math.floor(dateCount / (60 * 60 * 1000)) < 24) {
+    timeTxt = Math.floor(dateCount / (60 * 60 * 1000)) + '小时前'
+  } else if (Math.floor(dateCount / (24 * 60 * 60 * 1000)) <= 3) {
+    timeTxt = Math.floor(dateCount / (24 * 60 * 60 * 1000)) + '天前'
+  } else {
+    timeTxt = _getDateAndTime(date)
+  }
+  return timeTxt
+}
