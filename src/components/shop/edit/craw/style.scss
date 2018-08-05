@@ -103,47 +103,56 @@
         padding: 5px 0;
         height: calc(100% - 335px);
         border-radius: 2px;
-        .row{
-          display: flex;
-          height: 22px;
-          align-items: center;
-          padding: 0 10px;
-          .time{
-            color: green;
-            width: 140px;
-            flex: none;
-            font-weight: 700;
-          }
-          .msg{
-            flex: none;
-            width:120px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-          .shop{
-            flex: none;
-            width:120px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-          .goods{
-            flex: auto;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: #eee;
-          }
-          .status{
-            width:70px;
-            flex: none;
-            text-align: right;
-            &>.success{
-              color:green;
+        .inner{
+          height:100%;
+          .row{
+            display: flex;
+            height: 22px;
+            align-items: center;
+            padding: 0 10px;
+            .time{
+              color: green;
+              width: 140px;
+              flex: none;
+              font-weight: 700;
             }
-            &>.failed{
-              color:#e41f2b;
+            .msg{
+              flex: none;
+              width:120px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            .shop{
+              flex: none;
+              width:120px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            .goods{
+              flex: auto;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              color: #eee;
+            }
+            .status{
+              width:70px;
+              flex: none;
+              text-align: right;
+              &>.success{
+                color:green;
+              }
+              &>.failed{
+                color:#e41f2b;
+              }
+              &>.notUpdate{
+                color:#E6A23C
+              }
+            }
+            &:last-child{
+              margin-bottom: 40px;
             }
           }
         }

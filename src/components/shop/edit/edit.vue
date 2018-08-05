@@ -61,7 +61,7 @@
         <el-tab-pane name="4" value="商品发布">
           <span slot="label"><i class="el-icon-date"></i>商品发布</span>
           <div class="crawAreas">
-            <craw-view></craw-view>
+            <craw-view :shopName.sync="form.name" :shopId.sync="form.shopId"></craw-view>
           </div>
         </el-tab-pane>
       </el-tabs>

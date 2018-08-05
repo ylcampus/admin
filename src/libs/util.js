@@ -214,6 +214,24 @@ module.exports.arabiaToSimplisiedChinese = (num) => {
   return newchar
 }
 
+/**
+ * @name 获取日期与时间
+ */
+module.exports.getDateAndTime = (date) => {
+  let time = new Date(date)
+  let y = time.getFullYear()
+  let m = time.getMonth() + 1
+  m = m < 10 ? '0' + m : m
+  let d = time.getDate()
+  d = d < 10 ? '0' + d : d
+  let hour = time.getHours()
+  let h = hour < 10 ? '0' + hour : hour
+  let minute = time.getMinutes()
+  let mi = minute < 10 ? '0' + minute : minute
+  let second = time.getSeconds()
+  let s = second < 10 ? '0' + second : second
+  return y + '/' + m + '/' + d + ' ' + h + ':' + mi + ':' + s
+}
 // this.doTimeChange = function(time){
 //   var myJsDate = $filter('date',time,'yyyy/mm/dd hh:mm:ss');
 //   var update = new Date(myJsDate);//更新时间
