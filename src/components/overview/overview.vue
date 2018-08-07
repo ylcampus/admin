@@ -2,8 +2,8 @@
   <div id="Overview">
     <section class="yle_operation_penal">
       <div class="left_part" style="display: flex;align-items: center;">
-        <el-select v-model="filter.shopId" placeholder="请选择店铺" @change="shopSelect">
-          <el-option label="优乐商城" value="10000"></el-option>
+        <el-select v-model="filter.shopId" :placeholder="LAN.shopSelect" @change="shopSelect">
+          <el-option :label="LAN.ule" value="10000"></el-option>
           <el-option
             :key="key"
             v-for = "(item, key) in shopList"
@@ -16,11 +16,11 @@
       <div class="right_part">
         <div class="item">
           <el-radio-group v-model="filter.type" @change="statusSelect" size="small">
-            <el-radio-button label="1" >当天</el-radio-button>
-            <el-radio-button label="2" >最近7天</el-radio-button>
-            <el-radio-button label="3" >最近30天</el-radio-button>
-            <el-radio-button label="4" >最近90天</el-radio-button>
-            <el-radio-button label="5" >自定义</el-radio-button>
+            <el-radio-button label="1" >{{LAN.today}}</el-radio-button>
+            <el-radio-button label="2" >{{LAN.threeDays}}</el-radio-button>
+            <el-radio-button label="3" >{{LAN.thirtyDays}}</el-radio-button>
+            <el-radio-button label="4" >{{LAN.ninetyDays}}</el-radio-button>
+            <el-radio-button label="5" >{{LAN.custom}}</el-radio-button>
           </el-radio-group>
         </div>
         <div class="item">
@@ -29,9 +29,9 @@
             type="daterange"
             align="right"
             unlink-panels
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            :range-separator="LAN.to"
+            :start-placeholder="LAN.startDate"
+            :end-placeholder="LAN.endDate"
             :picker-options="pickerOptions"
             @change = "drawAll"
             :disabled="isDisabled">
@@ -44,36 +44,36 @@
         <div class="totalArea">
           <div class="totalItem">
             <div class="inner">
-              <div class="title">访问量</div>
+              <div class="title">{{LAN.visitNumber}}</div>
               <div class="number" style="font-size: 40px;color: green;">{{totalMap.visit}}</div>
             </div>
           </div>
           <div class="totalItem">
             <div class="inner">
-              <div class="title">订单（总）</div>
+              <div class="title">{{LAN.totalOrder}}</div>
               <div class="number">{{totalMap.order}}</div>
-              <router-link class="detail" to="/order">查看详情>></router-link>
+              <router-link class="detail" to="/order">{{LAN.seeMore}}>></router-link>
             </div>
           </div>
           <div class="totalItem">
             <div class="inner">
-              <div class="title">商品（总）</div>
+              <div class="title">{{LAN.totalGoods}}</div>
               <div class="number">{{totalMap.goods}}</div>
-              <router-link class="detail" to="/goods">查看详情>></router-link>
+              <router-link class="detail" to="/goods">{{LAN.seeMore}}>></router-link>
             </div>
           </div>
           <div class="totalItem">
             <div class="inner">
-              <div class="title">会员（总）</div>
+              <div class="title">{{LAN.totalMember}}</div>
               <div class="number">{{totalMap.member}}</div>
-              <router-link class="detail" to="/member">查看详情>></router-link>
+              <router-link class="detail" to="/member">{{LAN.seeMore}}>></router-link>
             </div>
           </div>
           <div class="totalItem">
             <div class="inner">
-              <div class="title">打折券（总）</div>
+              <div class="title">{{LAN.totalDiscount}}</div>
               <div class="number">{{totalMap.discount}}</div>
-              <router-link class="detail" to="/discount">查看详情>></router-link>
+              <router-link class="detail" to="/discount">{{LAN.seeMore}}>></router-link>
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@
             <div class="grid-content">
               <div class="inner">
                 <div id="orderPie"></div>
-                <span class="title">订单</span>
+                <span class="title">{{LAN.order}}</span>
               </div>
             </div>
           </el-col>
@@ -95,7 +95,7 @@
             <div class="grid-content">
               <div class="inner">
                 <div id="goodsPie"></div>
-                <span class="title">商品</span>
+                <span class="title">{{LAN.goods}}</span>
               </div>
             </div>
           </el-col>
@@ -103,7 +103,7 @@
             <div class="grid-content">
               <div class="inner">
                 <div id="memberPie"></div>
-                <span class="title">会员</span>
+                <span class="title">{{LAN.member}}</span>
               </div>
             </div>
           </el-col>
@@ -111,7 +111,7 @@
             <div class="grid-content">
               <div class="inner">
                 <div id="discountPie"></div>
-                <span class="title">打折券</span>
+                <span class="title">{{LAN.discount}}</span>
               </div>
             </div>
           </el-col>
@@ -124,6 +124,7 @@
 import echarts from 'echarts'
 import {getLineChartData, getShopList, getOrderChartData, getGoodsChartData, getMemberChartData, getDiscountChartData} from './proxy'
 import {mirrorQuaraterTick, getDateTxtArr, getDateString, getDate} from '@/libs/util'
+import LAN from '@/libs/il8n'
 export default {
   name: 'overview',
   watch: {
@@ -136,6 +137,7 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.overview,
       isDisabled: true,
       totalMap: { // 数据统计
         visit: 0,
@@ -158,7 +160,7 @@ export default {
       attentionLineY: [],
       pickerOptions: {
         shortcuts: [{
-          text: '最近一周',
+          text: LAN.overview.lastWeek,
           onClick (picker) {
             const end = new Date()
             const start = new Date()
@@ -166,7 +168,7 @@ export default {
             picker.$emit('pick', [start, end])
           }
         }, {
-          text: '最近30天',
+          text: LAN.overview.thirtyDays,
           onClick (picker) {
             const end = new Date()
             const start = new Date()
@@ -174,7 +176,7 @@ export default {
             picker.$emit('pick', [start, end])
           }
         }, {
-          text: '最近90天',
+          text: LAN.overview.ninetyDays,
           onClick (picker) {
             const end = new Date()
             const start = new Date()
@@ -288,7 +290,7 @@ export default {
           formatter: (params) => {
             let date = params[0].axisValue
             let dataNum = params[0].data === null ? '--' : `${params[0].data}人`
-            return `${date}<br/>访问量 : ${dataNum}`
+            return `${date}<br/>${this.LAN.visitNumber} : ${dataNum}`
           }
         },
         xAxis: {
@@ -305,7 +307,7 @@ export default {
           }
         },
         yAxis: {
-          name: '访问量(次)',
+          name: this.LAN.times,
           nameTextStyle: {
             color: '#999'
           },
@@ -409,16 +411,16 @@ export default {
       getOrderChartData({shopId: this.filter.shopId}).then(res => {
         if (res.code * 1 === 0) {
           let mirrorMap = {
-            '1': '待付款',
-            '2': '待发货',
-            '3': '已发货',
-            '4': '已完成',
-            '5': '已取消'
+            '1': this.LAN.payPending,
+            '2': this.LAN.deliverPending,
+            '3': this.LAN.delivered,
+            '4': this.LAN.completed,
+            '5': this.LAN.cancelled
           }
           let result = this.transionData(res.data, mirrorMap)
           this.totalMap.order = result.total
           let colors = ['#E6A23C', '#E6A23C', '#409EFF', '#67C23A', '#909399']
-          this.drawPie('orderPie', result.arr, colors, 'orderPieChart', '订单')
+          this.drawPie('orderPie', result.arr, colors, 'orderPieChart', this.LAN.order)
         }
       })
     },
@@ -426,13 +428,13 @@ export default {
       getGoodsChartData({shopId: this.filter.shopId}).then(res => {
         if (res.code * 1 === 0) {
           let mirrorMap = {
-            '1': '出售中',
-            '2': '库存中'
+            '1': this.LAN.saleing,
+            '2': this.LAN.stocking
           }
           let result = this.transionData(res.data, mirrorMap)
           this.totalMap.goods = result.total
           let colors = ['#67C23A', '#E6A23C']
-          this.drawPie('goodsPie', result.arr, colors, 'goodsPieChart', '商品')
+          this.drawPie('goodsPie', result.arr, colors, 'goodsPieChart', this.LAN.goods)
         }
       })
     },
@@ -440,13 +442,13 @@ export default {
       getMemberChartData().then(res => {
         if (res.code * 1 === 0) {
           let mirrorMap = {
-            '1': '离线',
-            '2': '在线'
+            '1': this.LAN.offline,
+            '2': this.LAN.online
           }
           let result = this.transionData(res.data, mirrorMap)
           this.totalMap.member = result.total
           let colors = ['#F56C6C', '#67C23A']
-          this.drawPie('memberPie', result.arr, colors, 'memberPieChart', '会员')
+          this.drawPie('memberPie', result.arr, colors, 'memberPieChart', this.LAN.member)
         }
       })
     },
@@ -454,15 +456,15 @@ export default {
       getDiscountChartData({shopId: this.filter.shopId}).then(res => {
         if (res.code * 1 === 0) {
           let mirrorMap = {
-            '1': '未领取',
-            '2': '未使用',
-            '3': '已使用',
-            '4': '已完成'
+            '1': this.LAN.receivePending,
+            '2': this.LAN.usePending,
+            '3': this.LAN.used,
+            '4': this.LAN.completed
           }
           let result = this.transionData(res.data, mirrorMap)
           this.totalMap.discount = result.total
           let colors = ['#E6A23C', '#909399', '#409EFF', '#67C23A']
-          this.drawPie('discountPie', result.arr, colors, 'discountPieChart', '打折券')
+          this.drawPie('discountPie', result.arr, colors, 'discountPieChart', this.LAN.discount)
         }
       })
     },
@@ -525,7 +527,7 @@ export default {
         },
         series: [
           {
-            name: name || '访问量',
+            name: name || this.LAN.visitNumber,
             type: 'pie',
             radius: ['60%', '68%'],
             center: ['50%', '40%'],
