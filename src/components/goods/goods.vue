@@ -47,14 +47,6 @@
         <el-table-column
           label="商品Id"
           prop="goodsId" width="150">
-          <template slot-scope="scope">
-            <el-popover
-              placement="top-start"
-              title="主图片"
-              trigger="hover">
-              <span slot="reference">{{scope.row.goodsId}}</span>
-            </el-popover>
-          </template>
         </el-table-column>
         <el-table-column
           label="价格"
@@ -68,7 +60,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="更新状态"
+          label="库存状态"
           prop="status" width="100">
           <template slot-scope="scope">
             <el-tag type="success" v-if = "scope.row.status === 1">出售中</el-tag>

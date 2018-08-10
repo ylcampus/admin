@@ -10,21 +10,6 @@
     <br>
     <br>
     <input value = "添加商品" type="button" @click="addGoods">
-    <!--<p>-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/451024527/TB2wXhCbyMnBKNjSZFzXXc_qVXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/451024527/TB2Mj3.fCtYBeNjSspaXXaOOFXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/451024527/TB2mXwUbXooBKNjSZPhXXc2CXXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/451024527/TB2N40zbCcqBKNjSZFgXXX_kXXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/451024527/TB2QevnfrGYBuNjy0FoXXciBFXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i3/451024527/TB2aGjyfr1YBuNjSszeXXablFXa_!!451024527.jpg"></p>-->
-    <!--<p>-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/451024527/TB2B1tzgQUmBKNjSZFOXXab2XXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/451024527/TB2XMndtDJYBeNjy1zeXXahzVXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/451024527/TB2aFhItrSYBuNjSspfXXcZCpXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i3/451024527/TB20UFYtv1TBuNjy0FjXXajyXXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/451024527/TB23NfuaKUXBuNjt_a0XXcysXXa_!!451024527.jpg">-->
-    <!--<img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/451024527/TB2EZXAgOMnBKNjSZFzXXc_qVXa_!!451024527.jpg">-->
-    <!--</p>-->
   </div>
 </template>
 <script>
