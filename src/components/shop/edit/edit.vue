@@ -1,49 +1,49 @@
 <template>
   <div id="EditShop">
     <div class="yle_tabs_title">
-      <el-button icon="el-icon-back" size="mini" @click="$router.push('/shop')">返回</el-button>
+      <el-button icon="el-icon-back" size="mini" @click="$router.push('/shop')">{{LAN.back}}</el-button>
       <span class="txt">{{tabsTitle}}</span>
     </div>
     <div class="warpMain">
       <el-tabs v-model="activeTabs" type="card" @tab-click="tabsClick">
-        <el-tab-pane name="1" value="基本信息">
-          <span slot="label"><i class="el-icon-date"></i>基本信息</span>
+        <el-tab-pane name="1" :value="LAN.baseMsg">
+          <span slot="label"><i class="el-icon-date"></i>{{LAN.baseMsg}}</span>
           <div class="editAreas">
             <el-form :model="form" :rules="rules" ref="ruleForm" label-width="100px" size="small">
-              <el-form-item label="店铺名称">{{form.name}}</el-form-item>
-              <el-form-item label="店铺Id">{{form.shopId}}</el-form-item>
-              <el-form-item label="域名">{{form.host}}</el-form-item>
-              <el-form-item label="skuId">{{form.skuId}}</el-form-item>
-              <el-form-item label="品牌">{{form.brand}}</el-form-item>
-              <el-form-item label="联系人">{{form.linkman}}</el-form-item>
-              <el-form-item label="联系电话">{{form.telephone}}</el-form-item>
-              <el-form-item label="电子邮件">{{form.email}}</el-form-item>
-              <el-form-item label="公司名称">{{form.company}}</el-form-item>
-              <el-form-item label="公司地址">{{form.address}}</el-form-item>
-              <el-form-item label="描述" prop="desc">
-                <el-input rows = "4" type="textarea" v-model="form.desc" placeholder="请输入品牌简介信息"></el-input>
+              <el-form-item :label="LAN.shopName">{{form.name}}</el-form-item>
+              <el-form-item :label="LAN.shopId">{{form.shopId}}</el-form-item>
+              <el-form-item :label="LAN.host">{{form.host}}</el-form-item>
+              <el-form-item :label="LAN.skuid">{{form.skuId}}</el-form-item>
+              <el-form-item :label="LAN.brand">{{form.brand}}</el-form-item>
+              <el-form-item :label="LAN.linkman">{{form.linkman}}</el-form-item>
+              <el-form-item :label="LAN.telephone">{{form.telephone}}</el-form-item>
+              <el-form-item :label="LAN.email">{{form.email}}</el-form-item>
+              <el-form-item :label="LAN.campany">{{form.company}}</el-form-item>
+              <el-form-item :label="LAN.address">{{form.address}}</el-form-item>
+              <el-form-item :label="LAN.desc" prop="desc">
+                <el-input rows = "4" type="textarea" v-model="form.desc" :placeholder="LAN.descHolder"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="submitForm">保存修改</el-button>
+                <el-button type="primary" @click="submitForm">{{LAN.save}}</el-button>
               </el-form-item>
             </el-form>
           </div>
         </el-tab-pane>
-        <el-tab-pane name="2" value="图文数据">
-          <span slot="label"><i class="el-icon-date"></i>图文数据</span>
+        <el-tab-pane name="2" :value="LAN.chart">
+          <span slot="label"><i class="el-icon-date"></i>{{LAN.chart}}</span>
           <div class="graphAreas">
             <el-form label-width="100px" size="small">
-              <el-form-item label="商标">
+              <el-form-item :label="LAN.trademark">
                 <div class="picArea logo">
                   <img src="../../../assets/img/shop/logo.jpg">
                 </div>
               </el-form-item>
-              <el-form-item label="横幅">
+              <el-form-item :label="LAN.banner">
                 <div class="picArea banner">
                   <img src="../../../assets/img/shop/banner.jpg">
                 </div>
               </el-form-item>
-              <el-form-item label="授权证明">
+              <el-form-item :label="LAN.authority">
                 <div class="picArea authority">
                   <img src="../../../assets/img/shop/authority.jpg">
                 </div>
@@ -51,15 +51,15 @@
             </el-form>
           </div>
         </el-tab-pane>
-        <el-tab-pane name="3" value="品牌简介">
-          <span slot="label"><i class="el-icon-date"></i>品牌简介</span>
+        <el-tab-pane name="3" :value="LAN.brief">
+          <span slot="label"><i class="el-icon-date"></i>{{LAN.brief}}</span>
           <div class="briefAreas">
             <p v-if="form.brief"></p>
-            <div class="noData" v-else>暂无数据</div>
+            <div class="noData" v-else>{{LAN.noData}}</div>
           </div>
         </el-tab-pane>
-        <el-tab-pane name="4" value="商品发布">
-          <span slot="label"><i class="el-icon-date"></i>商品发布</span>
+        <el-tab-pane name="4" :value="LAN.release">
+          <span slot="label"><i class="el-icon-date"></i>{{LAN.release}}</span>
           <div class="crawAreas">
             <craw-view :shopName.sync="form.name" :shopId.sync="form.shopId"></craw-view>
           </div>
@@ -72,6 +72,7 @@
 import {getShopDetail, editShop} from '../proxy'
 import {checkSpecialChar} from '../../../libs/validate'
 import crawView from './craw/craw'
+import LAN from '@/libs/il8n'
 export default {
   name: 'EditShop',
   components: {
@@ -79,8 +80,9 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.enterShop.edit,
       activeTabs: '4',
-      tabsTitle: '基本信息',
+      tabsTitle: LAN.enterShop.edit.baseMsg,
       form: {
         shopId: '--', // 店铺Id
         host: '--', // 域名
@@ -103,7 +105,7 @@ export default {
           {
             min: 0,
             max: 255,
-            message: '长度在 1 到 255 个字符',
+            message: LAN.enterShop.edit.descError,
             trigger: 'blur'
           },
           {
@@ -140,7 +142,7 @@ export default {
           }
           editShop(params).then((res) => {
             if (res.code * 1 === 0) {
-              this.$message.success('店铺编辑成功')
+              this.$message.success(this.LAN.editSuccess)
               this.getShopDetail()
             }
           })

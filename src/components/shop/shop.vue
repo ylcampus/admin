@@ -3,13 +3,13 @@
     <!--头部-->
     <section class="head">
       <div class="add">
-        <el-button icon="el-icon-plus" @click = "addShop" plain>新建店铺</el-button>
+        <el-button icon="el-icon-plus" @click = "addShop" plain>{{LAN.createShop}}</el-button>
       </div>
       <div class="filter">
         <div class="fitem">
           <el-input
             @keyup.enter.native = "getShopList"
-            placeholder="输入店铺名称进行搜索"
+            :placeholder="LAN.searchHolder"
             suffix-icon="el-icon-search"
             @clear = "getShopList"
             v-model="filter.name" clearable>
@@ -24,32 +24,32 @@
         :height = "tableHeight"
         stripe>
         <el-table-column
-          label="店铺名称"
+          :label="LAN.shopName"
           prop="name" width="200" show-overflow-tooltip>
           <template slot-scope="scope">
             <span class="sname" @click="editShop(scope.row)">{{ scope.row.name }}</span>
           </template>
         </el-table-column>
         <el-table-column
-          label="主机名"
+          :label="LAN.host"
           prop="host" width="150">
         </el-table-column>
         <el-table-column
-          label="店铺Id"
+          :label="LAN.shopId"
           prop="shopId" width="120">
         </el-table-column>
         <el-table-column
-          label="SkuId"
+          :label="LAN.skuid"
           prop="skuId" width="120">
         </el-table-column>
         <el-table-column
-          label="创建时间"
+          :label="LAN.createAt"
           prop="createAt">
         </el-table-column>
         <el-table-column
-          label="操作" width="100">
+          :label="LAN.operation" width="100">
           <template slot-scope="scope">
-            <span @click="delShop(scope.row)" style="cursor:pointer"><el-tag type="danger">删除</el-tag></span>
+            <span @click="delShop(scope.row)" style="cursor:pointer"><el-tag type="danger">{{LAN.delete}}</el-tag></span>
           </template>
         </el-table-column>
       </el-table>
@@ -70,10 +70,12 @@
 </template>
 <script>
 import {getShopList, deleteShop} from './proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'shopEnter',
   data () {
     return {
+      LAN: LAN.enterShop,
       total: 80, // 总数据数
       filter: { // 筛选条件
         pageNo: 1,
@@ -113,21 +115,21 @@ export default {
       })
     },
     delShop (row) { // 删除店铺
-      this.$confirm('确定要删除该店铺吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.LAN.delConfirm, this.LAN.tips, {
+        confirmButtonText: this.LAN.enter,
+        cancelButtonText: this.LAN.cancel,
         type: 'warning'
       }).then(() => {
         deleteShop(row.shopId).then((res) => {
           if (res.code * 1 === 0) {
-            this.$message.success('删除成功')
+            this.$message.success(this.LAN.delSuccess)
             this.getShopList()
           }
         })
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '操作已取消'
+          message: this.LAN.opaCancel
         })
       })
     },

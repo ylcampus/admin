@@ -1,26 +1,26 @@
 <template>
   <div id="AddShop">
-    <div class="yle_detail_title"><span>创建店铺</span></div>
+    <div class="yle_detail_title"><span>{{LAN.createShop}}</span></div>
     <div class="form">
       <el-form :model="form" :rules="rules" ref="ruleForm" label-width="100px" size="small">
-        <el-form-item label="品牌" prop="brand">
-          <el-input v-model="form.brand" placeholder="请输入店铺名称"></el-input>
+        <el-form-item :label="LAN.brand" prop="brand">
+          <el-input v-model="form.brand" :placeholder="LAN.brandHolder"></el-input>
         </el-form-item>
-        <el-form-item label="官方域名" prop="host">
-          <el-input v-model="form.host" placeholder="请输入域名信息"></el-input>
+        <el-form-item :label="LAN.host" prop="host">
+          <el-input v-model="form.host" :placeholder="LAN.hostHolder"></el-input>
         </el-form-item>
-        <el-form-item label="店铺Id" prop="shopId">
-          <el-input v-model="form.shopId" placeholder="请输入店铺Id"></el-input>
+        <el-form-item :label="LAN.shopId" prop="shopId">
+          <el-input v-model="form.shopId" :placeholder="LAN.shopIdHolder"></el-input>
         </el-form-item>
-        <el-form-item label="skuId" prop="skuId">
-          <el-input v-model="form.skuId" placeholder="请输入skuId"></el-input>
+        <el-form-item :label="LAN.skuid" prop="skuId">
+          <el-input v-model="form.skuId" :placeholder="LAN.skuidHolder"></el-input>
         </el-form-item>
-        <el-form-item label="品牌简介" prop="desc">
-          <el-input rows = "4" type="textarea" v-model="form.desc" placeholder="请输入品牌简介信息"></el-input>
+        <el-form-item :label="LAN.brief" prop="desc">
+          <el-input rows = "4" type="textarea" v-model="form.desc" :placeholder="LAN.briefHolder"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm()">立即创建</el-button>
-          <el-button @click="$router.push('/shop')">取消</el-button>
+          <el-button type="primary" @click="submitForm()">{{LAN.create}}</el-button>
+          <el-button @click="$router.push('/shop')">{{LAN.cancel}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -29,10 +29,12 @@
 <script>
 import {addShop} from '../proxy'
 import {validateName, validateHost, validateShopId, validateSkuId, checkSpecialChar} from '../../../libs/validate'
+import LAN from '@/libs/il8n'
 export default {
   name: 'addShop',
   data () {
     return {
+      LAN: LAN.enterShop.add,
       form: {
         shopId: '', // 店铺Id
         host: '', // 主机名
@@ -41,10 +43,10 @@ export default {
         desc: '' // 描述
       },
       rules: {
-        brand: [ // 店铺名称
+        brand: [ // 品牌
           {
             required: true,
-            message: '请输入品牌名称',
+            message: LAN.enterShop.add.brandMsg,
             trigger: 'blur'
           },
           {
@@ -59,7 +61,7 @@ export default {
         host: [ // 主机名称（官方域名）
           {
             required: true,
-            message: '请输入主机名称',
+            message: LAN.enterShop.add.hostMsg,
             trigger: 'blur'
           },
           {
@@ -70,7 +72,7 @@ export default {
         shopId: [ // 店铺Id
           {
             required: true,
-            message: '请输入店铺Id',
+            message: LAN.enterShop.add.shopIdMsg,
             trigger: 'blur'
           },
           {
@@ -81,7 +83,7 @@ export default {
         skuId: [ // skuId
           {
             required: true,
-            message: '请输入skuId',
+            message: LAN.enterShop.add.skuidMsg,
             trigger: 'blur'
           },
           {
@@ -93,7 +95,7 @@ export default {
           {
             min: 0,
             max: 255,
-            message: '长度在 1 到 255 个字符',
+            message: LAN.enterShop.add.briefMsg,
             trigger: 'blur'
           },
           {
@@ -109,9 +111,9 @@ export default {
     submitForm () {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.$confirm('店铺创建后，除品牌简介之外的数据都将不可再编辑，确认要创建店铺吗?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm(this.LAN.createConfirm, this.LAN.enter, {
+            confirmButtonText: this.LAN.createSuccess,
+            cancelButtonText: this.LAN.opaCancel,
             type: 'warning'
           }).then(() => {
             let params = {

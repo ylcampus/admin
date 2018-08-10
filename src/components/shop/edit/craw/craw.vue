@@ -3,62 +3,62 @@
     <div class="content">
       <div class="crawPart">
         <div class="opaArea">
-          <el-button size="mini" @click="crawGoodsData">爬取数据</el-button>
-          <el-button style="margin-left:0;" @click="refershCrawData" size="mini">刷新</el-button>
+          <el-button size="mini" @click="crawGoodsData">{{LAN.crawData}}</el-button>
+          <el-button style="margin-left:0;" @click="refershCrawData" size="mini">{{LAN.refresh}}</el-button>
         </div>
         <div class="panelArea">
           <div class="shopName">{{shopName}}</div>
           <div class="totalMsg">
             <div class="item big">
-              <div class="txt">当前商品</div>
+              <div class="txt">{{LAN.current}}</div>
               <div class="num current">{{current}}</div>
             </div>
             <div class="item">
-              <div class="txt">总商品数</div>
+              <div class="txt">{{LAN.totalResults}}</div>
               <div class="num">{{crawData.totalResults}}</div>
             </div>
             <div class="item">
-              <div class="txt">总页数</div>
+              <div class="txt">{{LAN.totalPage}}</div>
               <div class="num">{{crawData.totalPage}}</div>
             </div>
             <div class="item">
-              <div class="txt">每页商品数</div>
+              <div class="txt">{{LAN.pageSize}}</div>
               <div class="num">{{crawData.pageSize}}</div>
             </div>
             <div class="item">
-              <div class="txt">当前页</div>
+              <div class="txt">{{LAN.currentPage}}</div>
               <div class="num">{{crawData.currentPage}}</div>
             </div>
           </div>
           <div class="goodsMsg">
             <div class="gItem">
               <div class="column">
-                <div class="label">更新成功</div>
+                <div class="label">{{LAN.updateSuccess}}</div>
                 <div class="num success">{{crawData.updateSuccess}}</div>
               </div>
               <div class="column">
-                <div class="label">更新失败</div>
+                <div class="label">{{LAN.updateFailed}}</div>
                 <div class="num failed">{{crawData.updateFailed}}</div>
               </div>
               <div class="column">
-                <div class="label">未更新</div>
+                <div class="label">{{LAN.notUpdate}}</div>
                 <div class="num">{{crawData.notUpdate}}</div>
               </div>
             </div>
             <div class="gItem">
               <div class="column w50">
-                <div class="label">添加成功</div>
+                <div class="label">{{LAN.addSuccess}}</div>
                 <div class="num success">{{crawData.addSuccess}}</div>
               </div>
               <div class="column w50" style="border-right:none;">
-                <div class="label">添加失败</div>
+                <div class="label">{{LAN.addFailed}}</div>
                 <div class="num failed">{{crawData.addFailed}}</div>
               </div>
             </div>
           </div>
         </div>
         <div class="consoleArea" id="consoleArea">
-          <div v-show ="consoleList.length === 0" class="nodata">暂无数据</div>
+          <div v-show ="consoleList.length === 0" class="nodata">{{LAN.noData}}</div>
           <div v-show ="consoleList.length !== 0" class="inner">
             <div class="row" v-for="(row, index) in consoleList" :key="index">
               <div class="time">{{row.time}}</div>
@@ -66,11 +66,11 @@
               <div v-if="row.flag === 'detail'" class="shop" :title="row.shopName">{{row.shopName}}</div>
               <div v-if="row.flag === 'detail'" class="goods" :title="row.goodsName">{{row.goodsName}}</div>
               <div v-if="row.flag === 'detail'" class="status">
-                <span class="success" v-if="row.execStatus === 1">更新成功</span>
-                <span class="failed" v-if="row.execStatus === 2">更新失败</span>
-                <span class="notUpdate" v-if="row.execStatus === 3">未更新</span>
-                <span class="success" v-if="row.execStatus === 4">新增成功</span>
-                <span class="failed" v-if="row.execStatus === 5">新增失败</span>
+                <span class="success" v-if="row.execStatus === 1">{{LAN.updateSuccess}}</span>
+                <span class="failed" v-if="row.execStatus === 2">{{LAN.updateFailed}}</span>
+                <span class="notUpdate" v-if="row.execStatus === 3">{{LAN.notUpdate}}</span>
+                <span class="success" v-if="row.execStatus === 4">{{LAN.addSuccess}}</span>
+                <span class="failed" v-if="row.execStatus === 5">{{LAN.addFailed}}</span>
               </div>
             </div>
           </div>
@@ -86,25 +86,25 @@
             :height = "tableHeight"
             stripe>
             <el-table-column
-              label="执行时间"
+              :label="LAN.date"
               prop="date" width="200" show-overflow-tooltip>
             </el-table-column>
             <el-table-column
-              label="店铺"
+              :label="LAN.shopName"
               prop="shopName" width="100" show-overflow-tooltip></el-table-column>
             <el-table-column
-              label="商品"
+              :label="LAN.goodsName"
               prop="goodsName" show-overflow-tooltip>
             </el-table-column>
             <el-table-column
-              label="执行状态"
+              :label="LAN.execStatus"
               prop="execStatus" width="80" show-overflow-tooltip>
               <template slot-scope="scope">
-                <span v-if = "scope.row.execStatus === 1" class="yle_color_green">更新成功</span>
-                <span v-else-if = "scope.row.execStatus === 2" class="yle_color_red">更新失败</span>
-                <span v-else-if = "scope.row.execStatus === 3" class="yle_color_yellow">未更新</span>
-                <span v-else-if = "scope.row.execStatus === 4" class="yle_color_green">新增成功</span>
-                <span v-else-if = "scope.row.execStatus === 5" class="yle_color_red">新增失败</span>
+                <span v-if = "scope.row.execStatus === 1" class="yle_color_green">{{LAN.updateSuccess}}</span>
+                <span v-else-if = "scope.row.execStatus === 2" class="yle_color_red">{{LAN.updateFailed}}</span>
+                <span v-else-if = "scope.row.execStatus === 3" class="yle_color_yellow">{{LAN.notUpdate}}</span>
+                <span v-else-if = "scope.row.execStatus === 4" class="yle_color_green">{{LAN.addSuccess}}</span>
+                <span v-else-if = "scope.row.execStatus === 5" class="yle_color_red">{{LAN.addFailed}}</span>
                 <span v-else>--</span>
               </template>
             </el-table-column>
@@ -130,6 +130,7 @@ import {sha256} from 'js-sha256'
 import {getDateAndTime, getDateTxt} from '@/libs/util'
 import {crawData, getCrawLogData} from '../../proxy'
 import WS from './socket'
+import LAN from '@/libs/il8n'
 export default {
   name: 'Craw',
   props: {
@@ -158,6 +159,7 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.enterShop.craw,
       ws: null,
       crawData: { // 爬虫数据
         goodsName: '--', // 商品名称
@@ -205,9 +207,9 @@ export default {
       this.crawData = {...this.crawData, ...map}
       let msgTxt = ''
       if (map.flag === 'start') {
-        msgTxt = '开始爬取商品...'
+        msgTxt = this.LAN.startCraw
       } else if (map.flag === 'end') {
-        msgTxt = '爬取商品结束'
+        msgTxt = this.LAN.crawEnd
       }
       let consoleMap = {
         time: getDateAndTime(parseInt((new Date().getTime()), 10)),
@@ -233,7 +235,7 @@ export default {
       this.consoleList = []
       crawData(params).then((res) => {
         if (res.code * 1 === 0) {
-          this.$message.success('爬虫程序已启动')
+          this.$message.success(this.LAN.crawStarted)
         }
       })
     },
@@ -250,7 +252,7 @@ export default {
     refershCrawData () { // 刷新爬虫数据
       this.crawData = JSON.parse(this.cacheCrawData)
       this.consoleList = []
-      this.$message.success('已刷新')
+      this.$message.success(this.LAN.refreshed)
     },
     getLogData () { // 获取日志数据
       getCrawLogData(this.shopId).then(res => {

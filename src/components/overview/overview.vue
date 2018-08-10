@@ -52,28 +52,28 @@
             <div class="inner">
               <div class="title">{{LAN.totalOrder}}</div>
               <div class="number">{{totalMap.order}}</div>
-              <router-link class="detail" to="/order">{{LAN.seeMore}}>></router-link>
+              <router-link class="detail" to="/order">{{LAN.seeMore}}</router-link>
             </div>
           </div>
           <div class="totalItem">
             <div class="inner">
               <div class="title">{{LAN.totalGoods}}</div>
               <div class="number">{{totalMap.goods}}</div>
-              <router-link class="detail" to="/goods">{{LAN.seeMore}}>></router-link>
+              <router-link class="detail" to="/goods">{{LAN.seeMore}}</router-link>
             </div>
           </div>
           <div class="totalItem">
             <div class="inner">
               <div class="title">{{LAN.totalMember}}</div>
               <div class="number">{{totalMap.member}}</div>
-              <router-link class="detail" to="/member">{{LAN.seeMore}}>></router-link>
+              <router-link class="detail" to="/member">{{LAN.seeMore}}</router-link>
             </div>
           </div>
           <div class="totalItem">
             <div class="inner">
               <div class="title">{{LAN.totalDiscount}}</div>
               <div class="number">{{totalMap.discount}}</div>
-              <router-link class="detail" to="/discount">{{LAN.seeMore}}>></router-link>
+              <router-link class="detail" to="/discount">{{LAN.seeMore}}</router-link>
             </div>
           </div>
         </div>
