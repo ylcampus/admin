@@ -278,7 +278,7 @@ export default {
       cacheCrawData: {},
       logList: [], // 执行日志
       consoleList: [], // 控制台
-      tableHeight: 50,
+      tableHeight: 500,
       rows: [],
       total: 0
     }
