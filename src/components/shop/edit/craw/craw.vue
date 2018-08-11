@@ -3,7 +3,7 @@
     <div class="content">
       <div class="crawPart">
         <div class="opaArea">
-          <el-button size="mini" @click="crawGoodsData">{{LAN.crawData}}</el-button>
+          <el-button size="mini" @click="visible = true">{{LAN.crawData}}</el-button>
           <el-button style="margin-left:0;" @click="refershCrawData" size="mini">{{LAN.refresh}}</el-button>
         </div>
         <div class="panelArea">
@@ -123,12 +123,35 @@
         </section>
       </div>
     </div>
+    <el-dialog
+      title="密码验证"
+      :visible="visible"
+      width="450px"
+      @close="visible = false"
+      :close-on-click-modal="false"
+      id="PWD_Validate_Dialog">
+      <div class="PWDModal">
+        <el-form
+          :model="form"
+          :rules="pwdRules"
+          ref="pwdForm">
+          <el-form-item prop="pwd">
+            <el-input placeholder="请输入验证密码" v-model="form.pwd"></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="visible = false">取 消</el-button>
+        <el-button type="primary" @click="crawGoodsData">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
 import {sha256} from 'js-sha256'
 import {getDateAndTime, getDateTxt} from '@/libs/util'
 import {crawData, getCrawLogData} from '../../proxy'
+import {validatePwd} from '@/libs/validate'
 import WS from './socket'
 import LAN from '@/libs/il8n'
 export default {
@@ -147,7 +170,11 @@ export default {
     current () {
       let back = '--'
       if ((typeof this.crawData.updateSuccess) === 'number') {
-        back = this.crawData.updateSuccess + this.crawData.updateFailed + this.crawData.notUpdate + this.crawData.addSuccess + this.crawData.addFailed
+        back = this.crawData.updateSuccess +
+          this.crawData.updateFailed +
+          this.crawData.notUpdate +
+          this.crawData.addSuccess +
+          this.crawData.addFailed
       }
       return back
     }
@@ -155,12 +182,31 @@ export default {
   watch: {
     '$store.state.windowHeight' () {
       this.tableHeight = this.$refs.logPart.clientHeight - 105
+    },
+    visible (val) {
+      if (val) {
+        this.$nextTick(() => {
+          this.$refs.pwdForm.resetFields()
+        })
+      }
     }
   },
   data () {
     return {
       LAN: LAN.enterShop.craw,
+      visible: false,
       ws: null,
+      form: {
+        pwd: null
+      },
+      pwdRules: {
+        pwd: [
+          {
+            validator: validatePwd,
+            trigger: 'blur'
+          }
+        ]
+      },
       crawData: { // 爬虫数据
         goodsName: '--', // 商品名称
         totalResults: '--', // 总商品数
@@ -194,7 +240,7 @@ export default {
     // 监听socket数据
     WS.onmessage = (e) => {
       let objMap = JSON.parse(e.data)
-      console.log(objMap.shopId)
+      console.log(objMap)
       if (this.$route.name === 'EditShop' && objMap.shopId === this.shopId) {
         this.updateEmitMsg(objMap)
       }
@@ -226,16 +272,23 @@ export default {
         document.getElementById('consoleArea').scrollTo(consoleHeight, scrollHeight - consoleHeight)
       })
     },
-    crawGoodsData () { // 爬取商品数据
-      let params = {
-        shopId: this.shopId,
-        pwd: sha256('craw@123')
-      }
-      this.crawData = JSON.parse(this.cacheCrawData)
-      this.consoleList = []
-      crawData(params).then((res) => {
-        if (res.code * 1 === 0) {
-          this.$message.success(this.LAN.crawStarted)
+    crawGoodsData () {
+      this.$refs.pwdForm.validate((valid) => {
+        if (valid) {
+          let params = {
+            shopId: this.shopId,
+            pwd: sha256(this.form.pwd)
+          }
+          this.crawData = JSON.parse(this.cacheCrawData)
+          this.consoleList = []
+          crawData(params).then((res) => {
+            if (res.code * 1 === 0) {
+              this.$message.success(this.LAN.crawStarted)
+              this.visible = false
+            }
+          })
+        } else {
+          return false
         }
       })
     },
@@ -270,6 +323,15 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "./style.scss";
+</style>
+<style lang="scss">
+  .PWDModal{
+    margin-top: 10px;
+    padding: 0 15px;
+    .el-form-item{
+      margin-bottom: 0;
+    }
+  }
 </style>
