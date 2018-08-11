@@ -235,3 +235,19 @@ module.exports.getDateTxt = (date) => {
   }
   return timeTxt
 }
+
+// 计算时间
+module.exports.calcTime = (timeStamp) => {
+  const time = parseInt(timeStamp / 1000, 10)
+  const second = time % 60
+  const minute = parseInt(time / 60, 10) % 60
+  const hour = parseInt(time / (60 * 60), 10)
+  let h = hour < 10 ? '0' + hour : hour
+  let mi = minute < 10 ? '0' + minute : minute
+  let s = second < 10 ? '0' + second : second
+  return {
+    hour: h,
+    minute: mi,
+    second: s
+  }
+}

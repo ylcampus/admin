@@ -13,49 +13,98 @@
         color: #333;
         height: 40px;
         position: relative;
+        display: flex;
+        justify-content: space-between;
+        .rightPart{
+          .shopName{
+            .txt{
+              font-size: 12px;
+              cursor: pointer;
+              .num{
+                font-weight: bold;
+                font-size: 14px;
+                padding: 0 2px;
+              }
+            }
+          }
+        }
       }
       .panelArea{
         background: #f1f2f3;
         padding: 1px;
-        .shopName{
-          height: 40px;
-          line-height: 40px;
-          padding: 0 15px;
-          background: #fff;
-          font-weight: 700;
-        }
         .totalMsg{
           display: flex;
-          justify-content: space-between;
-          .item{
+          .leftPart{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 140px;
+            height: 140px;
             background: #fff;
-            width: 16.66%;
-            border-top: 1px solid #f1f2f3;
             border-right: 1px solid #f1f2f3;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.36s;
             border-bottom: 1px solid #f1f2f3;
-            .txt{
-              line-height: 30px;
-              border-bottom: 1px solid #f1f2f3;
+            flex: none;
+            img{
+              width: 120px;
+              height: 120px;
+              margin: 10px 0;
             }
-            .num{
-              line-height: 80px;
-              font-size: 32px;
-              font-weight: 700;
-              &.current{
-                color:green;
+          }
+          .rightPart{
+            display: flex;
+            justify-content: space-between;
+            flex: auto;
+            flex-direction: column;
+            .topArea{
+              display: flex;
+              justify-content: space-between;
+              height: 40px;
+              flex: none;
+              align-items: center;
+              .tItem{
+                width: 50%;
+                background: #fff;
+                height: 39px;
+                line-height: 39px;
+                border-right: 1px solid #f1f2f3;
+                border-bottom: 1px solid #f1f2f3;
+                padding: 0 15px;
+                &:nth-child(2){
+                  border-right:none;
+                }
               }
             }
-            &.big{
-              width:33.33%;
-            }
-            &:hover{
-              box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
-            }
-            &:nth-child(5){
-              border-right:none;
+            .bottomArea{
+              display: flex;
+              justify-content: space-between;
+              flex: auto;
+              .item{
+                background: #fff;
+                width: 25%;
+                border-right: 1px solid #f1f2f3;
+                cursor: pointer;
+                text-align: center;
+                transition: all 0.36s;
+                border-bottom: 1px solid #f1f2f3;
+                .txt{
+                  line-height: 30px;
+                  border-bottom: 1px solid #f1f2f3;
+                }
+                .num{
+                  line-height: 69px;
+                  font-size: 32px;
+                  font-weight: 700;
+                  &.current{
+                    color:green;
+                  }
+                }
+                &:hover{
+                  box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+                }
+                &:nth-child(4){
+                  border-right:none;
+                }
+              }
             }
           }
         }

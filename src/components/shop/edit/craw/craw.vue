@@ -3,31 +3,45 @@
     <div class="content">
       <div class="crawPart">
         <div class="opaArea">
-          <el-button size="mini" @click="visible = true">{{LAN.crawData}}</el-button>
-          <el-button style="margin-left:0;" @click="refershCrawData" size="mini">{{LAN.refresh}}</el-button>
+          <div class="leftPart">
+            <el-button size="mini" @click="visible = true">{{LAN.crawData}}</el-button>
+            <el-button style="margin-left:0;" @click="refershCrawData" size="mini">{{LAN.refresh}}</el-button>
+          </div>
+          <div class="rightPart">
+            <div class="shopName">
+              <span>{{shopName}}</span>
+              <span class="txt">(当前商品<span class="num">{{current}}</span>)</span>
+            </div>
+          </div>
         </div>
         <div class="panelArea">
-          <div class="shopName">{{shopName}}</div>
           <div class="totalMsg">
-            <div class="item big">
-              <div class="txt">{{LAN.current}}</div>
-              <div class="num current">{{current}}</div>
+            <div class="leftPart">
+              <img :src="pic">
             </div>
-            <div class="item">
-              <div class="txt">{{LAN.totalResults}}</div>
-              <div class="num">{{crawData.totalResults}}</div>
-            </div>
-            <div class="item">
-              <div class="txt">{{LAN.totalPage}}</div>
-              <div class="num">{{crawData.totalPage}}</div>
-            </div>
-            <div class="item">
-              <div class="txt">{{LAN.pageSize}}</div>
-              <div class="num">{{crawData.pageSize}}</div>
-            </div>
-            <div class="item">
-              <div class="txt">{{LAN.currentPage}}</div>
-              <div class="num">{{crawData.currentPage}}</div>
+            <div class="rightPart">
+              <div class="topArea">
+                <div class="tItem">已花费时间：{{usedTime}}</div>
+                <div class="tItem">预计剩余时间：{{remindTime}}</div>
+              </div>
+              <div class="bottomArea">
+                <div class="item">
+                  <div class="txt">{{LAN.totalResults}}</div>
+                  <div class="num">{{crawData.totalResults}}</div>
+                </div>
+                <div class="item">
+                  <div class="txt">{{LAN.totalPage}}</div>
+                  <div class="num">{{crawData.totalPage}}</div>
+                </div>
+                <div class="item">
+                  <div class="txt">{{LAN.pageSize}}</div>
+                  <div class="num">{{crawData.pageSize}}</div>
+                </div>
+                <div class="item">
+                  <div class="txt">{{LAN.currentPage}}</div>
+                  <div class="num">{{crawData.currentPage}}</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="goodsMsg">
@@ -136,7 +150,7 @@
           :rules="pwdRules"
           ref="pwdForm">
           <el-form-item prop="pwd">
-            <el-input placeholder="请输入验证密码" v-model="form.pwd"></el-input>
+            <el-input placeholder="请输入验证密码" type="password" v-model="form.pwd"></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -149,11 +163,13 @@
 </template>
 <script>
 import {sha256} from 'js-sha256'
-import {getDateAndTime, getDateTxt} from '@/libs/util'
+import {getDateAndTime, getDateTxt, calcTime} from '@/libs/util'
 import {crawData, getCrawLogData} from '../../proxy'
 import {validatePwd} from '@/libs/validate'
 import WS from './socket'
 import LAN from '@/libs/il8n'
+import {host, port} from '@/libs/config'
+const gpic = require('../../../../assets/img/noPic.png')
 export default {
   name: 'Craw',
   props: {
@@ -177,6 +193,38 @@ export default {
           this.crawData.addFailed
       }
       return back
+    },
+    pic () { // 商品图片
+      let back = gpic
+      if (this.crawData.pic) {
+        back = `${host}:${port}/${this.crawData.pic}`
+      }
+      return back
+    },
+    usedTime () { // 已花费时间
+      let timeStamp = 0
+      if (this.crawData.originTime) {
+        timeStamp = parseInt(this.crawData.timeStamp, 10) - parseInt(this.crawData.originTime)
+      }
+      let timeMap = calcTime(timeStamp)
+      return `${timeMap.hour}时${timeMap.minute}分${timeMap.second}秒`
+    },
+    remindTime () { // 剩余时间
+      let tackTime = 0
+      if (this.crawData.originTime) {
+        tackTime = parseInt(this.crawData.timeStamp, 10) - parseInt(this.crawData.originTime)
+      }
+      let currentNum = this.crawData.updateSuccess +
+        this.crawData.updateFailed +
+        this.crawData.notUpdate +
+        this.crawData.addSuccess +
+        this.crawData.addFailed
+      let current = currentNum || 1
+      let argvTime = tackTime / current
+      const total = parseInt(this.crawData.totalResults, 10)
+      let remindStamp = parseInt((total - currentNum) * argvTime, 10)
+      let timeMap = calcTime(remindStamp)
+      return `${timeMap.hour}时${timeMap.minute}分${timeMap.second}秒`
     }
   },
   watch: {
@@ -209,16 +257,19 @@ export default {
       },
       crawData: { // 爬虫数据
         goodsName: '--', // 商品名称
-        totalResults: '--', // 总商品数
-        totalPage: '--', // 总页数
-        pageSize: '--', // 每页商品数
-        currentPage: '--', // 当前页
-        updateSuccess: '--', // 更新成功
-        updateFailed: '--', // 更新失败
-        notUpdate: '--', // 未更新
-        addSuccess: '--', // 添加成功
-        addFailed: '--', // 添加失败
-        execStatus: '--' // 执行状态 1：更新成功 2：更新失败 3：未更新 4：新增成功 5：新增失败
+        totalResults: 0, // 总商品数
+        totalPage: 0, // 总页数
+        pageSize: 0, // 每页商品数
+        currentPage: 0, // 当前页
+        updateSuccess: 0, // 更新成功
+        updateFailed: 0, // 更新失败
+        notUpdate: 0, // 未更新
+        addSuccess: 0, // 添加成功
+        addFailed: 0, // 添加失败
+        execStatus: '--', // 执行状态 1：更新成功 2：更新失败 3：未更新 4：新增成功 5：新增失败
+        pic: null, // 商品图片
+        timeStamp: (new Date()).getTime(), // 当前时间
+        originTime: (new Date()).getTime() // 爬虫程序启动时间
       },
       filter: {
         pageNo: 1,
@@ -240,7 +291,6 @@ export default {
     // 监听socket数据
     WS.onmessage = (e) => {
       let objMap = JSON.parse(e.data)
-      console.log(objMap)
       if (this.$route.name === 'EditShop' && objMap.shopId === this.shopId) {
         this.updateEmitMsg(objMap)
       }
