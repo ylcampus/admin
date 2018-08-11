@@ -75,7 +75,7 @@ export default {
   data () {
     return {
       LAN: LAN.enterShop.edit,
-      activeTabs: '1',
+      activeTabs: '2',
       tabsTitle: LAN.enterShop.edit.baseMsg,
       form: {
         shopId: '--', // 店铺Id
