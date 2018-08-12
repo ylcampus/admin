@@ -142,9 +142,6 @@ module.exports = {
     status: 'Status',
     updateStatus: 'Update Status',
     timeStamp: 'Update Time',
-    saleing: 'saleing',
-    stocking: 'stocking',
-    create: 'Create',
     updateSuccess: 'Update Success',
     updateFailed: 'Update Failed',
     notUpdate: 'Not Update',
@@ -152,14 +149,13 @@ module.exports = {
     addFailed: 'Add Failed',
     detail: {
       back: 'Back',
-      basicMessage: 'Basic Message',
+      goodsDetail: 'Goods Detail',
       goodsId: 'GoodsId',
       goodsName: 'GoodsName',
       price: 'Price',
       status: 'Status',
       saleing: 'Saleing',
       stocking: 'Stocking',
-      create: 'Create',
       updateStatus: 'UpdateStatus',
       updateSuccess: 'UpdateSuccess',
       updateFailed: 'UpdateFailed',
@@ -179,6 +175,7 @@ module.exports = {
       tips: 'Tips',
       enter: 'Enter',
       cancel: 'Cancel',
+      updateSucces: 'Update Succes',
       opaCancel: 'Operation cancelled'
     }
   },

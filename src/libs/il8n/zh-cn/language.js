@@ -142,9 +142,6 @@ module.exports = {
     status: '库存状态',
     updateStatus: '更新状态',
     timeStamp: '更新时间',
-    saleing: '出售中',
-    stocking: '库存中',
-    create: '新建',
     updateSuccess: '更新成功',
     updateFailed: '更新失败',
     notUpdate: '未更新',
@@ -152,14 +149,13 @@ module.exports = {
     addFailed: '添加失败',
     detail: {
       back: '返回',
-      basicMessage: '基本信息',
+      goodsDetail: '商品详情',
       goodsId: '商品Id',
       goodsName: '商品名称',
       price: '价格',
       status: '状态',
       saleing: '出售中',
       stocking: '库存中',
-      create: '新建',
       updateStatus: '更新状态',
       updateSuccess: '更新成功',
       updateFailed: '更新失败',
@@ -179,6 +175,7 @@ module.exports = {
       tips: '提示',
       enter: '确定',
       cancel: '取消',
+      updateSucces: '更新数据成功',
       opaCancel: '操作已取消'
     }
   },

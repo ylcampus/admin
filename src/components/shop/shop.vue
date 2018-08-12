@@ -1,6 +1,5 @@
 <template>
   <div id="EnterShop">
-    <!--头部-->
     <section class="head">
       <div class="add">
         <el-button icon="el-icon-plus" @click = "addShop" plain>{{LAN.createShop}}</el-button>
@@ -17,7 +16,6 @@
         </div>
       </div>
     </section>
-    <!--店铺列表-->
     <section class="shopsList">
       <el-table
         :data="shopList"
@@ -54,7 +52,6 @@
         </el-table-column>
       </el-table>
     </section>
-    <!--分页-->
     <section class="pagination">
       <el-pagination
         @size-change="handleSizeChange"

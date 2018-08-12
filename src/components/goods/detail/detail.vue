@@ -1,88 +1,83 @@
 <template>
   <div id="GoodsDetail">
     <div class="yle_tabs_title">
-      <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
-      <span class="txt">{{tabsTitle}}</span>
+      <el-button icon="el-icon-back" size="mini" @click="back">{{LAN.back}}</el-button>
+      <span class="txt">{{LAN.goodsDetail}}</span>
     </div>
     <div class="warpMain">
-      <el-tabs v-model="activeTabs" type="card" @tab-click="tabsClick">
-        <el-tab-pane name="1" value="基本信息">
-          <span slot="label"><i class="el-icon-date"></i>基本信息</span>
-          <div class="tabsAreas">
-            <el-form :model="form" label-width="100px" size="small">
-              <el-form-item label="商品Id">{{form.goodsId}}</el-form-item>
-              <el-form-item label="商品名称" class="yle_color_blue yle_pointer">{{form.title}}</el-form-item>
-              <el-form-item label="价格">{{form.price}}</el-form-item>
-              <el-form-item label="状态">
-                <el-tag type="success" v-if = "form.status === 1">出售中</el-tag>
-                <el-tag type="danger" v-else-if = "form.status === 2">库存中</el-tag>
-                <span v-else>--</span>
-              </el-form-item>
-              <el-form-item label="更新状态">
-                <span v-if = "form.updateStatus === 1">新建</span>
-                <span v-else-if = "form.updateStatus === 2">更新成功</span>
-                <span v-else-if = "form.updateStatus === 3">更新失败</span>
-                <span v-else>--</span>
-              </el-form-item>
-              <el-form-item label="店铺名称" class="yle_color_blue yle_pointer">{{form.shopName}}</el-form-item>
-              <el-form-item label="创建时间">{{form.create_at}}</el-form-item>
-              <el-form-item label="最近更新时间">{{form.timeStamp}}</el-form-item>
-              <el-form-item>
-                <el-button @click="update">更新数据</el-button>
-              </el-form-item>
-            </el-form>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane name="2" value="SKU信息">
-          <span slot="label"><i class="el-icon-date"></i>SKU信息</span>
-          <div class="tabsAreas skuArea">
-            <div class="picMsg">
-              <div @click="colorSelect(item)"
-                :key="key"
-                v-bind:class="{'active': item.cId === activecId}"
-                class="item" v-for="(item, key) in form.picList">
-                <img :src="item.pic">
-              </div>
+      <div class="leftPart">
+        <div class="skuPart">
+          <div class="picMsg">
+            <div @click="colorSelect(item)"
+               :key="key"
+               v-bind:class="{'active': item.cId === activecId}"
+               class="item" v-for="(item, key) in form.picList">
+              <img :src="hostname + item.pic">
             </div>
-            <div class="skuMsg">
-              <div :key="key" class="item" v-for="(item, key) in form.skuArr">
-                <div class="row">
-                  <span class="key">颜色(尺码)</span>
-                  <span class="value">{{item.names}}</span>
-                </div>
-                <div class="row">
-                  <span class="key">skuId</span>
-                  <span class="value">{{item.skuId}}</span>
-                </div>
-                <div class="row">
-                  <span class="key">库存</span>
-                  <span class="value">{{item.stock}}</span>
-                </div>
+          </div>
+          <div class="skuMsg">
+            <div :key="key" class="item" v-for="(item, key) in form.skuArr">
+              <div class="row">
+                <span class="key">{{LAN.colorSize}}</span>
+                <span class="value" :title="item.names">{{item.names}}</span>
+              </div>
+              <div class="row">
+                <span class="key">{{LAN.skuId}}</span>
+                <span class="value">{{item.skuId}}</span>
+              </div>
+              <div class="row">
+                <span class="key">{{LAN.stock}}</span>
+                <span class="value">{{item.stock}}</span>
               </div>
             </div>
           </div>
-        </el-tab-pane>
-        <el-tab-pane name="3" value="描述信息">
-          <span slot="label"><i class="el-icon-date"></i>描述信息</span>
-          <div class="descArea">
-            <div :key="key" class="item" v-for="(item, key) in form.descPics">
-              <img :src="item">
-            </div>
+        </div>
+        <div class="descPart">
+          <div :key="key" class="item" v-for="(pic, key) in form.descPics">
+            <img :src="hostname + pic">
           </div>
-        </el-tab-pane>
-      </el-tabs>
+        </div>
+      </div>
+      <div class="rightPart">
+        <el-form :model="form" label-width="100px" size="small">
+          <el-form-item :label="LAN.goodsId">{{form.goodsId}}</el-form-item>
+          <el-form-item :label="LAN.goodsName" class="yle_color_blue yle_pointer">{{form.title}}</el-form-item>
+          <el-form-item :label="LAN.price">{{form.price}}</el-form-item>
+          <el-form-item :label="LAN.status">
+            <el-tag type="success" v-if = "form.status === 1">{{LAN.saleing}}</el-tag>
+            <el-tag type="danger" v-else-if = "form.status === 2">{{LAN.stocking}}</el-tag>
+            <span v-else>--</span>
+          </el-form-item>
+          <el-form-item :label="LAN.updateStatus">
+            <span v-if = "form.updateStatus === 1">{{LAN.updateSuccess}}</span>
+            <span v-else-if = "form.updateStatus === 2">{{LAN.updateFailed}}</span>
+            <span v-else-if = "form.updateStatus === 3">{{LAN.notUpdate}}</span>
+            <span v-else-if = "form.updateStatus === 3">{{LAN.addSuccess}}</span>
+            <span v-else-if = "form.updateStatus === 3">{{LAN.addFailed}}</span>
+            <span v-else>--</span>
+          </el-form-item>
+          <el-form-item :label="LAN.shopName" class="yle_color_blue yle_pointer">{{form.shopName}}</el-form-item>
+          <el-form-item :label="LAN.createAt">{{form.create_at}}</el-form-item>
+          <el-form-item :label="LAN.updateAt">{{form.timeStamp}}</el-form-item>
+          <el-form-item>
+            <el-button @click="update">{{LAN.update}}</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import {getGoodsDetail, updateGoodsData} from '../proxy'
+import {hostname} from '@/libs/config'
+import LAN from '@/libs/il8n'
 export default {
   name: 'GoodsDetail',
   data () {
     return {
+      LAN: LAN.goodsManagement.detail,
+      hostname: hostname,
       layout: null,
-      activeTabs: '1',
-      tabsTitle: '基本信息',
       activecId: '',
       form: {
         picList: [],
@@ -93,7 +88,6 @@ export default {
   },
   mounted () {
     this.getGoodsDetail()
-    // 接下来处理商品详情相关业务逻辑
   },
   methods: {
     getGoodsDetail () {
@@ -106,15 +100,13 @@ export default {
         let picList = []
         let pics = this.form.pics
         for (let key in pics) {
-          let rkey = key.split(';')[1]
-          let map = {
-            cId: rkey,
-            pic: pics[key]
-          }
           if (picList.length === 0) {
-            this.activecId = rkey
+            this.activecId = key
           }
-          picList.push(map)
+          picList.push({
+            cId: key,
+            pic: pics[key]
+          })
         }
         this.form.picList = picList
         let activeCId = picList[0].cId
@@ -126,9 +118,6 @@ export default {
         }
       })
     },
-    tabsClick (tab) {
-      this.tabsTitle = tab.$attrs.value
-    },
     colorSelect (row) { // 颜色选择
       this.activecId = row.cId
       this.form.skuArr = this.form.skuList.filter((item) => {
@@ -136,21 +125,21 @@ export default {
       })
     },
     update () { // 更新数据
-      this.$confirm('确定要更新数据吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.LAN.updateConfirm, this.LAN.tips, {
+        confirmButtonText: this.LAN.enter,
+        cancelButtonText: this.LAN.cancel,
         type: 'warning'
       }).then(() => {
         updateGoodsData(this.form.goodsId).then((res) => {
           if (res.code * 1 === 0) {
-            this.$message.success('更新数据成功')
+            this.$message.success(this.LAN.updateSucces)
             this.getGoodsDetail()
           }
         })
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '操作已取消'
+          message: this.LAN.opaCancel
         })
       })
     },

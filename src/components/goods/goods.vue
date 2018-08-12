@@ -3,9 +3,9 @@
     <section class="yle_operation_penal">
       <div class="left_part">
         <el-radio-group v-model="filter.status" @change="statusSelect" size="small">
-          <el-radio-button label=""  >全部</el-radio-button>
-          <el-radio-button label="1" >出售中</el-radio-button>
-          <el-radio-button label="2" >库存中</el-radio-button>
+          <el-radio-button label=""  >{{LAN.all}}</el-radio-button>
+          <el-radio-button label="1" >{{LAN.sale}}</el-radio-button>
+          <el-radio-button label="2" >{{LAN.stock}}</el-radio-button>
         </el-radio-group>
       </div>
       <div class="right_part">
@@ -16,8 +16,8 @@
           </div>
         </div>
         <div class="item w180">
-          <el-select v-model="filter.shopId" placeholder="请选择店铺" @change="shopSelect" clearable>
-            <el-option label="不限" value=""></el-option>
+          <el-select v-model="filter.shopId" :placeholder="LAN.shopSelect" @change="shopSelect" clearable>
+            <el-option :label="LAN.noLimit" value=""></el-option>
             <el-option
               :key="key"
               v-for = "(item, key) in shopList"
@@ -29,7 +29,7 @@
         <div class="item">
           <el-input
             @keyup.enter.native = "getGoodsList"
-            placeholder="输入商品名称进行搜索"
+            :placeholder="LAN.searchHolder"
             suffix-icon="el-icon-search"
             @clear = "getGoodsList"
             v-model="filter.key" clearable>
@@ -53,11 +53,11 @@
           <div class="nameTxt shopName">{{row.shopName}}</div>
           <div class="nameTxt price">￥{{row.price}}</div>
           <div class="excuStatus">
-            <span v-if ="row.updateStatus === 1" class="updateSuccess tag">更新成功</span>
-            <span v-if ="row.updateStatus === 2" class="updateFailed tag">更新失败</span>
-            <span v-if ="row.updateStatus === 3" class="notUpdate tag">未更新</span>
-            <span v-if ="row.updateStatus === 4" class="addSuccess tag">添加成功</span>
-            <span v-if ="row.updateStatus === 5" class="addFailed tag">添加失败</span>
+            <span v-if ="row.updateStatus === 1" class="updateSuccess tag">{{LAN.updateSuccess}}</span>
+            <span v-if ="row.updateStatus === 2" class="updateFailed tag">{{LAN.updateFailed}}</span>
+            <span v-if ="row.updateStatus === 3" class="notUpdate tag">{{LAN.notUpdate}}</span>
+            <span v-if ="row.updateStatus === 4" class="addSuccess tag">{{LAN.addSuccess}}</span>
+            <span v-if ="row.updateStatus === 5" class="addFailed tag">{{LAN.addFailed}}</span>
           </div>
         </div>
       </div>
@@ -67,48 +67,50 @@
           :height = "tableHeight"
           stripe>
           <el-table-column
-            label="商品名称"
+            :label="LAN.goodsName"
             prop="name" width="220" show-overflow-tooltip>
             <template slot-scope="scope">
               <span class="yle_color_blue yle_pointer" @click="toGoodsDetail(scope.row)">{{ scope.row.title }}</span>
             </template>
           </el-table-column>
           <el-table-column
-            label="商品Id"
+            :label="LAN.goodsId"
             prop="goodsId" width="150">
           </el-table-column>
           <el-table-column
-            label="价格"
+            :label="LAN.price"
             prop="price" width="100">
           </el-table-column>
           <el-table-column
-            label="所属店铺"
+            :label="LAN.shopName"
             prop="shopName" width="150" show-overflow-tooltip>
             <template slot-scope="scope">
               <span class="yle_color_blue yle_pointer" @click="toShopDetail(scope.row)">{{ scope.row.shopName }}</span>
             </template>
           </el-table-column>
           <el-table-column
-            label="库存状态"
+            :label="LAN.status"
             prop="status" width="100">
             <template slot-scope="scope">
-              <el-tag type="success" v-if = "scope.row.status === 1">出售中</el-tag>
-              <el-tag type="danger" v-else-if = "scope.row.status === 2">库存中</el-tag>
+              <el-tag type="success" v-if = "scope.row.status === 1">{{LAN.sale}}</el-tag>
+              <el-tag type="danger" v-else-if = "scope.row.status === 2">{{LAN.stock}}</el-tag>
               <span v-else>--</span>
             </template>
           </el-table-column>
           <el-table-column
-            label="更新状态"
-            prop="updateStatus" width="100">
+            :label="LAN.updateStatus"
+            prop="updateStatus" width="150" show-overflow-tooltip>
             <template slot-scope="scope">
-              <span v-if = "scope.row.updateStatus === 1">新建</span>
-              <span v-else-if = "scope.row.updateStatus === 2">更新成功</span>
-              <span v-else-if = "scope.row.updateStatus === 3">更新失败</span>
+              <span v-if = "scope.row.updateStatus === 1">{{LAN.updateSuccess}}</span>
+              <span v-else-if = "scope.row.updateStatus === 2">{{LAN.updateFailed}}</span>
+              <span v-else-if = "scope.row.updateStatus === 3">{{LAN.notUpdate}}</span>
+              <span v-else-if = "scope.row.updateStatus === 3">{{LAN.addSuccess}}</span>
+              <span v-else-if = "scope.row.updateStatus === 3">{{LAN.addFailed}}</span>
               <span v-else>--</span>
             </template>
           </el-table-column>
           <el-table-column
-            label="更新时间"
+            :label="LAN.timeStamp"
             prop="timeStamp" show-overflow-tooltip>
           </el-table-column>
         </el-table>
@@ -130,10 +132,12 @@
 <script>
 import {getGoodsList, getShopList} from './proxy'
 import {hostname} from '@/libs/config'
+import LAN from '@/libs/il8n'
 export default {
   name: 'Goods',
   data () {
     return {
+      LAN: LAN.goodsManagement,
       layout: this.$route.query.layout || 'row', // row 块模式 column 表格模式
       rowLayoutWidth: 0,
       hostname: hostname,
@@ -155,7 +159,7 @@ export default {
       let num = parseInt(this.rowLayoutWidth / 220, 10)
       let remindpix = this.rowLayoutWidth - num * 220
       let gap = remindpix / num
-      return 220 + gap - 4.75
+      return 220 + gap - 5
     }
   },
   watch: {
