@@ -1,11 +1,168 @@
 #Goods{
   background: #fff;
   height: 100%;
-  padding: 0px 20px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
+  .yle_operation_penal{
+    .item{
+      .layout{
+        display: flex;
+        height: 32px;
+        width: 100px;
+        align-items: center;
+        .icon{
+          width:50px;
+          height:32px;
+          display: inline-block;
+          background-size: 16px 16px;
+          background-position: center center;
+          cursor: pointer;
+          background-repeat: no-repeat;
+          &.row{
+            transition: all 0.36s;
+            background-image: url("../../assets/img/common/row.png");
+            margin-right:1px;
+            &:hover{
+              background-image: url("../../assets/img/common/row.hover.png");
+            }
+            &.active{
+              background-color: #409EFF;
+              background-image: url("../../assets/img/common/row.active.png");
+              &:hover{
+                background-image: url("../../assets/img/common/row.active.png");
+              }
+            }
+          }
+          &.column{
+            transition: all 0.36s;
+            background-image: url("../../assets/img/common/column.png");
+            &:hover{
+              background-image: url("../../assets/img/common/column.hover.png");
+            }
+            &.active{
+              background-color: #409EFF;
+              background-image: url("../../assets/img/common/column.active.png");
+              &:hover{
+                background-image: url("../../assets/img/common/column.active.png");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .goodsList{
+    height: calc(100% - 110px);
+    .rowLayout{
+      height: 100%;
+      overflow-y: auto;
+      background: #f1f2f3;
+      padding: 1px;
+      .box{
+        position: relative;
+        display: inline-block;
+        width: 220px;
+        height: 320px;
+        background: #fff;
+        float: left;
+        margin: 0 1px 1px 0;
+        cursor: pointer;
+        &:hover{
+          box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+        }
+        .pics{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          height: 55px;
+          margin: 0 15px;
+          .pic{
+            border: 1px solid #f1f2f3;
+            margin: 0 1px;
+            transition: all 0.36s;
+            img{
+              width: 50px;
+              height: 50px;
+            }
+            &:hover, &.active{
+              border-color:#409EFF;
+            }
+          }
+        }
+        .nameTxt{
+          font-size: 14px;
+          color: #333;
+          line-height: 20px;
+          overflow: hidden;
+          padding: 0 15px;
+          margin: 5px 0;
+          &.goodsName{
+            height: 40px;
+          }
+          &.shopName{
+            height: 20px;
+            margin-top: 0;
+          }
+          &.price{
+            font-weight: 700;
+          }
+        }
+        .excuStatus{
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          color: #fff;
+          height: 20px;
+          line-height: 20px;
+          &>.tag{
+            padding: 0 5px;
+            display: inline-block;
+            float: left;
+          }
+          &>.updateSuccess{
+            background: #67C23A;
+          }
+          &>.updateFailed{
+            background: #F56C6C;
+          }
+          &>.notUpdate{
+            background: #E6A23C;
+          }
+          &>.addSuccess{
+            background: #67C23A;
+          }
+          &>.addFailed{
+            background: #F56C6C;
+          }
+          &>.stock{
+            background: #E6A23C;
+          }
+          &>.sale{
+            background: #67C23A;
+          }
+        }
+        .mainPart{
+          height: 160px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            width:150px;
+            height: 150px;
+          }
+        }
+      }
+
+    }
+    .columnLayout{
+
+    }
+  }
   .pagination{
     display: flex;
+    flex:none;
     height: 50px;
     align-items: center;
   }

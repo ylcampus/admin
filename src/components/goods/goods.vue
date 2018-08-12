@@ -9,6 +9,12 @@
         </el-radio-group>
       </div>
       <div class="right_part">
+        <div class="item">
+          <div class="layout">
+            <span class="icon row active"></span>
+            <span class="icon column"></span>
+          </div>
+        </div>
         <div class="item w180">
           <el-select v-model="filter.shopId" placeholder="请选择店铺" @change="shopSelect" clearable>
             <el-option label="不限" value=""></el-option>
@@ -32,8 +38,34 @@
       </div>
     </section>
     <!--商品列表-->
-    <section class="goodsList">
-      <el-table
+    <div class="goodsList">
+      <div class="rowLayout"  v-show="layout === 'row'" ref="rowLayout">
+        <div class="box" v-for="row in goodsList" :key="row.goodsId">
+          <div class="mainPart">
+            <img :src="hostname + row.pics[0]">
+          </div>
+          <div class="pics">
+            <div v-bind:class="{'active': index === 0}" class="pic" v-for="(pic, index) in row.pics" :key="index">
+              <img :src="hostname + pic">
+            </div>
+          </div>
+          <div class="nameTxt goodsName" :title="row.title">{{row.title}}</div>
+          <div class="nameTxt shopName">{{row.shopName}}</div>
+          <div class="nameTxt price">￥{{row.price}}</div>
+          <div class="excuStatus">
+            <span v-if ="row.updateStatus === 1" class="updateSuccess tag">更新成功</span>
+            <span v-if ="row.updateStatus === 2" class="updateFailed tag">更新失败</span>
+            <span v-if ="row.updateStatus === 3" class="notUpdate tag">未更新</span>
+            <span v-if ="row.updateStatus === 4" class="addSuccess tag">添加成功</span>
+            <span v-if ="row.updateStatus === 5" class="addFailed tag">添加失败</span>
+            <span v-if ="row.status === 1" class="sale tag">出售中</span>
+            <span v-if ="row.status === 2" class="stock tag">库存中</span>
+          </div>
+        </div>
+      </div>
+      <div class="columnLayout" v-show="layout === 'column'">
+      </div>
+      <!--<el-table
         :data="goodsList"
         :height = "tableHeight"
         stripe>
@@ -65,7 +97,7 @@
           <template slot-scope="scope">
             <el-tag type="success" v-if = "scope.row.status === 1">出售中</el-tag>
             <el-tag type="danger" v-else-if = "scope.row.status === 2">库存中</el-tag>
-            <span v-else>--</span>
+            <span v-else>&#45;&#45;</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -75,15 +107,15 @@
             <span v-if = "scope.row.updateStatus === 1">新建</span>
             <span v-else-if = "scope.row.updateStatus === 2">更新成功</span>
             <span v-else-if = "scope.row.updateStatus === 3">更新失败</span>
-            <span v-else>--</span>
+            <span v-else>&#45;&#45;</span>
           </template>
         </el-table-column>
         <el-table-column
           label="更新时间"
           prop="timeStamp" show-overflow-tooltip>
         </el-table-column>
-      </el-table>
-    </section>
+      </el-table>-->
+    </div>
     <section class="pagination">
       <el-pagination
         @size-change="handleSizeChange"
@@ -99,10 +131,14 @@
 </template>
 <script>
 import {getGoodsList, getShopList} from './proxy'
+import {hostname} from '@/libs/config'
 export default {
   name: 'goods',
   data () {
     return {
+      layout: 'row', // row 块模式 column 表格模式
+      rowLayoutWidth: 0,
+      hostname: hostname,
       total: 0,
       filter: {
         pageNo: 1,
@@ -116,6 +152,21 @@ export default {
       goodsList: []
     }
   },
+  watch: {
+    '$store.state.windowWidth' () { // 监听页面宽度变化
+      console.log(this.$refs.rowLayout.clientWidth)
+      console.log(1)
+    },
+    '$store.state.windowHeight' () { // 监听页面高度变化
+      console.log(this.$refs.rowLayout.clientWidth)
+      console.log(1)
+    },
+    layout (val) { // 监听页面布局模式
+      if (val === 'row') {
+        this.calcRowLayoutWidth()
+      }
+    }
+  },
   mounted () {
     getShopList({
       pageNo: 1,
@@ -126,8 +177,17 @@ export default {
       }
     })
     this.getGoodsList()
+    // 现在可以向下绘制页面了
+    // 下一步工作-动态宽度计算
   },
   methods: {
+    calcRowLayoutWidth () { // 计算容器宽度
+      if (this.layout === 'row') {
+        this.$nextTick(() => {
+          this.rowLayoutWidth = this.$refs.rowLayout.clientWidth
+        })
+      }
+    },
     getGoodsList () { // 获取资源列表数据
       let params = {
         pageNo: this.filter.pageNo,

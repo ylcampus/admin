@@ -14,7 +14,7 @@
     display:flex;
     #sidebar{
       box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-      background-color: #e8e8e8;
+      background-color: #fff;
       overflow-y: auto;
       flex: none;
       .elSidebar:not(.el-menu--collapse) {
@@ -44,7 +44,7 @@
           position: relative;
           transition: all 0.36s;
           &.is-active{
-            background: #fff;
+            background: #ecf5ff;
             color: #3399FF;
             &:after{
               position: absolute;
@@ -58,19 +58,19 @@
             }
           }
           &:hover{
-            background: #fff;
+            background: #ecf5ff;
           }
         }
         .el-submenu{
           position: relative;
           transition: all 0.36s;
           .el-menu-item{
-            background: #e8e8e8;
+            background: #fff;
             &.is-active{
-              background: #fff;
+              background: #ecf5ff;
             }
             &:hover{
-              background: #fff;
+              background: #ecf5ff;
             }
           }
         }
