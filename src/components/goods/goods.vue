@@ -11,8 +11,8 @@
       <div class="right_part">
         <div class="item">
           <div class="layout">
-            <span class="icon row active"></span>
-            <span class="icon column"></span>
+            <span v-bind:class="{'active': this.layout === 'row'}" @click="switchLayout('row')" class="icon row"></span>
+            <span v-bind:class="{'active': this.layout === 'column'}" @click="switchLayout('column')" class="icon column"></span>
           </div>
         </div>
         <div class="item w180">
@@ -40,12 +40,12 @@
     <!--商品列表-->
     <div class="goodsList">
       <div class="rowLayout"  v-show="layout === 'row'" ref="rowLayout">
-        <div class="box" v-for="row in goodsList" :key="row.goodsId">
+        <div class="box" @click="toGoodsDetail(row)" v-bind:style="{width: boxWidth + 'px'}" v-for="row in goodsList" :key="row.goodsId">
           <div class="mainPart">
-            <img :src="hostname + row.pics[0]">
+            <img :src="hostname + row.pic">
           </div>
           <div class="pics">
-            <div v-bind:class="{'active': index === 0}" class="pic" v-for="(pic, index) in row.pics" :key="index">
+            <div @click.stop="row.pic = pic" v-bind:class="{'active': pic === row.pic}" class="pic" v-for="(pic, index) in row.pics" :key="index">
               <img :src="hostname + pic">
             </div>
           </div>
@@ -58,63 +58,61 @@
             <span v-if ="row.updateStatus === 3" class="notUpdate tag">未更新</span>
             <span v-if ="row.updateStatus === 4" class="addSuccess tag">添加成功</span>
             <span v-if ="row.updateStatus === 5" class="addFailed tag">添加失败</span>
-            <span v-if ="row.status === 1" class="sale tag">出售中</span>
-            <span v-if ="row.status === 2" class="stock tag">库存中</span>
           </div>
         </div>
       </div>
-      <div class="columnLayout" v-show="layout === 'column'">
+      <div class="columnLayout" v-show="layout === 'column'" ref="columnLayout">
+        <el-table
+          :data="goodsList"
+          :height = "tableHeight"
+          stripe>
+          <el-table-column
+            label="商品名称"
+            prop="name" width="220" show-overflow-tooltip>
+            <template slot-scope="scope">
+              <span class="yle_color_blue yle_pointer" @click="toGoodsDetail(scope.row)">{{ scope.row.title }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="商品Id"
+            prop="goodsId" width="150">
+          </el-table-column>
+          <el-table-column
+            label="价格"
+            prop="price" width="100">
+          </el-table-column>
+          <el-table-column
+            label="所属店铺"
+            prop="shopName" width="150" show-overflow-tooltip>
+            <template slot-scope="scope">
+              <span class="yle_color_blue yle_pointer" @click="toShopDetail(scope.row)">{{ scope.row.shopName }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="库存状态"
+            prop="status" width="100">
+            <template slot-scope="scope">
+              <el-tag type="success" v-if = "scope.row.status === 1">出售中</el-tag>
+              <el-tag type="danger" v-else-if = "scope.row.status === 2">库存中</el-tag>
+              <span v-else>--</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="更新状态"
+            prop="updateStatus" width="100">
+            <template slot-scope="scope">
+              <span v-if = "scope.row.updateStatus === 1">新建</span>
+              <span v-else-if = "scope.row.updateStatus === 2">更新成功</span>
+              <span v-else-if = "scope.row.updateStatus === 3">更新失败</span>
+              <span v-else>--</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="更新时间"
+            prop="timeStamp" show-overflow-tooltip>
+          </el-table-column>
+        </el-table>
       </div>
-      <!--<el-table
-        :data="goodsList"
-        :height = "tableHeight"
-        stripe>
-        <el-table-column
-          label="商品名称"
-          prop="name" width="220" show-overflow-tooltip>
-          <template slot-scope="scope">
-            <span class="yle_color_blue yle_pointer" @click="toGoodsDetail(scope.row)">{{ scope.row.title }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="商品Id"
-          prop="goodsId" width="150">
-        </el-table-column>
-        <el-table-column
-          label="价格"
-          prop="price" width="100">
-        </el-table-column>
-        <el-table-column
-          label="所属店铺"
-          prop="shopName" width="150" show-overflow-tooltip>
-          <template slot-scope="scope">
-            <span class="yle_color_blue yle_pointer" @click="toShopDetail(scope.row)">{{ scope.row.shopName }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="库存状态"
-          prop="status" width="100">
-          <template slot-scope="scope">
-            <el-tag type="success" v-if = "scope.row.status === 1">出售中</el-tag>
-            <el-tag type="danger" v-else-if = "scope.row.status === 2">库存中</el-tag>
-            <span v-else>&#45;&#45;</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="更新状态"
-          prop="updateStatus" width="100">
-          <template slot-scope="scope">
-            <span v-if = "scope.row.updateStatus === 1">新建</span>
-            <span v-else-if = "scope.row.updateStatus === 2">更新成功</span>
-            <span v-else-if = "scope.row.updateStatus === 3">更新失败</span>
-            <span v-else>&#45;&#45;</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="更新时间"
-          prop="timeStamp" show-overflow-tooltip>
-        </el-table-column>
-      </el-table>-->
     </div>
     <section class="pagination">
       <el-pagination
@@ -133,10 +131,10 @@
 import {getGoodsList, getShopList} from './proxy'
 import {hostname} from '@/libs/config'
 export default {
-  name: 'goods',
+  name: 'Goods',
   data () {
     return {
-      layout: 'row', // row 块模式 column 表格模式
+      layout: this.$route.query.layout || 'row', // row 块模式 column 表格模式
       rowLayoutWidth: 0,
       hostname: hostname,
       total: 0,
@@ -152,19 +150,27 @@ export default {
       goodsList: []
     }
   },
+  computed: {
+    boxWidth () {
+      let num = parseInt(this.rowLayoutWidth / 220, 10)
+      let remindpix = this.rowLayoutWidth - num * 220
+      let gap = remindpix / num
+      return 220 + gap - 4.75
+    }
+  },
   watch: {
     '$store.state.windowWidth' () { // 监听页面宽度变化
-      console.log(this.$refs.rowLayout.clientWidth)
-      console.log(1)
+      if (this.layout === 'row') {
+        this.rowLayoutWidth = this.$refs.rowLayout.clientWidth
+      }
     },
     '$store.state.windowHeight' () { // 监听页面高度变化
-      console.log(this.$refs.rowLayout.clientWidth)
-      console.log(1)
+      if (this.layout === 'column') {
+        this.tableHeight = this.$refs.columnLayout.clientHeight
+      }
     },
     layout (val) { // 监听页面布局模式
-      if (val === 'row') {
-        this.calcRowLayoutWidth()
-      }
+      this.calcLayout()
     }
   },
   mounted () {
@@ -177,16 +183,22 @@ export default {
       }
     })
     this.getGoodsList()
-    // 现在可以向下绘制页面了
-    // 下一步工作-动态宽度计算
+    this.calcLayout()
   },
   methods: {
-    calcRowLayoutWidth () { // 计算容器宽度
+    calcLayout () { // 计算容器宽度
       if (this.layout === 'row') {
         this.$nextTick(() => {
           this.rowLayoutWidth = this.$refs.rowLayout.clientWidth
         })
+      } else if (this.layout === 'column') {
+        this.$nextTick(() => {
+          this.tableHeight = this.$refs.columnLayout.clientHeight
+        })
       }
+    },
+    switchLayout (val) { // 切换布局模式
+      this.layout = val
     },
     getGoodsList () { // 获取资源列表数据
       let params = {
@@ -204,7 +216,11 @@ export default {
       }
       getGoodsList(params).then((res) => {
         if (res.code * 1 === 0 && res.data) {
-          this.goodsList = res.data.rows || []
+          let list = res.data.rows || []
+          this.goodsList = list.map((row) => {
+            row.pic = row.pics[0] || ''
+            return row
+          })
           this.total = res.data.total || 0
         }
       })
@@ -221,7 +237,8 @@ export default {
       this.$router.push({
         name: 'GoodsDetail',
         query: {
-          goodsId: row.goodsId
+          goodsId: row.goodsId,
+          layout: this.layout
         }
       })
     },

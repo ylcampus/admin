@@ -1,9 +1,9 @@
 #GoodsDetail{
   background: #fff;
-  padding: 0px 20px;
+  padding: 0 20px;
   .warpMain{
     .tabsAreas{
-      margin: 10px 0px;
+      margin: 10px 0;
       &>form{
         width:450px;
       }
@@ -30,14 +30,14 @@
         }
         .skuMsg{
           max-width: 1000px;
-          margin: 15px 0px;
+          margin: 15px 0;
           .item{
             display: inline-block;
             border: 1px solid #e6e6e6;
             padding: 25px 15px;
             cursor: pointer;
             transition: all .5s;
-            margin: 0px 5px 5px 0px;
+            margin: 0 5px 5px 0;
             font-size: 13px;
             color:#666;
             line-height: 22px;
@@ -55,7 +55,7 @@
       }
     }
     .descArea{
-      margin: 10px 0px;
+      margin: 10px 0;
       .item{
         max-width: 800px;
       }

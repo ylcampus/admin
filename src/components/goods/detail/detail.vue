@@ -1,7 +1,7 @@
 <template>
   <div id="GoodsDetail">
     <div class="yle_tabs_title">
-      <el-button icon="el-icon-back" size="mini" @click="$router.push('/goods')">返回</el-button>
+      <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
       <span class="txt">{{tabsTitle}}</span>
     </div>
     <div class="warpMain">
@@ -80,6 +80,7 @@ export default {
   name: 'GoodsDetail',
   data () {
     return {
+      layout: null,
       activeTabs: '1',
       tabsTitle: '基本信息',
       activecId: '',
@@ -92,10 +93,12 @@ export default {
   },
   mounted () {
     this.getGoodsDetail()
+    // 接下来处理商品详情相关业务逻辑
   },
   methods: {
     getGoodsDetail () {
       let goodsId = this.$route.query.goodsId
+      this.layout = this.$route.query.layout
       getGoodsDetail(goodsId).then((res) => {
         if (res.code * 1 === 0 && res.data) {
           this.form = {...this.form, ...res.data}
@@ -149,6 +152,14 @@ export default {
           type: 'info',
           message: '操作已取消'
         })
+      })
+    },
+    back () {
+      this.$router.push({
+        name: 'Goods',
+        query: {
+          layout: this.layout
+        }
       })
     }
   }
