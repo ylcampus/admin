@@ -3,7 +3,7 @@
     <div class="yle_detail_title"><span>打折券详情</span></div>
     <div class="form">
       <el-form label-width="100px" size="small">
-        <el-form-item label="打折券">{{form.discountId}}</el-form-item>
+        <el-form-item label="打折券Id">{{form.discountId}}</el-form-item>
         <el-form-item label="订单" class="yle_color_blue yle_pointer">{{form.goodsName || '--'}}</el-form-item>
         <el-form-item label="会员" class="yle_color_blue yle_pointer">{{form.memberAccount}}</el-form-item>
         <el-form-item label="店铺" class="yle_color_blue yle_pointer">{{form.shopName}}</el-form-item>

@@ -1,6 +1,6 @@
 <template>
   <div id="NotFound">
-    404页面
+    404(Not Found)
   </div>
 </template>
 <script>

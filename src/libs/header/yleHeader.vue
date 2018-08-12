@@ -63,9 +63,6 @@
               <div class="lItem">
                 <a href="http://192.168.1.15:8080/api/file/preview?path=test.pdf" target="_blank">用户手册</a>
               </div>
-              <div class="lItem">
-                <a href="http://192.168.1.15:8080/api/file/download?path=test.pdf" target="_self">数据库</a>
-              </div>
             </div>
           </div>
         </div>

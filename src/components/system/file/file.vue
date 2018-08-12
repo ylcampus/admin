@@ -59,16 +59,14 @@
         </div>
       </el-popover>
       <!--暂无数据-->
-      <div class="yle-nodata" v-if="fileList.length === 0">
-        暂无数据
-      </div>
+      <div class="yle-nodata" v-if="fileList.length === 0">暂无数据</div>
     </section>
     <!--文件数统计-->
     <div class="filsTotal">共计{{fileList.length}}个对象</div>
   </div>
 </template>
 <script>
-import {readDir, rmDir} from './proxy'
+import {readDir} from './proxy'
 export default {
   name: 'file',
   data () {

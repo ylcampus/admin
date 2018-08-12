@@ -2,7 +2,7 @@
   <div class="nodetree">
     <span class="normal-node">
       <template v-if="treedata.sig&&treedata.sig==='load'">
-        <el-button type = "iconButton" :loading="true">加载中</el-button>
+        <el-button type = "iconButton" :loading="true">加载中...</el-button>
       </template>
       <template v-else>
         <overflow :title="treenode.label" :length="10"></overflow>

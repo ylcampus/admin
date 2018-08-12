@@ -155,7 +155,7 @@ export default {
         }
       })
     },
-    getParams () { // 获取body体参数
+    getParams () {
       let bmap = {
         name: this.form.name,
         auth: this.$refs.menuTree.getCheckedKeys().toString()
@@ -165,7 +165,7 @@ export default {
       }
       return bmap
     },
-    cancel () { // 取消
+    cancel () {
       this.$router.push('/role')
     }
   }

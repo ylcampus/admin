@@ -243,7 +243,7 @@ export default {
         }
         freeze(params).then((res) => {
           if (res.code * 1 === 0) {
-            let tips = (flag === 1) ? '启用成功' : '禁用成功？'
+            let tips = (flag === 1) ? '启用成功' : '禁用成功'
             this.$message.success(tips)
             this.getMemberList()
           }
@@ -304,11 +304,11 @@ export default {
   #Member {
     .areaTree{
       .el-input__inner{
-        background-color: #f7f7f7;
+        background-color: #f1f2f3;
         border: none;
         border-radius: 20px;
-        height: 40px;
-        line-height: 40px;
+        height: 36px;
+        line-height: 36px;
       }
     }
   }
