@@ -1,45 +1,45 @@
 <template>
   <div id="MemberDeatil">
     <div class="yle_tabs_title">
-      <el-button icon="el-icon-back" size="mini" @click="$router.push('/member')">返回</el-button>
+      <el-button icon="el-icon-back" size="mini" @click="$router.push('/member')">{{LAN.back}}</el-button>
       <span class="txt">{{tabsTitle}}</span>
     </div>
     <div class="warpMain">
       <el-tabs v-model="activeTabs" type="card" @tab-click="tabsClick">
-        <el-tab-pane name="1" value="基本信息">
-          <span slot="label"><i class="el-icon-date"></i>基本信息</span>
+        <el-tab-pane name="1" :value="LAN.basicMessage">
+          <span slot="label"><i class="el-icon-date"></i>{{LAN.basicMessage}}</span>
           <div class="basicAreas">
             <el-form :model="form" label-width="100px" size="small">
-              <el-form-item label="会员Id">{{form.memberId}}</el-form-item>
-              <el-form-item label="账号">{{form.account}}</el-form-item>
-              <el-form-item label="冻结状态">
-                <el-tag v-if = "!form.freeze" type="success">正常</el-tag>
-                <el-tag v-if = "form.freeze" type="danger">账号被冻结</el-tag>
+              <el-form-item :label="LAN.memberId">{{form.memberId}}</el-form-item>
+              <el-form-item :label="LAN.account">{{form.account}}</el-form-item>
+              <el-form-item :label="LAN.freezeStatus">
+                <el-tag v-if = "!form.freeze" type="success">{{LAN.normal}}</el-tag>
+                <el-tag v-if = "form.freeze" type="danger">{{LAN.freezed}}</el-tag>
               </el-form-item>
-              <el-form-item label="在线状态">
-                <el-tag v-if = "form.status === '1'" type="info">离线</el-tag>
-                <el-tag v-if = "form.status === '2'" type="success">在线</el-tag>
+              <el-form-item :label="LAN.status">
+                <el-tag v-if = "form.status === '1'" type="info">{{LAN.online}}</el-tag>
+                <el-tag v-if = "form.status === '2'" type="success">{{LAN.offline}}</el-tag>
               </el-form-item>
-              <el-form-item label="省">{{form.province}}</el-form-item>
-              <el-form-item label="市">{{form.city}}</el-form-item>
-              <el-form-item label="学校">{{form.school}}</el-form-item>
-              <el-form-item label="校区">{{form.campus}}</el-form-item>
-              <el-form-item label="创建时间">{{form.create_at}}</el-form-item>
-              <el-form-item label="最近更新时间">{{form.update_at}}</el-form-item>
+              <el-form-item :label="LAN.province">{{form.province}}</el-form-item>
+              <el-form-item :label="LAN.city">{{form.city}}</el-form-item>
+              <el-form-item :label="LAN.school">{{form.school}}</el-form-item>
+              <el-form-item :label="LAN.campus">{{form.campus}}</el-form-item>
+              <el-form-item :label="LAN.createAt">{{form.create_at}}</el-form-item>
+              <el-form-item :label="LAN.updateAt">{{form.update_at}}</el-form-item>
             </el-form>
           </div>
         </el-tab-pane>
-        <el-tab-pane name="2" value="订单数据" disabled>
-          <span slot="label"><i class="el-icon-date"></i>订单数据</span>
-          <div class="orderAreas areas"><div class="noData">暂无数据</div></div>
+        <el-tab-pane name="2" :value="LAN.orderMsg" disabled>
+          <span slot="label"><i class="el-icon-date"></i>{{LAN.orderMsg}}</span>
+          <div class="orderAreas areas"><div class="noData">{{LAN.noData}}</div></div>
         </el-tab-pane>
-        <el-tab-pane name="3" value="打折券数据" disabled>
-          <span slot="label"><i class="el-icon-date"></i>打折券数据</span>
-          <div class="discountAreas areas"><div class="noData">暂无数据</div></div>
+        <el-tab-pane name="3" :value="LAN.discountMsg" disabled>
+          <span slot="label"><i class="el-icon-date"></i>{{LAN.discountMsg}}</span>
+          <div class="discountAreas areas"><div class="noData">{{LAN.noData}}</div></div>
         </el-tab-pane>
-        <el-tab-pane name="4" value="访问数据" disabled>
-          <span slot="label"><i class="el-icon-date"></i>访问数据</span>
-          <div class="visitAreas areas"><div class="noData">暂无数据</div></div>
+        <el-tab-pane name="4" :value="LAN.visitMsg" disabled>
+          <span slot="label"><i class="el-icon-date"></i>{{LAN.visitMsg}}</span>
+          <div class="visitAreas areas"><div class="noData">{{LAN.noData}}</div></div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -47,10 +47,12 @@
 </template>
 <script>
 import {getMemberDetail} from '../proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'memberDetail',
   data () {
     return {
+      LAN: LAN.memberManagement.detail,
       activeTabs: '1',
       tabsTitle: '基本信息',
       form: {

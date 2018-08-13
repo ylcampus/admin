@@ -81,10 +81,12 @@
 </template>
 <script>
 import {getUserList, deleteUser} from './proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'user',
   data () {
     return {
+      LAN: LAN.userManagement,
       total: 80, // 总数据数
       filter: { // 筛选条件
         pageNo: 1,

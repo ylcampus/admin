@@ -202,10 +202,11 @@ module.exports = {
       discountId: '打折券Id',
       consignee: '买家',
       shopName: '店铺名称',
-      payAwy: '支付方式',
+      payWay: '支付方式',
       payAfter: '货到付款',
       weixin: '微信',
       zhifubao: '支付宝',
+      orderStatus: '订单状态',
       waitPay: '待付款',
       waitSend: '待发货',
       alreadySend: '已发货',
@@ -215,7 +216,7 @@ module.exports = {
       amount: '金额',
       createAt: '创建时间',
       goodsMsg: '商品信息',
-      picture: '主图片',
+      goodsName: '商品名称',
       tagPrice: '吊牌价',
       color: '颜色',
       size: '尺码',
@@ -227,7 +228,8 @@ module.exports = {
       telephone: '联系电话',
       distributionMsg: '配送信息',
       courierNo: '快递单号',
-      company: '快递公司'
+      company: '快递公司',
+      basicMsg: '基本信息'
     }
   },
   memberManagement: {

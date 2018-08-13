@@ -48,10 +48,12 @@
 <script>
 import {getRoleList, addUser, getUserDetail, editUser} from '../proxy'
 import {validateAccount, checkSpecialChar} from '../../../../libs/validate'
+import LAN from '@/libs/il8n'
 export default {
   name: 'userAddEdit',
   data () {
     return {
+      LAN: LAN.userManagement.addEdit,
       title: '添加用户',
       pflag: 'UserAdd', // 添加or编辑 默认为添加
       form: {

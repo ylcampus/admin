@@ -4,7 +4,7 @@
     <div class="areaTree">
       <div class="filter">
         <el-input
-          placeholder="输入区域名称进行过滤"
+          :placeholder="LAN.areaHolder"
           suffix-icon="el-icon-search"
           v-model="filterText" clearable>
         </el-input>
@@ -25,16 +25,16 @@
       <section class="head">
         <div class="status">
           <el-radio-group v-model="filter.status" @change="statusSelect" size="small">
-            <el-radio-button label="">全部</el-radio-button>
-            <el-radio-button label="1">离线</el-radio-button>
-            <el-radio-button label="2">在线</el-radio-button>
+            <el-radio-button label="">{{LAN.all}}</el-radio-button>
+            <el-radio-button label="1">{{LAN.offline}}</el-radio-button>
+            <el-radio-button label="2">{{LAN.online}}</el-radio-button>
           </el-radio-group>
         </div>
         <div class="filter">
           <div class="fitem">
             <el-input
               @keyup.enter.native = "getMemberList"
-              placeholder="输入用户账号/手机号进行搜索"
+              :placeholder="LAN.searchHolder"
               suffix-icon="el-icon-search"
               @clear = "getMemberList"
               v-model="filter.key" clearable>
@@ -50,7 +50,7 @@
           stripe>
           <el-table-column
             prop="account"
-            label="会员账号"
+            :label="LAN.account"
             width="150" show-overflow-tooltip>
             <template slot-scope="scope">
               <span class="raccount" @click="toMemberDetail(scope.row)">{{ scope.row.account }}</span>
@@ -58,48 +58,38 @@
           </el-table-column>
           <el-table-column
             prop="name"
-            label="姓名"
+            :label="LAN.name"
             width="80" show-overflow-tooltip>
             <template slot-scope="scope">
               <span>{{scope.row.name || '--'}}</span>
             </template>
           </el-table-column>
           <el-table-column
-            prop="status"
-            label="在线状态"
-            align="center"
-            width="80">
-            <template slot-scope="scope">
-              <el-tag v-if = "scope.row.status === '1'" type="info">离线</el-tag>
-              <el-tag v-if = "scope.row.status === '2'" type="success">在线</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column
             prop="sex"
-            label="性别"
+            :label="LAN.sex"
             align="center"
             width="50">
             <template slot-scope="scope">
-              <span v-if = "scope.row.sex === 1">男</span>
-              <span v-else-if = "scope.row.sex === 2">女</span>
+              <span v-if = "scope.row.sex === 1">{{LAN.male}}</span>
+              <span v-else-if = "scope.row.sex === 2">{{LAN.female}}</span>
               <span v-else>--</span>
             </template>
           </el-table-column>
           <el-table-column
             align="center"
-            label="地址信息">
+            :label="LAN.address">
             <el-table-column
               prop="province"
-              label="省"
+              :label="LAN.province"
               align="center"
-              width="80" show-overflow-tooltip>
+              width="100" show-overflow-tooltip>
               <template slot-scope="scope">
                 <span>{{scope.row.province || '--'}}</span>
               </template>
             </el-table-column>
             <el-table-column
               prop="city"
-              label="市"
+              :label="LAN.city"
               align="center"
               width="80">
               <template slot-scope="scope">
@@ -108,7 +98,7 @@
             </el-table-column>
             <el-table-column
               prop="school"
-              label="学校"
+              :label="LAN.school"
               align="center"
               width="100" show-overflow-tooltip>
               <template slot-scope="scope">
@@ -117,7 +107,7 @@
             </el-table-column>
             <el-table-column
               prop="campus"
-              label="校区"
+              :label="LAN.campus"
               align="center"
               width="80" show-overflow-tooltip>
               <template slot-scope="scope">
@@ -127,24 +117,24 @@
           </el-table-column>
           <el-table-column
             prop="create_at"
-            label="注册时间" show-overflow-tooltip>
+            :label="LAN.createAt" show-overflow-tooltip>
           </el-table-column>
           <el-table-column
             prop="freeze"
-            label="冻结状态"
+            :label="LAN.freeze"
             align="center"
             width="80" show-overflow-tooltip>
             <template slot-scope="scope">
-              <span v-if = "!scope.row.freeze">正常</span>
-              <span v-if = "scope.row.freeze">账号被冻结</span>
+              <span v-if = "!scope.row.freeze">{{LAN.normal}}</span>
+              <span v-if = "scope.row.freeze">{{LAN.freezed}}</span>
             </template>
           </el-table-column>
           <el-table-column
-            label="操作" width="120">
+            :label="LAN.operation" width="180">
             <template slot-scope="scope">
-              <span style="cursor:pointer" @click="freeze(scope.row, 1)" v-if="scope.row.freeze"><el-tag type="success">启用</el-tag></span>
-              <span style="cursor:pointer" @click="freeze(scope.row, 2)" v-if="!scope.row.freeze"><el-tag type="danger">禁用</el-tag></span>
-              <span style="cursor:pointer" @click="deleteMember(scope.row)"><el-tag type="danger">删除</el-tag></span>
+              <span style="cursor:pointer" @click="freeze(scope.row, 1)" v-if="scope.row.freeze"><el-tag type="success">{{LAN.enable}}</el-tag></span>
+              <span style="cursor:pointer" @click="freeze(scope.row, 2)" v-if="!scope.row.freeze"><el-tag type="danger">{{LAN.disable}}</el-tag></span>
+              <span style="cursor:pointer" @click="deleteMember(scope.row)"><el-tag type="danger">{{LAN.del}}</el-tag></span>
             </template>
           </el-table-column>
         </el-table>
@@ -166,6 +156,7 @@
 </template>
 <script>
 import {getAreaTreeData, getMemberList, deleteMember, freeze} from './proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'Member',
   watch: {
@@ -175,6 +166,7 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.memberManagement,
       filterText: '',
       tableHeight: 720,
       filter: {
@@ -212,29 +204,29 @@ export default {
       })
     },
     deleteMember (row) { // 删除会员
-      this.$confirm('确定要删除吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.LAN.delConfirm, this.LAN.tips, {
+        confirmButtonText: this.LAN.enter,
+        cancelButtonText: this.LAN.cancel,
         type: 'warning'
       }).then(() => {
         deleteMember(row.memberId).then((res) => {
           if (res.code * 1 === 0) {
-            this.$message.success('删除成功')
+            this.$message.success(this.LAN.delSuccess)
             this.getMemberList()
           }
         })
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '操作已取消'
+          message: this.LAN.opaCancel
         })
       })
     },
     freeze (row, flag) { // 启用、禁用会员
-      let txt = (flag === 1) ? '确定要启用吗？' : '确定要禁用吗？'
-      this.$confirm(txt, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      let txt = (flag === 1) ? this.LAN.enableConfirm : this.LAN.disableConfirm
+      this.$confirm(txt, this.LAN.tips, {
+        confirmButtonText: this.LAN.enter,
+        cancelButtonText: this.LAN.cancel,
         type: 'warning'
       }).then(() => {
         let params = {
@@ -243,7 +235,7 @@ export default {
         }
         freeze(params).then((res) => {
           if (res.code * 1 === 0) {
-            let tips = (flag === 1) ? '启用成功' : '禁用成功'
+            let tips = (flag === 1) ? this.LAN.enableSuccess : this.LAN.disableSuccess
             this.$message.success(tips)
             this.getMemberList()
           }
@@ -251,7 +243,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '操作已取消'
+          message: this.LAN.opaCancel
         })
       })
     },

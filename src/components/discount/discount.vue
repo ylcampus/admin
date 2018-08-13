@@ -101,10 +101,12 @@
 </template>
 <script>
 import {getShopList, getDiscountList} from './proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'Discount',
   data () {
     return {
+      LAN: LAN.discountManagement,
       total: 0,
       filter: {
         pageNo: 1,

@@ -32,10 +32,12 @@
 </template>
 <script>
 import {getDiscountDetail} from '../proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'discountDetail',
   data () {
     return {
+      LAN: LAN.discountManagement.detail,
       form: {}
     }
   },
