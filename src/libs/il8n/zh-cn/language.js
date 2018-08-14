@@ -485,7 +485,7 @@ module.exports = {
     login: '登录',
     userBookSimble: '优乐帐号用户协议',
     aboutUs: '关于优乐帐号与隐私的声明',
-    footerTxt: 'Copyright&nbsp;©&nbsp;2011-2018&nbsp;&nbsp;南京优乐校园电子商务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;保留一切权利&nbsp;&nbsp;苏B2-20070200号&nbsp;|&nbsp;\n' + ' 苏ICP备09062682号-9',
+    footerTxt: 'Copyright © 2011-201  南京优乐校园电子商务有限公司  版权所有  保留一切权利  苏B2-20070200号 | \n' + ' 苏ICP备09062682号-9',
     forgetPwd: {
       uleMall: '优乐校园',
       forgetTitle: '忘记密码',
@@ -504,7 +504,7 @@ module.exports = {
       userBook: '优乐帐号用户协议',
       aboutUs: '关于优乐帐号与隐私的声明',
       linkUs: '联系我们',
-      footerTxt: 'Copyright&nbsp;©&nbsp;2011-2018&nbsp;&nbsp;南京优乐校园电子商务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;保留一切权利&nbsp;&nbsp;苏B2-20070200号&nbsp;|&nbsp;\n' + ' 苏ICP备09062682号-9',
+      footerTxt: 'Copyright © 2011-201  南京优乐校园电子商务有限公司  版权所有  保留一切权利  苏B2-20070200号 | \n' + ' 苏ICP备09062682号-9',
       pwdRule1: '包含数字，字母及特殊字符且8到12位',
       pwdRule2: '两次输入密码不一致',
       verText: '获取验证码',
@@ -534,15 +534,15 @@ module.exports = {
   },
   protal: {
     product: '产品与服务',
-    productTitle: '精准.可控.高效.可持续',
+    productDesc: '精准.可控.高效.可持续',
     way: '可控的商品信息与品牌推广渠道',
-    wayTitle: '使用云服务ECS、VPC、EVS、AS、ELB部署应用，搭建论坛网站',
+    wayDesc: '使用云服务ECS、VPC、EVS、AS、ELB部署应用，搭建论坛网站',
     mark: '精准的市场定位',
-    markTitle: '使用微服务开发框架，将电商应用从原生Spring Boot和Go-kit迁移并部署到ServiceStage平台上',
+    markDesc: '使用微服务开发框架，将电商应用从原生Spring Boot和Go-kit迁移并部署到ServiceStage平台上',
     data: '数据采集与量化分析',
-    dataTitle: '使用机器学习服务，预测餐厅未来的销售量，为开设新餐厅提供决策依据。',
+    dataDesc: '使用机器学习服务，预测餐厅未来的销售量，为开设新餐厅提供决策依据。',
     cooperative: '合作伙伴展示',
-    cooperativeTitle: '共建和谐共赢的云生态，实现快速发展',
+    cooperativeDesc: '共建和谐共赢的云生态，实现快速发展',
     book: {
       title: '声明.协议.文档',
       statement: '法律声明',
@@ -600,7 +600,8 @@ module.exports = {
     male: '男',
     female: '女',
     telephone: '手机号码',
-    emial: '邮箱',
+    email: '邮箱',
+    emailHolder: '请输入邮箱',
     save: '保 存',
     safety: '账号安全',
     validPhone: '验证手机',
@@ -639,8 +640,8 @@ module.exports = {
     }
   },
   common: {
-    length25Error: '长度不能超过25个字节',
-    sexSelectError: '请选择性别',
+    validateName: '长度不能超过25个字节',
+    validateSex: '请选择性别',
     checkSpecialChar: '内容含有特殊字符',
     validatePhone: '请输入正确的手机号码',
     validateCode: '请输入正确的验证码，六位数字',
@@ -649,7 +650,6 @@ module.exports = {
     validateHost: '格式错误',
     validateShopId: '格式错误',
     validateSkuId: '格式错误',
-    loadding: '加载中...',
-    treeLoadding: '加载中...'
+    loadding: '加载中...'
   }
 }

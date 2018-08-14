@@ -4,68 +4,64 @@
     <header id="header">
       <div class="inner">
         <div class="web-logo">
-          <a href="/">优乐校园</a>
+          <a href="/">{{LAN.uleMall}}</a>
         </div>
       </div>
     </header>
     <!--主体-->
     <section id="pwdBody">
       <div class="inner">
-        <div class="title">忘记密码</div>
+        <div class="title">{{LAN.forgetTitle}}</div>
         <div class="body">
           <!--页面一-->
           <div id="resetByIdFromP1" v-show="currentPage === 1">
-            <div class="tips">提示：点击图片可刷新验证码</div>
+            <div class="tips">{{LAN.tips}}</div>
             <el-form ref="formP1" :rules="forgetSrep1Rules" :model="formP1">
               <el-form-item prop="account">
-                <el-input v-model="formP1.account" placeholder="请输入账号"></el-input>
+                <el-input v-model="formP1.account" :placeholder="LAN.accountHolder"></el-input>
               </el-form-item>
               <el-form-item prop="validCode">
                 <div class="codeInner">
                   <div class="codeInput">
-                    <el-input @keyup.enter.native = "nextStep" v-model="formP1.validCode" placeholder="请输入验证码"></el-input>
+                    <el-input @keyup.enter.native = "nextStep" v-model="formP1.validCode" :placeholder="LAN.validCodeHolder"></el-input>
                   </div>
                   <div class="validCode" id="validCode" @click="refreshvalidCode"></div>
                 </div>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="nextStep">下一步</el-button>
-                <el-button @click="cancel">取消</el-button>
+                <el-button type="primary" @click="nextStep">{{LAN.nextStep}}</el-button>
+                <el-button @click="cancel">{{LAN.cancel}}</el-button>
               </el-form-item>
             </el-form>
           </div>
           <!--页面二-->
           <div id="resetByIdFromP2"  v-show="currentPage === 2">
-            <div class="forByPhoneSubTitle">
-              验证身份后设置新密码
-            </div>
-            <div class="forByPhoneDes">
-              如果您有其他设备使用此帐号，设置新密码后需重新登录，以确保正常使用华为服务。
-            </div>
+            <div class="forByPhoneSubTitle">{{LAN.forByPhoneSubTitle}}</div>
+            <div class="forByPhoneDes">{{LAN.forByPhoneDes}}</div>
             <div class="tel">
               <span class="telphone">{{telTxt}}</span>
-              <span v-if="sendFlag" class="forCode" @click="getTelephoneCode">获取验证码</span>
+              <span v-if="sendFlag" class="forCode" @click="getTelephoneCode">{{LAN.forCode}}</span>
               <span v-if="!sendFlag" class="verText">{{verText}}</span>
             </div>
             <!--form表单-->
             <div class="form">
               <el-form ref="formP2" :rules="forgetSrep2Rules" :model="formP2">
                 <el-form-item prop="validCode">
-                  <el-input  v-model="formP2.validCode" placeholder="验证码" clearable></el-input>
+                  <el-input  v-model="formP2.validCode" :placeholder="LAN.validCode" clearable></el-input>
                 </el-form-item>
                 <el-form-item prop="newPwd">
-                  <el-input type="password" v-model="formP2.newPwd" placeholder="输入新密码" clearable></el-input>
+                  <el-input type="password" v-model="formP2.newPwd" :placeholder="LAN.newPwdHolder" clearable></el-input>
                 </el-form-item>
                 <el-form-item prop="confirmPwd">
-                  <el-input type="password" @keyup.enter.native = "backPwd" v-model="formP2.confirmPwd" placeholder="输入确认密码" clearable></el-input>
+                  <el-input type="password" @keyup.enter.native = "backPwd" v-model="formP2.confirmPwd" :placeholder="LAN.confirmPwdHolder" clearable></el-input>
                 </el-form-item>
               </el-form>
             </div>
             <!--提交-->
             <div id="inputArea">
               <div class="submit">
-                <el-button type="primary" @click="backPwd">确定</el-button>
-                <el-button @click="cancel">取消</el-button>
+                <el-button type="primary" @click="backPwd">{{LAN.enter}}</el-button>
+                <el-button @click="cancel">{{LAN.cancel}}</el-button>
               </div>
             </div>
           </div>
@@ -77,18 +73,15 @@
       <div class="inner">
         <div class="warrant-area">
           <p class="lItem">
-            <a class="rule" href="/userBook" target="_blank">优乐帐号用户协议</a>
+            <a class="rule" href="/userBook" target="_blank">{{LAN.userBook}}</a>
             <em class="foot_em">|</em>
-            <a class="rule" href="/aboutUs" target="_blank">关于优乐帐号与隐私的声明</a>
+            <a class="rule" href="/aboutUs" target="_blank">{{LAN.aboutUs}}</a>
             <span class="foot_em">
               <em style="font-style: normal">|</em>
-              <a style="padding:0 10px;" href="/linkUs" target="blank">联系我们</a>
+              <a style="padding:0 10px;" href="/linkUs" target="blank">{{LAN.linkUs}}</a>
             </span>
           </p>
-          <p class="lItem" style="margin-top:10px ">
-            Copyright&nbsp;©&nbsp;2011-2018&nbsp;&nbsp;南京优乐校园电子商务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;保留一切权利&nbsp;&nbsp;苏B2-20070200号&nbsp;|&nbsp;
-            苏ICP备09062682号-9
-          </p>
+          <p class="lItem" style="margin-top:10px ">{{LAN.footerTxt}}</p>
         </div>
       </div>
     </section>
@@ -98,6 +91,7 @@
 import {sha256} from 'js-sha256'
 import {getCaptcha, checkAccountMsg, getTelephoneCode, backPwd} from '../proxy'
 import {validateAccount, validateCode, validatePwd} from '../../../../libs/validate'
+import LAN from '@/libs/il8n'
 export default {
   name: 'ForgetPwd',
   data () {
@@ -106,15 +100,16 @@ export default {
       if (
         !/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[~?!@+-.#$%^&*])[\da-zA-Z~?!@+-.#$%^&*]{8,20}$/.test(value)
       ) {
-        callback(new Error('包含数字，字母及特殊字符且8到12位'))
+        callback(new Error(this.LAN.pwdRule1))
       } else if (value !== this.formP2.newPwd) {
-        callback(new Error('两次输入密码不一致'))
+        callback(new Error(this.LAN.pwdRule2))
       } else {
         callback()
       }
     }
     return {
-      verText: '获取验证码',
+      LAN: LAN.login.forgetPwd,
+      verText: LAN.login.forgetPwd.verText,
       sendFlag: true,
       currentPage: 1,
       telephone: null,
@@ -214,7 +209,7 @@ export default {
       this.$refs.formP2.validate((valid) => {
         if (valid) {
           if (this.formP2.newPwd !== this.formP2.confirmPwd) {
-            this.$message.error('两次密码输入不一致')
+            this.$message.error(this.LAN.backPwdTxt)
           } else {
             let params = {
               validCode: this.formP2.validCode,
@@ -223,7 +218,7 @@ export default {
             }
             backPwd(params).then((res) => {
               if (res.code * 1 === 0) {
-                this.$message.success('修改密码成功')
+                this.$message.success(this.LAN.backPwdSuccess)
                 this.$nextTick(() => {
                   this.cancel()
                 })
@@ -236,16 +231,16 @@ export default {
       })
     },
     startTime () { // 启动计时器
-      this.verText = `60s后发送`
+      this.verText = this.LAN.sendAfer1
       let wait = 59
       this.sendFlag = false
       let timer = setInterval(() => {
         if (wait > 0) {
-          this.verText = `${wait}s后发送`
+          this.verText = `${wait}${this.LAN.sendAfter2}`
           wait--
         } else {
           this.sendFlag = true
-          this.verText = '重新发送'
+          this.verText = this.LAN.verText
           clearInterval(timer)
         }
       }, 1000)

@@ -2,11 +2,11 @@
   <div id="ProtalBook">
     <div class="inner">
       <div id="sidebar">
-        <h2 class="title">声明.协议.文档</h2>
+        <h2 class="title">{{LAN.title}}</h2>
         <div class="sideBody">
-          <router-link v-bind:class="{ active: pageName === 'Statement' }" class="item" to="/statement">法律声明</router-link>
-          <router-link v-bind:class="{ active: pageName === 'UserBook' }" class="item" to="/userBook">优乐用户协议</router-link>
-          <router-link v-bind:class="{ active: pageName === 'LinkUs' }" class="item" to="/linkUs">联系我们</router-link>
+          <router-link v-bind:class="{ active: pageName === 'Statement' }" class="item" to="/statement">{{LAN.statement}}</router-link>
+          <router-link v-bind:class="{ active: pageName === 'UserBook' }" class="item" to="/userBook">{{LAN.userBook}}</router-link>
+          <router-link v-bind:class="{ active: pageName === 'LinkUs' }" class="item" to="/linkUs">{{LAN.linkUs}}</router-link>
         </div>
       </div>
       <div id="mainWarp">
@@ -16,10 +16,12 @@
   </div>
 </template>
 <script>
+import LAN from '@/libs/il8n'
 export default {
   name: 'ProtalBook',
   data () {
     return {
+      LAN: LAN.protal.book,
       pageName: this.$route.name // 当前活动页
     }
   },

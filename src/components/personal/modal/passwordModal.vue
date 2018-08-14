@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="修改密码"
+    :title="LAN.updatePWd"
     :visible="visible"
     width="450px"
     @close="close"
@@ -12,18 +12,18 @@
         :rules="modifyPwdRules"
         ref="modifyPwdForm"
         label-width="100px">
-        <el-form-item label="旧密码" prop="oldPassword">
-          <el-input placeholder="旧密码" type="password" v-model="form.oldPassword"></el-input>
+        <el-form-item :label="LAN.oldPwd" prop="oldPassword">
+          <el-input :placeholder="LAN.oldPwd" type="password" v-model="form.oldPassword"></el-input>
         </el-form-item>
-        <el-form-item label="新密码" prop="newPassword">
-          <el-input placeholder="新密码" type="password" v-model="form.newPassword"></el-input>
+        <el-form-item :label="LAN.newPwd" prop="newPassword">
+          <el-input :placeholder="LAN.newPwd" type="password" v-model="form.newPassword"></el-input>
         </el-form-item>
-        <el-form-item label="确认密码" prop="confirmPwd">
-          <el-input placeholder="确认密码" type="password" v-model="form.confirmPwd" @keyup.enter.native="submit"></el-input>
+        <el-form-item :label="LAN.confirmPwd" prop="confirmPwd">
+          <el-input :placeholder="LAN.confirmPwd" type="password" v-model="form.confirmPwd" @keyup.enter.native="submit"></el-input>
         </el-form-item>
         <el-form-item class="modify-form-btn">
-          <el-button type="primary" @click="submit">确 定</el-button>
-          <el-button @click="close">取 消</el-button>
+          <el-button type="primary" @click="submit">{{LAN.enter}}</el-button>
+          <el-button @click="close">{{LAN.cancel}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -33,6 +33,7 @@
 import {modifyPwd, loginOut} from '../proxy'
 import {validatePwd} from '../../../libs/validate'
 import {sha256} from 'js-sha256'
+import LAN from '@/libs/il8n'
 export default {
   props: {
     visible: {
@@ -55,14 +56,15 @@ export default {
       if (
         !/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[~?!@+-.#$%^&*])[\da-zA-Z~?!@+-.#$%^&*]{8,20}$/.test(value)
       ) {
-        callback(new Error('包含数字，字母及特殊字符且8到12位'))
+        callback(new Error(this.LAN.pwdVaild1))
       } else if (value !== this.form.newPassword) {
-        callback(new Error('两次输入密码不一致'))
+        callback(new Error(this.LAN.pwdValid2))
       } else {
         callback()
       }
     }
     return {
+      LAN: LAN.personal.pwdModal,
       form: {
         oldPassword: '',
         newPassword: '',
@@ -102,7 +104,7 @@ export default {
           }
           modifyPwd(params).then((res) => {
             if (res.code * 1 === 0 && res.data) {
-              this.$message.success('已成功修改密码，请重新登录')
+              this.$message.success(this.LAN.updateSuccess)
               loginOut().then((res) => {
                 if (res.code * 1 === 0) {
                   this.close()

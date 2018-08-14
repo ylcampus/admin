@@ -3,46 +3,46 @@
     <div class="page-personel">
       <!--个人资料-->
       <div class="info-block">
-        <div class="info-block-title">个人资料</div>
+        <div class="info-block-title">{{LAN.titleTxt}}</div>
         <el-form :model="form" :rules="rules" ref="personalForm" label-width="100px" style="width:386px">
-          <el-form-item label="账号">{{form.account}}</el-form-item>
-          <el-form-item label="用户姓名" prop="name">
-            <el-input placeholder="用户姓名" v-model="form.name"></el-input>
+          <el-form-item :label="LAN.account">{{form.account}}</el-form-item>
+          <el-form-item :label="LAN.name" prop="name">
+            <el-input :placeholder="LAN.name" v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="性别" prop="sex" required>
+          <el-form-item :label="LAN.sex" prop="sex" required>
             <el-radio-group v-model="form.sex">
-              <el-radio :label="1">男</el-radio>
-              <el-radio :label="2">女</el-radio>
+              <el-radio :label="1">{{LAN.male}}</el-radio>
+              <el-radio :label="2">{{LAN.female}}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="手机号码">{{form.telephone}}</el-form-item>
-          <el-form-item label="邮箱" prop="email">
-            <el-input placeholder="邮箱" v-model="form.email"></el-input>
+          <el-form-item :label="LAN.telephone">{{form.telephone}}</el-form-item>
+          <el-form-item :label="LAN.email" prop="email">
+            <el-input :placeholder="LAN.emailHolder" v-model="form.email"></el-input>
           </el-form-item>
         </el-form>
         <div class="info-block-btn">
-          <el-button type="primay" @click="submit">保 存</el-button>
+          <el-button type="primay" @click="submit">{{LAN.save}}</el-button>
         </div>
       </div>
       <!--账号安全-->
       <div class="info-block">
-        <div class="info-block-title">账号安全</div>
+        <div class="info-block-title">{{LAN.safety}}</div>
         <div class="info-block-edit">
           <div class="edit-label">
-            <span class="edit-label-title">验证手机</span>
-            <span class="edit-label-text">您的手机:{{form.telephone}}若已丢失或停用，请立即更换，避免账号被盗</span>
+            <span class="edit-label-title">{{LAN.validPhone}}</span>
+            <span class="edit-label-text">{{LAN.yourPhone}}:{{form.telephone}}{{LAN.phoneChangeTxt}}</span>
           </div>
           <div class="edit-btn">
-            <el-button @click="changePhone = true" style="width:110px;" type="primary">更换手机号</el-button>
+            <el-button @click="changePhone = true" style="width:110px;" type="primary">{{LAN.change}}</el-button>
           </div>
         </div>
         <div class="info-block-edit">
           <div class="edit-label">
-            <span class="edit-label-title">密码设置</span>
-            <span class="edit-label-text">安全性高的密码可以使账号更安全，建议您定期更换密码，且设置包含数字、字母及特殊字符且8位以上</span>
+            <span class="edit-label-title">{{LAN.setPwd}}</span>
+            <span class="edit-label-text">{{LAN.setPwdTips}}</span>
           </div>
           <div class="edit-btn">
-            <el-button @click="changePwd = true" style="width:110px;" type="primary">修 改</el-button>
+            <el-button @click="changePwd = true" style="width:110px;" type="primary">{{LAN.update}}</el-button>
           </div>
         </div>
       </div>
@@ -57,6 +57,7 @@ import {getUserInfo, editUser} from './proxy'
 import {validateName, validateSex, checkSpecialChar} from '../../libs/validate'
 import passwordModal from './modal/passwordModal.vue'
 import phoneModal from './modal/phoneModal.vue'
+import LAN from '@/libs/il8n'
 export default {
   name: 'personal',
   components: {
@@ -65,6 +66,7 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.personal,
       changePhone: false,
       changePwd: false,
       form: {
@@ -94,12 +96,12 @@ export default {
         email: [
           {
             type: 'email',
-            message: '请输入正确的邮箱地址',
+            message: LAN.personal.emailError,
             trigger: 'blur'
           },
           {
             max: 30,
-            message: '不能超过30个字'
+            message: LAN.personal.emailLengthLimit
           }
         ]
       }
@@ -132,7 +134,7 @@ export default {
           }
           editUser(params).then((res) => {
             if (res.code * 1 === 0 && res.data) {
-              this.$message.success('修改成功')
+              this.$message.success(this.LAN.updateSuccess)
               this.getUserInfo()
             }
           })

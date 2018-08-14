@@ -8,7 +8,7 @@
         <!--侧边栏-->
         <section id="sidebar">
           <div class="visitData" @click="getVisitData">
-            <el-tooltip effect="dark" content="当日访问数据-点击可刷新" placement="right">
+            <el-tooltip effect="dark" :content="LAN.visitToday" placement="right">
               <div class="number">128</div>
             </el-tooltip>
           </div>
@@ -34,15 +34,14 @@
         </section>
       </section>
       <!--页脚-->
-      <section @click="handleMenu" id = "footer">
-        ©2017 苏州万店掌网络科技有限公司 苏ICP备16028066
-      </section>
+      <section @click="handleMenu" id = "footer">{{LAN.footerTxt}}</section>
     </div>
   </div>
 </template>
 <script>
 import {getSession} from './proxy'
 import YleHeader from '../../libs/header/yleHeader'
+import LAN from '@/libs/il8n'
 export default {
   name: 'frame',
   components: {
@@ -50,6 +49,7 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.frame,
       activePage: this.$route.path, // 当前活动页
       vRouter: true, // 启用 vue-router 的模式
       isCollapse: false, // 侧边栏折叠状态

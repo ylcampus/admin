@@ -2,44 +2,44 @@
   <el-dialog
     width="450px"
     @close="close"
-    title="绑定手机号-首次登录"
+    :title="LAN.dialogTitle"
     :visible="visible"
     append-to-body
     id="First_Login_Dialog">
     <div class="First_Login_Body">
       <!--首页-->
       <div class="firstPage" v-show="currentView === 1">
-        <div class="tips">验证码将会发送至您的手机</div>
+        <div class="tips">{{LAN.tips}}</div>
         <div class="formArea">
           <el-form :model="form" :rules="sendRules" ref="sendForm">
             <el-form-item prop="telephone">
-              <el-input v-model="form.telephone" placeholder="请输入手机号码" clearable></el-input>
+              <el-input v-model="form.telephone" :placeholder="LAN.telephoneHolder" clearable></el-input>
             </el-form-item>
             <el-form-item class="reset-form-btn">
-              <el-button type="primary" @click="getValidCode">获取验证码</el-button>
+              <el-button type="primary" @click="getValidCode">{{LAN.getValidCode}}</el-button>
             </el-form-item>
           </el-form>
         </div>
       </div>
       <!--下一页-->
       <div class="nextPage" v-show="currentView === 2">
-        <div class="tips">已发送验证码至您的账号({{form.telephone}})</div>
+        <div class="tips">{{LAN.alreadySend}}({{form.telephone}})</div>
         <div class="formArea">
           <el-form :model="form" :rules="resetRules" ref="resetForm">
             <el-form-item prop="validCode">
               <div class="warp">
-                <el-input style="width:260px;" v-model="form.validCode" type="text" placeholder="请输入手机验证码" clearable></el-input>
+                <el-input style="width:260px;" v-model="form.validCode" type="text" :placeholder="LAN.validCodeHolder" clearable></el-input>
                 <el-button :disabled="!isSendFlag" @click="getValidCode">{{verText}}</el-button>
               </div>
             </el-form-item>
             <el-form-item prop="originalPassword">
-              <el-input v-model="form.originalPassword" type="password" placeholder="请输入旧密码" clearable></el-input>
+              <el-input v-model="form.originalPassword" type="password" :placeholder="LAN.originalPwdHolder" clearable></el-input>
             </el-form-item>
             <el-form-item prop="newPassword">
-              <el-input v-model="form.newPassword" type="password" placeholder="请输入新密码" clearable></el-input>
+              <el-input v-model="form.newPassword" type="password" :placeholder="LAN.newPwdHolder" clearable></el-input>
             </el-form-item>
             <el-form-item class="reset-form-btn">
-              <el-button type="primary" @click="updatePwd">修改密码</el-button>
+              <el-button type="primary" @click="updatePwd">{{LAN.updatePwd}}</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -50,7 +50,7 @@
       <button @click="back" type="button" class="dialogTitleBtn">
         <i class="el-dialog__close el-icon el-icon-back"></i>
       </button>
-      <span class="elDialogTitle">修改密码</span>
+      <span class="elDialogTitle">{{LAN.elDialogTitle}}</span>
     </span>
   </el-dialog>
 </template>
@@ -58,6 +58,7 @@
 import {sha256} from 'js-sha256'
 import {getTelephoneCode, modifyPwdAndBindTelephone, loginIn} from '../proxy'
 import {validatePhone, validateCode, validatePwd} from '../../../../libs/validate'
+import LAN from '@/libs/il8n'
 export default {
   name: 'FirstLogin',
   props: {
@@ -86,7 +87,8 @@ export default {
   },
   data () {
     return {
-      verText: '获取验证码', // 验证码
+      LAN: LAN.login.firstLogin,
+      verText: LAN.login.firstLogin.verText, // 验证码
       isSendFlag: true, // 发送验证码标识
       timer: null,
       currentView: 1, // 当前视图
@@ -154,16 +156,16 @@ export default {
       })
     },
     startTime () { // 启动计时器
-      this.verText = `60s后发送`
+      this.verText = this.LAN.sendAfer1
       let wait = 59
       this.isSendFlag = false
       this.timer = setInterval(() => {
         if (wait > 0) {
-          this.verText = `${wait}s后发送`
+          this.verText = `${wait}${this.LAN.sendAfer2}`
           wait--
         } else {
           this.isSendFlag = true
-          this.verText = '重新发送'
+          this.verText = this.LAN.sendAgain
           clearInterval(this.timer)
           this.timer = null
         }
@@ -187,7 +189,7 @@ export default {
           }
           modifyPwdAndBindTelephone(params).then((res) => {
             if (res.code * 1 === 0) {
-              this.$message.success('绑定手机并修改密码成功')
+              this.$message.success(this.LAN.opaSuccess)
               this.store.commit('user/clearData')
               this.$nextTick(() => {
                 let loginParams = {

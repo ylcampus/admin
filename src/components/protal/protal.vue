@@ -29,30 +29,30 @@
       <div class="product">
         <div class="inner">
           <div class="tArea">
-            <div class="title">产品与服务</div>
-            <div class="subTitle">精准.可控.高效.可持续</div>
+            <div class="title">{{LAN.product}}</div>
+            <div class="subTitle">{{LAN.productDesc}}</div>
           </div>
           <div class="cardArea">
             <div class="item">
               <div class="pic">
                 <div class="logo logo1"></div>
               </div>
-              <div class="title">可控的商品信息与品牌推广渠道</div>
-              <div class="desc">使用云服务ECS、VPC、EVS、AS、ELB部署应用，搭建论坛网站</div>
+              <div class="title">{{LAN.way}}</div>
+              <div class="desc">{{LAN.wayDesc}}</div>
             </div>
             <div class="item">
               <div class="pic">
                 <div class="logo logo2"></div>
               </div>
-              <div class="title">精准的市场定位</div>
-              <div class="desc">使用微服务开发框架，将电商应用从原生Spring Boot和Go-kit迁移并部署到ServiceStage平台上</div>
+              <div class="title">{{LAN.mark}}</div>
+              <div class="desc">{{LAN.markDesc}}</div>
             </div>
             <div class="item">
               <div class="pic">
                 <div class="logo logo3"></div>
               </div>
-              <div class="title">数据采集与量化分析</div>
-              <div class="desc">使用机器学习服务，预测餐厅未来的销售量，为开设新餐厅提供决策依据。</div>
+              <div class="title">{{LAN.data}}</div>
+              <div class="desc">{{LAN.dataDesc}}</div>
             </div>
           </div>
         </div>
@@ -61,8 +61,8 @@
       <div class="brand">
         <div class="inner">
           <div class="bArea">
-            <div class="title">合作伙伴展示</div>
-            <div class="subTitle">共建和谐共赢的云生态，实现快速发展</div>
+            <div class="title">{{LAN.cooperative}}</div>
+            <div class="subTitle">{{LAN.cooperativeDesc}}</div>
           </div>
           <div class="cardArea">
             <div class="inner">
@@ -105,6 +105,7 @@
 <script>
 import YleHeader from '../../libs/header/yleHeader'
 import YleFooter from '../../libs/footer/yleFooter'
+import LAN from '@/libs/il8n'
 export default {
   name: 'ProtalFrame',
   components: {
@@ -113,6 +114,7 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.protal,
       pageName: this.$route.name // 当前活动页
     }
   },

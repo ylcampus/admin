@@ -1,27 +1,28 @@
 <template>
   <div id="LinkUs">
     <div class="inner">
-      <div class="title">联系我们</div>
+      <div class="title">{{LAN.title}}</div>
       <div class="body">
         <div id="linkUsForm">
-          <div class="condition">联系地址</div>
-          <div class="forByPhoneDes">
-            如果手机停用或原先手机号不能正常使用，请进入联系我们页面联系我们客服人员。
-          </div>
-          <div class="condition">联系人</div>
-          <div class="forByPhoneDes">董纪国</div>
-          <div class="condition">联系电话</div>
-          <div class="forByPhoneDes">18205185737</div>
+          <div class="condition">{{LAN.address}}</div>
+          <div class="forByPhoneDes">{{LAN.forByPhoneDes}}</div>
+          <div class="condition">{{LAN.linkmanTxt}}</div>
+          <div class="forByPhoneDes">{{LAN.linkman}}</div>
+          <div class="condition">{{LAN.telTxt}}</div>
+          <div class="forByPhoneDes">{{LAN.tel}}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import LAN from '@/libs/il8n'
 export default {
   name: 'LinkUs',
   data () {
-    return {}
+    return {
+      LAN: LAN.protal.book.linkUs
+    }
   },
   mounted () {},
   methods: {}

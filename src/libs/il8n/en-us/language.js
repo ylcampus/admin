@@ -534,15 +534,15 @@ module.exports = {
   },
   protal: {
     product: '产品与服务',
-    productTitle: '精准.可控.高效.可持续',
+    productDesc: '精准.可控.高效.可持续',
     way: '可控的商品信息与品牌推广渠道',
-    wayTitle: '使用云服务ECS、VPC、EVS、AS、ELB部署应用，搭建论坛网站',
+    wayDesc: '使用云服务ECS、VPC、EVS、AS、ELB部署应用，搭建论坛网站',
     mark: '精准的市场定位',
-    markTitle: '使用微服务开发框架，将电商应用从原生Spring Boot和Go-kit迁移并部署到ServiceStage平台上',
+    markDesc: '使用微服务开发框架，将电商应用从原生Spring Boot和Go-kit迁移并部署到ServiceStage平台上',
     data: '数据采集与量化分析',
-    dataTitle: '使用机器学习服务，预测餐厅未来的销售量，为开设新餐厅提供决策依据。',
+    dataDesc: '使用机器学习服务，预测餐厅未来的销售量，为开设新餐厅提供决策依据。',
     cooperative: '合作伙伴展示',
-    cooperativeTitle: '共建和谐共赢的云生态，实现快速发展',
+    cooperativeDesc: '共建和谐共赢的云生态，实现快速发展',
     book: {
       title: '声明.协议.文档',
       statement: '法律声明',
@@ -639,8 +639,8 @@ module.exports = {
     }
   },
   common: {
-    length25Error: '长度不能超过25个字节',
-    sexSelectError: '请选择性别',
+    validateName: '长度不能超过25个字节',
+    validateSex: '请选择性别',
     checkSpecialChar: '内容含有特殊字符',
     validatePhone: '请输入正确的手机号码',
     validateCode: '请输入正确的验证码，六位数字',
@@ -649,7 +649,6 @@ module.exports = {
     validateHost: '格式错误',
     validateShopId: '格式错误',
     validateSkuId: '格式错误',
-    loadding: '加载中...',
-    treeLoadding: '加载中...'
+    loadding: '加载中...'
   }
 }

@@ -4,38 +4,36 @@
     <header id="header">
       <div class="inner">
         <div class="web-logo">
-          <a href="/">优乐商城</a>
+          <a href="/">{{LAN.uleMall}}</a>
         </div>
       </div>
     </header>
     <!--登录表单-->
     <section id="loginBody">
       <div class="inner">
-        <div class="title">账号登录</div>
+        <div class="title">{{LAN.accountLogin}}</div>
         <div class="body">
           <div id="loginForm">
-            <div class="condition">
-              验证身份后进行登录
-            </div>
+            <div class="condition">{{LAN.condition}}</div>
             <div class="forByPhoneDes">
-              如果手机停用或原先手机号不能正常使用，请进入<a href="/linkUs" target="_blank" class="linkUs">联系我们</a>页面联系我们客服人员。
+              {{LAN.forByPhoneDes}}<a href="/linkUs" target="_blank" class="linkUs">{{LAN.linkUs}}</a>{{LAN.linkService}}
             </div>
             <div class="forget">
-              <router-link to="/forgetPwd">忘记密码</router-link>
+              <router-link to="/forgetPwd">{{LAN.forget}}</router-link>
             </div>
             <!--form表单-->
             <div class="form">
               <el-form ref="form" :rules="rules" :model="form">
                 <el-form-item prop="account">
-                  <el-input v-model="form.account" placeholder="请输入账户名" clearable></el-input>
+                  <el-input v-model="form.account" :placeholder="LAN.accountHolder" clearable></el-input>
                 </el-form-item>
                 <el-form-item prop="pwd">
-                  <el-input @keyup.enter.native = "submit" v-model="form.pwd" placeholder="输入新密码" type="password" clearable></el-input>
+                  <el-input @keyup.enter.native = "submit" v-model="form.pwd" :placeholder="LAN.pwdHolder" type="password" clearable></el-input>
                 </el-form-item>
                 <el-form-item >
                   <div class="remember">
                     <el-checkbox v-model="form.checked"></el-checkbox>
-                    <span>我已同意<a href="/userBook" target="_blank" class="userBook">《优乐商城用户协议》</a></span>
+                    <span>{{LAN.read}}<a href="/userBook" target="_blank" class="userBook">{{LAN.userBook}}</a></span>
                   </div>
                 </el-form-item>
               </el-form>
@@ -43,7 +41,7 @@
             <!--提交 disabled-->
             <div id="inputArea">
               <div class="submit">
-                <el-button @click="submit">登录</el-button>
+                <el-button @click="submit">{{LAN.login}}</el-button>
               </div>
             </div>
           </div>
@@ -55,18 +53,15 @@
       <div class="inner">
         <div class="warrant-area">
           <p class="lItem">
-            <a class="rule" href="/userBook" target="_blank">优乐帐号用户协议</a>
+            <a class="rule" href="/userBook" target="_blank">{{LAN.userBookSimble}}</a>
             <em class="foot_em">|</em>
-            <a class="rule" href="/aboutUs" target="_blank">关于优乐帐号与隐私的声明</a>
+            <a class="rule" href="/aboutUs" target="_blank">{{LAN.aboutUs}}</a>
             <span class="foot_em">
               <em style="font-style: normal">|</em>
-              <a style="padding:0 10px;" href="/linkUs" target="blank">联系我们</a>
+              <a style="padding:0 10px;" href="/linkUs" target="blank">{{LAN.linkUs}}</a>
             </span>
           </p>
-          <p class="lItem" style="margin-top:10px ">
-            Copyright&nbsp;©&nbsp;2011-2018&nbsp;&nbsp;南京优乐校园电子商务有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;保留一切权利&nbsp;&nbsp;苏B2-20070200号&nbsp;|&nbsp;
-            苏ICP备09062682号-9
-          </p>
+          <p class="lItem" style="margin-top:10px ">{{LAN.footerTxt}}</p>
         </div>
       </div>
     </section>

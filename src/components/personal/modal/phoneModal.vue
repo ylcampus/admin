@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="更换手机号"
+    :title="LAN.changePhone"
     :visible="visible"
     width="450px"
     @close="close"
@@ -12,18 +12,18 @@
         :rules="changeRules"
         ref="phoneForm"
         label-width="100px">
-        <el-form-item label="新手机号" prop="telephone">
-          <el-input placeholder="新手机号" v-model="form.telephone"></el-input>
+        <el-form-item :label="LAN.telephone" prop="telephone">
+          <el-input :placeholder="LAN.telephone" v-model="form.telephone"></el-input>
         </el-form-item>
-        <el-form-item label="验证码" prop="validCode">
+        <el-form-item :label="LAN.validCode" prop="validCode">
           <div class="warp">
-            <el-input @keyup.enter.native="submit" class="phoneInput" v-model="form.validCode" placeholder="请输入手机验证码" clearable></el-input>
+            <el-input @keyup.enter.native="submit" class="phoneInput" v-model="form.validCode" :placeholder="LAN.phoneInputHolder" clearable></el-input>
             <el-button class="sendBtn" :disabled="!isSendFlag" @click="getTelephoneCode">{{verText}}</el-button>
           </div>
         </el-form-item>
         <el-form-item class="change-form-btn">
-          <el-button type="primary" @click="submit">确 定</el-button>
-          <el-button @click="close">取 消</el-button>
+          <el-button type="primary" @click="submit">{{LAN.enter}}</el-button>
+          <el-button @click="close">{{LAN.cancel}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -32,6 +32,7 @@
 <script>
 import {getTelephoneCode, changeTelephone} from '../proxy'
 import {validatePhone, validateCode} from '../../../libs/validate'
+import LAN from '@/libs/il8n'
 export default {
   name: 'phoneModal',
   props: {
@@ -51,7 +52,8 @@ export default {
   },
   data () {
     return {
-      verText: '获取验证码',
+      LAN: LAN.personal.phoneModal,
+      verText: LAN.personal.phoneModal.verText,
       isSendFlag: true,
       form: {
         telephone: '', // 手机号
@@ -86,7 +88,7 @@ export default {
           }
           changeTelephone(params).then((res) => {
             if (res.code * 1 === 0 && res.data) {
-              this.$message.success('手机号修改成功')
+              this.$message.success(this.LAN.updateSuccess)
               this.$nextTick(() => {
                 this.close()
                 this.$emit('refresh')
@@ -107,16 +109,16 @@ export default {
       })
     },
     startTime () { // 启动计时器
-      this.verText = `60s后发送`
+      this.verText = this.LAN.send1
       let wait = 59
       this.isSendFlag = false
       let timer = setInterval(() => {
         if (wait > 0) {
-          this.verText = `${wait}s后发送`
+          this.verText = `${wait}${this.LAN.send2}`
           wait--
         } else {
           this.isSendFlag = true
-          this.verText = '重新发送'
+          this.verText = this.LAN.sendAgain
           clearInterval(timer)
         }
       }, 1000)
