@@ -4,10 +4,10 @@
     <section class="head">
       <div class="add">
         <div class="fitem" style="width:150px;">
-          <el-select v-model="filter.tag" placeholder="请选择定时任务类型" @change="typeSelect" clearable>
-            <el-option label="不限" value=""></el-option>
-            <el-option label="系统" value="1"></el-option>
-            <el-option label="租户" value="2"></el-option>
+          <el-select v-model="filter.tag" :placeholder="LAN.taskTypeSelect" @change="typeSelect" clearable>
+            <el-option :label="LAN.noLimit" value=""></el-option>
+            <el-option :label="LAN.system" value="1"></el-option>
+            <el-option :label="LAN.tenant" value="2"></el-option>
           </el-select>
         </div>
       </div>
@@ -15,7 +15,7 @@
         <div class="fitem">
           <el-input
             @keyup.enter.native = "getTaskList"
-            placeholder="输入定时任务名称进行搜索"
+            :placeholder="LAN.searchHolder"
             suffix-icon="el-icon-search"
             @clear = "getTaskList"
             v-model="filter.key" clearable>
@@ -31,7 +31,7 @@
         stripe>
         <el-table-column
           prop="name"
-          label="名称"
+          :label="LAN.taskName"
           width="200" show-overflow-tooltip>
           <template slot-scope="scope">
             <span class="tname" @click="toDteailPage(scope.row)">{{ scope.row.name }}</span>
@@ -39,45 +39,45 @@
         </el-table-column>
         <el-table-column
           prop="tag"
-          label="类型"
+          :label="LAN.tag"
           width="100">
           <template slot-scope="scope">
-            <span v-if = "scope.row.type === 1">系统任务</span>
-            <span v-else-if = "scope.row.type === 2">租户任务</span>
+            <span v-if = "scope.row.type === 1">{{LAN.systemTask}}</span>
+            <span v-else-if = "scope.row.type === 2">{{LAN.tenantTask}}</span>
             <span v-else>--</span>
           </template>
         </el-table-column>
         <el-table-column
           prop="tenantName"
-          label="租户"
+          :label="LAN.tenantName"
           width="100">
         </el-table-column>
         <el-table-column
           prop="rule"
-          label="执行时间"
+          :label="LAN.rule"
           width="180" show-overflow-tooltip>
         </el-table-column>
         <el-table-column
           prop="ready"
-          label="就绪状态"
+          :label="LAN.ready"
           width="120">
           <template slot-scope="scope">
-            <span v-if = "scope.row.ready">已启用</span>
-            <span v-else-if = "!scope.row.ready">未启用</span>
+            <span v-if = "scope.row.ready">{{LAN.abled}}</span>
+            <span v-else-if = "!scope.row.ready">{{LAN.disabled}}</span>
           </template>
         </el-table-column>
         <el-table-column
           prop="status"
-          label="运行状态"
+          :label="LAN.status"
           width="120">
           <template slot-scope="scope">
-            <span v-if = "scope.row.status==='runing'">运行中</span>
-            <span v-else-if = "scope.row.status==='pending'">挂起中</span>
+            <span v-if = "scope.row.status==='runing'">{{LAN.runing}}</span>
+            <span v-else-if = "scope.row.status==='pending'">{{LAN.pending}}</span>
           </template>
         </el-table-column>
         <el-table-column
           prop="desc"
-          label="描述" show-overflow-tooltip>
+          :label="LAN.desc" show-overflow-tooltip>
         </el-table-column>
       </el-table>
     </section>
@@ -97,10 +97,12 @@
 </template>
 <script>
 import {getTaskList} from './proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'task',
   data () {
     return {
+      LAN: LAN.taskManagement,
       total: 80, // 总数据数
       filter: { // 筛选条件
         pageNo: 1,

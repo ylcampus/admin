@@ -4,8 +4,8 @@
     <!--form表单-->
     <div class="form">
       <el-form :model="form" :rules="rules" ref="ruleForm" label-width="100px" size="small">
-        <el-form-item label="角色" prop="roleId">
-          <el-select v-model="form.roleId" placeholder="请选择角色">
+        <el-form-item :label="LAN.role" prop="roleId">
+          <el-select v-model="form.roleId" :placeholder="LAN.roleSelect">
             <el-option
               v-for="item in roleList"
               :key="item.roleId"
@@ -14,32 +14,32 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="用户账号" prop="account">
-          <el-input  :disabled="pflag === 'UserEdit'" v-model="form.account" placeholder="请输入用户账号-最短3个字符最长不超过16个字符"></el-input>
+        <el-form-item :label="LAN.account" prop="account">
+          <el-input  :disabled="pflag === 'UserEdit'" v-model="form.account" :placeholder="LAN.accountHolder"></el-input>
         </el-form-item>
-        <el-form-item label="姓名" prop="name">
-          <el-input  :disabled="pflag === 'UserEdit'" v-model="form.name" placeholder="请输入姓名"></el-input>
+        <el-form-item :label="LAN.name" prop="name">
+          <el-input  :disabled="pflag === 'UserEdit'" v-model="form.name" :placeholder="LAN.nameHolder"></el-input>
         </el-form-item>
-        <el-form-item label="性别" prop="sex">
+        <el-form-item :label="LAN.sex" prop="sex">
           <el-radio-group v-model="form.sex" :disabled="pflag === 'UserEdit'">
-            <el-radio :label="1" border>男</el-radio>
-            <el-radio :label="2" border>女</el-radio>
+            <el-radio :label="1" border>{{LAN.male}}</el-radio>
+            <el-radio :label="2" border>{{LAN.female}}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item v-if = "pflag === 'UserEdit'" label="联系电话">
-          <el-input v-model="form.telephone" placeholder="联系电话" disabled></el-input>
+        <el-form-item v-if = "pflag === 'UserEdit'" :label="LAN.telephone">
+          <el-input v-model="form.telephone" :placeholder="LAN.telephoneHolder" disabled></el-input>
         </el-form-item>
-        <el-form-item v-if = "pflag === 'UserEdit'" label="电子邮件">
-          <el-input  v-model="form.email" placeholder="电子邮件" disabled></el-input>
+        <el-form-item v-if = "pflag === 'UserEdit'" :label="LAN.email">
+          <el-input  v-model="form.email" :placeholder="LAN.emailHolder" disabled></el-input>
         </el-form-item>
-        <el-form-item label="描述" prop="desc">
-          <el-input @keyup.enter.native="submitForm" rows = "4" type="textarea" v-model="form.desc" placeholder="请输入描述信息"></el-input>
+        <el-form-item :label="LAN.desc" prop="desc">
+          <el-input @keyup.enter.native="submitForm" rows = "4" type="textarea" v-model="form.desc" :placeholder="LAN.descHolder"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm()">
-            {{pflag === 'UserAdd' ? '立即创建' : '保存修改'}}
+            {{pflag === 'UserAdd' ? LAN.create : LAN.save }}
           </el-button>
-          <el-button @click="cancel()">取消</el-button>
+          <el-button @click="cancel()">{{LAN.cancel}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -68,7 +68,7 @@ export default {
         roleId: [
           {
             required: true,
-            message: '请选择角色',
+            message: LAN.userManagement.addEdit.roleError,
             trigger: 'change'
           }
         ],
@@ -83,7 +83,7 @@ export default {
           {
             min: 1,
             max: 32,
-            message: '长度在 1 到 32 个字符',
+            message: LAN.userManagement.addEdit.nameError,
             trigger: 'blur'
           },
           {
@@ -95,7 +95,7 @@ export default {
           {
             min: 0,
             max: 255,
-            message: '长度在 1 到 255 个字符',
+            message: LAN.userManagement.addEdit.descError,
             trigger: 'blur'
           },
           {
@@ -108,7 +108,7 @@ export default {
   },
   mounted () {
     this.pflag = this.$route.name
-    this.title = this.pflag === 'UserAdd' ? '添加用户' : '编辑用户'
+    this.title = this.pflag === 'UserAdd' ? this.LAN.addUser : this.LAN.editUser
     // 若是编辑页面则首先去获取资源详情
     if (this.pflag === 'UserEdit') {
       let userId = this.$route.query.userId
@@ -151,7 +151,7 @@ export default {
           if (this.pflag === 'UserAdd') {
             addUser(params).then((res) => {
               if (res.code * 1 === 0) {
-                this.$message.success('用户添加成功')
+                this.$message.success(this.LAN.addSuccess)
                 setTimeout(() => {
                   this.$router.push('/user')
                 }, 2000)
@@ -161,7 +161,7 @@ export default {
             params.userId = this.form.userId
             editUser(params).then((res) => {
               if (res.code * 1 === 0) {
-                this.$message.success('用户编辑成功')
+                this.$message.success(this.LAN.editSuccess)
                 setTimeout(() => {
                   this.$router.push('/user')
                 }, 2000)

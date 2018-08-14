@@ -3,17 +3,17 @@
     <section class="yle_operation_penal">
       <div class="left_part">
         <el-radio-group v-model="filter.status" @change="statusSelect" size="small">
-          <el-radio-button label=""  >全部</el-radio-button>
-          <el-radio-button label="1" >未领取</el-radio-button>
-          <el-radio-button label="2" >未使用</el-radio-button>
-          <el-radio-button label="3" >已使用</el-radio-button>
-          <el-radio-button label="4" >已完成</el-radio-button>
+          <el-radio-button label="">{{LAN.all}}</el-radio-button>
+          <el-radio-button label="1">{{LAN.receivePending}}</el-radio-button>
+          <el-radio-button label="2">{{LAN.usePending}}</el-radio-button>
+          <el-radio-button label="3">{{LAN.used}}</el-radio-button>
+          <el-radio-button label="4">{{LAN.completed}}</el-radio-button>
         </el-radio-group>
       </div>
       <div class="right_part">
         <div class="item w180">
-          <el-select v-model="filter.shopId" placeholder="请选择店铺" @change="shopSelect" clearable>
-            <el-option label="不限" value=""></el-option>
+          <el-select v-model="filter.shopId" :placeholder="LAN.shopSelectHolder" @change="shopSelect" clearable>
+            <el-option :label="LAN.noLimit" value=""></el-option>
             <el-option
               :key="key"
               v-for = "(item, key) in shopList"
@@ -25,7 +25,7 @@
         <div class="item">
           <el-input
             @keyup.enter.native = "getDiscountList"
-            placeholder="输入会员账号进行搜索"
+            :placeholder="LAN.searchKey"
             suffix-icon="el-icon-search"
             @clear = "getDiscountList"
             v-model="filter.key" clearable>
@@ -40,47 +40,47 @@
         :height = "tableHeight"
         stripe>
         <el-table-column
-          label="打折券Id"
+          :label="LAN.discountId"
           prop="discountId" width="200" show-overflow-tooltip>
           <template slot-scope="scope">
             <span class="yle_color_blue yle_pointer" @click="toDiscountDetail(scope.row)">{{scope.row.discountId }}</span>
           </template>
         </el-table-column>
         <el-table-column
-          label="所属店铺"
+          :label="LAN.shopName"
           prop="shopName" width="150" show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-          label="会员"
+          :label="LAN.memberAccount"
           prop="memberAccount" width="150" show-overflow-tooltip>
           <template slot-scope="scope">
             <span>{{scope.row.memberAccount  || '--'}}</span>
           </template>
         </el-table-column>
         <el-table-column
-          label="状态"
+          :label="LAN.status"
           prop="status" width="100">
           <template slot-scope="scope">
-            <el-tag type="success" v-if = "scope.row.status === 1">未领取</el-tag>
-            <el-tag type="success" v-else-if = "scope.row.status === 2">未使用</el-tag>
-            <el-tag type="success" v-else-if = "scope.row.status === 3">已使用</el-tag>
-            <el-tag type="success" v-else-if = "scope.row.status === 4">已完成</el-tag>
+            <el-tag type="success" v-if = "scope.row.status === 1">{{LAN.receivePending}}</el-tag>
+            <el-tag type="success" v-else-if = "scope.row.status === 2">{{LAN.usePending}}</el-tag>
+            <el-tag type="success" v-else-if = "scope.row.status === 3">{{LAN.used}}</el-tag>
+            <el-tag type="success" v-else-if = "scope.row.status === 4">{{LAN.completed}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column
-          label="折扣"
+          :label="LAN.type"
           prop="type" width="100">
           <template slot-scope="scope">
-            <span v-if = "scope.row.type === 1">一折券</span>
-            <span v-else-if = "scope.row.type === 2">二折券</span>
-            <span v-else-if = "scope.row.type === 3">三折券</span>
-            <span v-else-if = "scope.row.type === 4">四折券</span>
-            <span v-else-if = "scope.row.type === 5">五折券</span>
+            <span v-if = "scope.row.type === 1">{{LAN.discount1}}</span>
+            <span v-else-if = "scope.row.type === 2">{{LAN.discount2}}</span>
+            <span v-else-if = "scope.row.type === 3">{{LAN.discount3}}</span>
+            <span v-else-if = "scope.row.type === 4">{{LAN.discount4}}</span>
+            <span v-else-if = "scope.row.type === 5">{{LAN.discount5}}</span>
             <span v-else>--</span>
           </template>
         </el-table-column>
         <el-table-column
-          label="创建时间"
+          :label="LAN.createAt"
           prop="create_at" show-overflow-tooltip>
         </el-table-column>
       </el-table>

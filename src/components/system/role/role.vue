@@ -3,14 +3,14 @@
     <!--头部-->
     <section class="head">
       <div class="add">
-        <el-button icon="el-icon-plus" @click = "addRole" plain>添加</el-button>
-        <el-button icon="el-icon-close" :disabled="selected.length === 0" @click = "delRole" plain>删除</el-button>
+        <el-button icon="el-icon-plus" @click = "addRole" plain>{{LAN.add}}</el-button>
+        <el-button icon="el-icon-close" :disabled="selected.length === 0" @click = "delRole" plain>{{LAN.del}}</el-button>
       </div>
       <div class="filter">
         <div class="fitem">
           <el-input
             @keyup.enter.native = "getRoleList"
-            placeholder="输入角色名称进行搜索"
+            :placeholder="输入角色名称进行搜索"
             suffix-icon="el-icon-search"
             @clear = "getRoleList"
             v-model="filter.name" clearable>
@@ -31,7 +31,7 @@
         </el-table-column>
         <el-table-column
           prop="name"
-          label="角色名称"
+          :label="LAN.name"
           width="150" show-overflow-tooltip>
           <template slot-scope="scope">
             <span class="rname" @click="editRole(scope.row)">{{ scope.row.name }}</span>
@@ -40,11 +40,11 @@
         <el-table-column
           prop="desc"
           width="220"
-          label="描述" show-overflow-tooltip>
+          :label="LAN.desc" show-overflow-tooltip>
         </el-table-column>
         <el-table-column
           prop="authArr"
-          label="权限列表" show-overflow-tooltip>
+          :label="LAN.authArr" show-overflow-tooltip>
           <template slot-scope="scope">
             <span :key="key" v-for = "(item, key) in scope.row.authArr"
               :class="{ 'mainTxt': item.tag === 'main', 'subTxt': item.tag === 'sub'}"
@@ -69,10 +69,12 @@
 </template>
 <script>
 import {getRoleList, deleteRole} from './proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'role',
   data () {
     return {
+      LAN: LAN.roleManagement,
       total: 80, // 总数据数
       filter: { // 筛选条件
         pageNo: 1,
@@ -117,9 +119,9 @@ export default {
       this.$router.push('role/add')
     },
     delRole () { // 删除角色
-      this.$confirm('确定要删除已选角色吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.LAN.delConfirm, this.LAN.tips, {
+        confirmButtonText: this.LAN.enter,
+        cancelButtonText: this.LAN.cancel,
         type: 'warning'
       }).then(() => {
         let ids = this.selected.map((row) => {
@@ -127,14 +129,14 @@ export default {
         })
         deleteRole({ids: ids}).then((res) => {
           if (res.code * 1 === 0) {
-            this.$message.success('删除成功')
+            this.$message.success(this.LAN.delSuccess)
             this.getRoleList()
           }
         })
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '操作已取消'
+          message: this.LAN.opaCancel
         })
       })
     },

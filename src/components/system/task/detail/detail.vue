@@ -1,35 +1,35 @@
 <template>
   <div id="TaskAddEdit">
-    <div class="yle_detail_title"><span>定时任务详情</span></div>
+    <div class="yle_detail_title"><span>{{LAN.taskDetail}}</span></div>
     <div class="form">
       <el-form label-width="100px" size="small">
-        <el-form-item label="定时任务名称">{{form.name}}</el-form-item>
-        <el-form-item label="租户">{{form.tenantName}}</el-form-item>
-        <el-form-item label="时间类型">
-          <span v-if="form.type === 1">每天</span>
-          <span v-if="form.type === 2">每周</span>
-          <span v-if="form.type === 3">每月</span>
+        <el-form-item :label="LAN.name">{{form.name}}</el-form-item>
+        <el-form-item :label="LAN.tenantName">{{form.tenantName}}</el-form-item>
+        <el-form-item :label="LAN.timeType">
+          <span v-if="form.type === 1">{{LAN.day}}</span>
+          <span v-if="form.type === 2">{{LAN.week}}</span>
+          <span v-if="form.type === 3">{{LAN.month}}</span>
         </el-form-item>
-        <el-form-item label="类型">
-          <span v-if="form.type === 1">系统任务</span>
-          <span v-if="form.type === 2">租户任务</span>
+        <el-form-item :label="LAN.type">
+          <span v-if="form.type === 1">{{LAN.system}}</span>
+          <span v-if="form.type === 2">{{LAN.tenant}}</span>
         </el-form-item>
-        <el-form-item label="所属模块">{{form.module}}</el-form-item>
-        <el-form-item label="处理函数">{{form.handle}}</el-form-item>
-        <el-form-item label="就绪状态">
-          <span v-if="form.ready">已启用</span>
-          <span v-if="!form.ready">未启用</span>
+        <el-form-item :label="LAN.module">{{form.module}}</el-form-item>
+        <el-form-item :label="LAN.handle">{{form.handle}}</el-form-item>
+        <el-form-item :label="LAN.ready">
+          <span v-if="form.ready">{{LAN.abled}}</span>
+          <span v-if="!form.ready">{{LAN.disabled}}</span>
         </el-form-item>
-        <el-form-item label="定时规则">{{form.rule}}</el-form-item>
-        <el-form-item label="运行状态">
-          <span v-if="form.status === 'runing'">运行中</span>
-          <span v-if="form.status === 'pending'">挂起中</span>
+        <el-form-item :label="LAN.rule">{{form.rule}}</el-form-item>
+        <el-form-item :label="LAN.status">
+          <span v-if="form.status === 'runing'">{{LAN.runing}}</span>
+          <span v-if="form.status === 'pending'">{{LAN.pending}}</span>
         </el-form-item>
-        <el-form-item label="描述">{{form.desc}}</el-form-item>
-        <el-form-item label="创建时间">{{form.create_at}}</el-form-item>
-        <el-form-item label="最近更新时间">{{form.update_at}}</el-form-item>
+        <el-form-item :label="LAN.desc">{{form.desc}}</el-form-item>
+        <el-form-item :label="LAN.createAt">{{form.create_at}}</el-form-item>
+        <el-form-item :label="LAN.updateAt">{{form.update_at}}</el-form-item>
         <el-form-item>
-          <el-button @click="back">返回</el-button>
+          <el-button @click="back">{{LAN.back}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -37,10 +37,12 @@
 </template>
 <script>
 import {getTaskDetail} from '../proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'taskDetail',
   data () {
     return {
+      LAN: LAN.taskManagement.detail,
       form: {}
     }
   },

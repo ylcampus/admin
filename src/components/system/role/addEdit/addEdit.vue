@@ -4,14 +4,14 @@
     <!--form表单-->
     <div class="form">
       <el-form :model="form" :rules="rules" ref="ruleForm" label-width="100px">
-        <el-form-item label="角色名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入角色名称"></el-input>
+        <el-form-item :label="LAN.roleName" prop="name">
+          <el-input v-model="form.name" :placeholder="LAN.roleNameHolder"></el-input>
         </el-form-item>
-        <el-form-item label="菜单权限" prop="auth">
+        <el-form-item :label="LAN.auth" prop="auth">
           <div class="authTree">
             <div class="searchArea">
               <el-input
-                placeholder="输入关键字进行过滤"
+                :placeholder="LAN.authHolder"
                 v-model="filterText" clearable>
               </el-input>
             </div>
@@ -28,14 +28,14 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item label="描述" prop="desc">
-          <el-input rows = "4" type="textarea" v-model="form.desc" placeholder="请输入描述信息"></el-input>
+        <el-form-item :label="LAN.desc" prop="desc">
+          <el-input rows = "4" type="textarea" v-model="form.desc" :placeholder="LAN.descHolder"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm()">
-            {{pflag === 'RoleAdd' ? '立即创建' : '保存修改'}}
+            {{pflag === 'RoleAdd' ? LAN.create : LAN.save}}
           </el-button>
-          <el-button @click="cancel()">取消</el-button>
+          <el-button @click="cancel()">{{LAN.cancel}}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -44,6 +44,7 @@
 <script>
 import {getSession, addRole, getRoleDetail, editRole} from '../proxy'
 import {checkSpecialChar} from '../../../../libs/validate'
+import LAN from '@/libs/il8n'
 export default {
   name: 'roleAddEdit',
   watch: {
@@ -53,8 +54,9 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.roleManagement.addEdit,
       filterText: '',
-      title: '添加角色',
+      title: LAN.roleManagement.addEdit.addRole,
       pflag: 'RoleAdd', // 添加or编辑 默认为添加
       form: {
         roleId: null,
@@ -71,13 +73,13 @@ export default {
         name: [
           {
             required: true,
-            message: '请输入角色名称',
+            message: LAN.roleManagement.addEdit.roleNameError,
             trigger: 'blur'
           },
           {
             min: 1,
             max: 32,
-            message: '长度在 1 到 32 个字符',
+            message: LAN.roleManagement.addEdit.roleLengthError,
             trigger: 'blur'
           },
           {
@@ -89,7 +91,7 @@ export default {
           {
             min: 0,
             max: 255,
-            message: '长度在 1 到 255 个字符',
+            message: LAN.roleManagement.addEdit.descError,
             trigger: 'blur'
           },
           {
@@ -102,7 +104,7 @@ export default {
   },
   mounted () {
     this.pflag = this.$route.name
-    this.title = this.pflag === 'RoleAdd' ? '添加角色' : '编辑角色'
+    this.title = this.pflag === 'RoleAdd' ? this.LAN.addRole : this.LAN.editRole
     // 获取会话信息
     getSession().then((res) => {
       if (res.code * 1 === 0 && res.data) {
@@ -133,7 +135,7 @@ export default {
           if (this.pflag === 'RoleAdd') { // 添加角色
             addRole(params).then((res) => {
               if (res.code * 1 === 0) {
-                this.$message.success('角色添加成功')
+                this.$message.success(this.LAN.addSuccess)
                 setTimeout(() => {
                   this.$router.push('/role')
                 }, 2000)
@@ -143,7 +145,7 @@ export default {
             params.roleId = this.form.roleId
             editRole(params).then((res) => {
               if (res.code * 1 === 0) {
-                this.$message.success('角色编辑成功')
+                this.$message.success(this.LAN.editSuccess)
                 setTimeout(() => {
                   this.$router.push('/role')
                 }, 2000)

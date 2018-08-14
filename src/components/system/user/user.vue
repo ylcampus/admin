@@ -3,21 +3,21 @@
     <!--头部-->
     <section class="head">
       <div class="add">
-        <el-button icon="el-icon-plus" @click = "addUser" plain>添加</el-button>
-        <el-button icon="el-icon-close" :disabled="selected.length === 0" @click = "delUser" plain>删除</el-button>
+        <el-button icon="el-icon-plus" @click = "addUser" plain>{{LAN.add}}</el-button>
+        <el-button icon="el-icon-close" :disabled="selected.length === 0" @click = "delUser" plain>{{LAN.del}}</el-button>
       </div>
       <div class="filter">
         <div class="fitem" style="width:150px;">
-          <el-select v-model="filter.tag" placeholder="请选择用户类型" @change="typeSelect" clearable>
-            <el-option label="不限" value=""></el-option>
-            <el-option label="租户" value="1"></el-option>
-            <el-option label="普通用户" value="2"></el-option>
+          <el-select v-model="filter.tag" :placeholder="LAN.selectHolder" @change="typeSelect" clearable>
+            <el-option :label="LAN.noLimit" value=""></el-option>
+            <el-option :label="LAN.tenant" value="1"></el-option>
+            <el-option :label="LAN.normal" value="2"></el-option>
           </el-select>
         </div>
         <div class="fitem">
           <el-input
             @keyup.enter.native = "getUserList"
-            placeholder="输入用户账号/姓名进行搜索"
+            :placeholder="LAN.searchHolder"
             suffix-icon="el-icon-search"
             @clear = "getUserList"
             v-model="filter.key" clearable>
@@ -38,7 +38,7 @@
         </el-table-column>
         <el-table-column
           prop="account"
-          label="用户账号"
+          :label="LAN.account"
           width="200" show-overflow-tooltip>
           <template slot-scope="scope">
             <span class="raccount" @click="editUser(scope.row)">{{ scope.row.account }}</span>
@@ -46,22 +46,22 @@
         </el-table-column>
         <el-table-column
           prop="roleName"
-          label="角色"
+          :label="LAN.roleName"
           width="100">
         </el-table-column>
         <el-table-column
           prop="name"
-          label="姓名"
+          :label="LAN.name"
           width="100">
         </el-table-column>
         <el-table-column
           prop="telephone"
-          label="联系电话"
+          :label="LAN.telephone"
           width="120">
         </el-table-column>
         <el-table-column
           prop="desc"
-          label="描述" show-overflow-tooltip>
+          :label="LAN.desc" show-overflow-tooltip>
         </el-table-column>
       </el-table>
     </section>
@@ -129,9 +129,9 @@ export default {
       this.$router.push('user/add')
     },
     delUser () { // 删除用户
-      this.$confirm('确定要删除已选用户吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.LAN.deleteConfirm, this.LAN.tips, {
+        confirmButtonText: this.LAN.enter,
+        cancelButtonText: this.LAN.cancel,
         type: 'warning'
       }).then(() => {
         let ids = this.selected.map((row) => {
@@ -139,14 +139,14 @@ export default {
         })
         deleteUser({ids: ids}).then((res) => {
           if (res.code * 1 === 0) {
-            this.$message.success('删除成功')
+            this.$message.success(this.LAN.delSuccess)
             this.getUserList()
           }
         })
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '操作已取消'
+          message: this.LAN.opaCancel
         })
       })
     },

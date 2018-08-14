@@ -3,10 +3,10 @@
     <!--操作面板-->
     <section class="operation">
       <div class="item">
-        <el-checkbox v-model="selectAll">全选</el-checkbox>
+        <el-checkbox v-model="selectAll">{{LAN.all}}</el-checkbox>
       </div>
       <div class="item">
-        <el-button icon="el-icon-plus" plain disabled>删除</el-button>
+        <el-button icon="el-icon-plus" plain disabled>{{LAN.del}}</el-button>
       </div>
     </section>
     <!--面包屑-->
@@ -26,19 +26,19 @@
       <el-popover
         v-if="fileList.length !== 0"
         placement="right-start"
-        :title="item.flag === 'dir' ? '文件夹': '文件'"
+        :title="item.flag === 'dir' ? LAN.dir: LAN.file"
         :key="key"
         v-bind:open-delay="2000"
         v-for="(item, key) in fileList"
         trigger="hover">
         <div class="yle-file_msgBox">
-          <div class="fItem">文件名称：{{item.name}}</div>
-          <div class="fItem">类型：
-            <span v-if="item.flag === 'dir'">文件夹</span>
-            <span v-else>文件</span>
+          <div class="fItem">{{LAN.fileName}}{{item.name}}</div>
+          <div class="fItem">{{LAN.type}}
+            <span v-if="item.flag === 'dir'">{{LAN.dir}}</span>
+            <span v-else>{{LAN.file}}</span>
           </div>
-          <div class="fItem">路径：{{item.path}}</div>
-          <div class="fItem">创建时间：{{item.birthtime}}</div>
+          <div class="fItem">{{LAN.path}}{{item.path}}</div>
+          <div class="fItem">{{LAN.createAt}}{{item.birthtime}}</div>
         </div>
         <div class="item" @dblclick = "openDir(item)" slot="reference">
           <div class="icon">
@@ -59,18 +59,20 @@
         </div>
       </el-popover>
       <!--暂无数据-->
-      <div class="yle-nodata" v-if="fileList.length === 0">暂无数据</div>
+      <div class="yle-nodata" v-if="fileList.length === 0">{{LAN.noData}}</div>
     </section>
     <!--文件数统计-->
-    <div class="filsTotal">共计{{fileList.length}}个对象</div>
+    <div class="filsTotal">{{LAN.total}}{{fileList.length}}{{LAN.obj}}</div>
   </div>
 </template>
 <script>
 import {readDir} from './proxy'
+import LAN from '@/libs/il8n'
 export default {
   name: 'file',
   data () {
     return {
+      LAN: LAN.fileManagement,
       selectAll: false,
       dir: '', // 当前路径
       fileList: [] // 文件列表

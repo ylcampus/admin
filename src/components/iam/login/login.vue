@@ -79,6 +79,7 @@ import {sha256} from 'js-sha256'
 import {loginIn} from './proxy'
 import {validateAccount, validatePwd} from '../../../libs/validate'
 import firstLoginModal from './firstLogin/firstLoginModal'
+import LAN from '@/libs/il8n'
 export default {
   name: 'login',
   components: {
@@ -86,6 +87,7 @@ export default {
   },
   data () {
     return {
+      LAN: LAN.login,
       isFirstLogin: false, // 是否是首次登陆
       form: {
         account: '', // 账号
